@@ -1,38 +1,20 @@
-import { cn } from "@/utils/cn";
-import ErrorElement from "./ErrorElement";
+import { cn } from "@/lib/utils";
 import FetchTripsLoader from "../loaders/fetch-trips-loader";
+import { ReactNode } from "react";
 
-const Loading = ({
-  children,
-  isFetching,
-  error,
-  loadingElementClassName,
-  errorElementClassName,
-  errorElement = (
-    <ErrorElement
-      error={error?.message}
-      errorElementClassName={errorElementClassName}
-    />
-  ),
+export default function Loading({
+  className,
+
   loadingElement = <FetchTripsLoader />,
-}) => {
+}: {
+  className?: string;
+  loadingElement?: ReactNode;
+}) {
   // REQUIRED FALLBACK ELEMENT
-  if (isFetching) {
-    return (
-      <div
-        className={cn(
-          "h-[60vh] flex justify-center items-center",
-          loadingElementClassName
-        )}
-      >
-        {loadingElement}
-      </div>
-    );
-  }
-  if (error) {
-    return errorElement;
-  }
-  return children;
-};
 
-export default Loading;
+  return (
+    <div className={cn("h-[60vh] flex justify-center items-center", className)}>
+      {loadingElement}
+    </div>
+  );
+}

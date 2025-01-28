@@ -1,7 +1,4 @@
-import { Autoplay, Pagination } from "swiper/modules";
-
-import { Swiper, SwiperSlide } from "swiper/react";
-
+"use client";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -9,6 +6,9 @@ import "swiper/css/pagination";
 import { Trip } from "@/lib/types/trips";
 import { sliderBreakPoints } from "@/lib/data";
 import TripCard from "@/components/common/trip-card";
+import { useInView } from "@/providers/in-view-provider";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
 
 // import required modules
 type Props = {
@@ -22,7 +22,6 @@ type Props = {
   isPaginated?: boolean;
   loop?: boolean;
   breakPoints?: typeof sliderBreakPoints;
-  inView: boolean;
 };
 export default function TripsSlider({
   className,
@@ -35,8 +34,8 @@ export default function TripsSlider({
   isPaginated = false,
   loop = true,
   breakPoints = sliderBreakPoints,
-  inView,
 }: Props) {
+  const { isInview } = useInView();
   return (
     <div id="tripsSlider" className={className}>
       <Swiper
@@ -61,7 +60,7 @@ export default function TripsSlider({
       >
         {tripsList?.map((trip, i) => (
           <SwiperSlide key={trip.id}>
-            <TripCard inView={inView} i={i} trip={trip} />
+            <TripCard inView={isInview} i={i} trip={trip} />
           </SwiperSlide>
         ))}
       </Swiper>

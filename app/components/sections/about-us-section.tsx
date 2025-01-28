@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next";
+// import { useTranslation } from "react-i18next";
 import Image from "next/image";
 import Link from "next/link";
 import { travelCategories } from "@/lib/data";
@@ -7,7 +7,7 @@ import SectionHeader from "@/components/common/section-header";
 import InfiniteSlider from "../infinite-slider";
 
 export default function AboutUsSection() {
-  const { t } = useTranslation("global");
+  // const { t } = useTranslation("global");
   return (
     <section className="bg-light overflow-hidden">
       <div className="relative px-4 min-[1400px]:ms-auto min-[1400px]:w-8/12 z-[1]  lg:overflow-visible">
@@ -19,9 +19,12 @@ export default function AboutUsSection() {
               }
               subTitleRevealClassName="max-lg:mx-auto"
               introTextRevealClassName="max-lg:mx-auto"
-              subTitle={t("homePage.aboutUsSection.subTitle")}
-              introText={t("homePage.aboutUsSection.introText")}
-              desc={t("homePage.aboutUsSection.aboutDesc")}
+              // subTitle={t("homePage.aboutUsSection.subTitle")}
+              // introText={t("homePage.aboutUsSection.introText")}
+              // desc={t("homePage.aboutUsSection.aboutDesc")}
+              subTitle={"dfhdfhdfh"}
+              introText={"fdhdfhdf"}
+              desc={"fbvsvsd"}
               descClassName="text-black"
             />
 
@@ -31,20 +34,24 @@ export default function AboutUsSection() {
               className="mx-auto lg:ms-0 block w-fit"
             >
               <Link href="/trips" className="py-2 px-4 h-fit">
-                {t("homePage.aboutUsSection.aboutButtonLabel")}
+                {/* {t("homePage.aboutUsSection.aboutButtonLabel")} */}
+                asrfsdagfg
               </Link>
             </Button>
             <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-5 mt-5 p-[10px] md:p-0">
               <div className="rounded-md overflow-hidden border-2 border-main">
                 <Image
                   src={"/images/slide-1.jpg"}
-                  alt=""
-                  className="w-[150px] h-[110px] object-cover"
+                  alt="about"
+                  height={110}
+                  width={150}
+                  className="object-cover"
                 />
               </div>
               <div className="flex flex-col text-center">
                 <span className="text-grayDesc text-xl">
-                  {t("homePage.aboutUsSection.dateLabel")}
+                  {/* {t("homePage.aboutUsSection.dateLabel")} */}
+                  dfhfdhdfh
                 </span>
                 <strong className="text-5xl text-main">2005</strong>
               </div>
@@ -70,10 +77,12 @@ export default function AboutUsSection() {
           return (
             <span
               key={i}
-              data-text={t(`homePage.infiniteSlider.${i}`)}
+              // data-text={t(`homePage.infiniteSlider.${i}`)}
+              data-text={"dfhdfh"}
               className="text-6xl font-mainFont lg:text-8xl whitespace-nowrap stroke-fill transition-all duration-500 hover:before:bg-main before:transition-all before:duration-500 relative before:absolute before:start-[-20px] before:top-1/2 before:-translate-y-1/2 before:w-[10px] before:h-[10px] before:bg-black before:rounded-full after:content-[attr(data-text)] after:absolute after:inset-0 after:w-0 after:z-[1] after:transition-all after:duration-500 hover:after:w-full after:overflow-hidden"
             >
-              {t(`homePage.infiniteSlider.${i}`)}
+              {/* {t(`homePage.infiniteSlider.${i}`)} */}
+              dfhdfh
             </span>
           );
         })}

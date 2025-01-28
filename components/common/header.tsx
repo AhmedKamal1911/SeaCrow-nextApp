@@ -39,9 +39,9 @@ type Props = {
 };
 
 export default function Header({ data }: Props) {
-  const isMatched = useMediaQuery("(max-width: 1280px)");
+  // const isMatched = useMediaQuery("(max-width: 1280px)");
   // FIXME:Fix aside in media query
-  // const isMatched = true;
+  const isMatched = false;
 
   const pathname = usePathname();
   const isHomepage = pathname === "/";

@@ -2,12 +2,12 @@
 
 // import { useLanguage } from "@/contexts/LanguageProvider";
 
-import { motion } from "framer-motion";
 import Link from "next/link";
 
 import clsx from "clsx";
 import HeroSlider from "../hero-slider";
 import { ImageType } from "@/lib/types/shared";
+import HeroSectionHeading from "../hero-section-heading";
 
 type HeroButton = {
   id: number;
@@ -45,25 +45,7 @@ const HeroSection = ({ data }: Props) => {
 
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-30 px-4 text-center w-full select-none">
         <div className="flex flex-col gap-3 ">
-          <motion.h1
-            variants={{
-              hidden: { opacity: 0, y: -75, scale: 0.8 },
-              visible: { opacity: 1, y: 0, scale: 1 },
-            }}
-            initial="hidden"
-            animate="visible"
-            transition={{ duration: 0.8, delay: 0.2 }}
-            // className={clsx(
-            //   {
-            //     "text-[36px] min-[376px]:text-[45px]":
-            //       selectedLanguage.languageName === "ru",
-            //     "text-5xl": selectedLanguage.languageName !== "ru",
-            //   },
-            //   "text-white sm:text-[90px] lg:text-9xl m-auto w-[1100px] max-w-full font-bold !leading-[1.3]"
-            // )}
-          >
-            {heroHeading}
-          </motion.h1>
+          <HeroSectionHeading>{heroHeading}</HeroSectionHeading>
 
           <Link
             href={heroButton?.url}

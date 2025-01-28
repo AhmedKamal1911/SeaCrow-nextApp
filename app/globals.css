@@ -70,3 +70,128 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.stroke-fill {
+  -webkit-text-fill-color: white;
+  -moz-text-fill-color: white;
+  -ms-text-fill-color: white;
+  text-fill-color: white;
+
+  -webkit-text-stroke: 1px rgb(84, 89, 95);
+  -moz-text-stroke: 1px rgb(84, 89, 95);
+  -ms-text-stroke: 1px rgb(84, 89, 95);
+  text-stroke: 1px rgb(84, 89, 95);
+}
+
+.error-stroke {
+  -webkit-text-fill-color: rgb(0, 0, 0);
+  -moz-text-fill-color: rgb(0, 0, 0);
+  -ms-text-fill-color: rgb(0, 0, 0);
+  text-fill-color: rgb(0, 0, 0);
+
+  -webkit-text-stroke: 0.1px rgb(218, 20, 20);
+  -moz-text-stroke: 0.1px rgb(218, 20, 20);
+  -ms-text-stroke: 0.1px rgb(218, 20, 20);
+  text-stroke: 0.1px rgb(218, 20, 20);
+}
+
+.stroke-fill::after {
+  -webkit-text-fill-color: #bfa888;
+  -moz-text-fill-color: #bfa888;
+  -ms-text-fill-color: #bfa888;
+  text-fill-color: #bfa888;
+}
+.swiper-pagination {
+  background-color: rgba(218, 218, 218, 0.493);
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 0 !important;
+}
+.swiper-pagination-vertical {
+  display: flex;
+  height: fit-content;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+.swiper-pagination-bullet {
+  flex-shrink: 0;
+  display: block !important;
+  width: 15px !important;
+  height: 15px !important;
+  background-color: #000000 !important;
+}
+.mySwiper .swiper-slide.opacity-slide {
+  opacity: 0.6;
+  filter: grayscale(0.4);
+}
+.mySwiper .swiper-slide.opacity-slide.swiper-slide-thumb-active {
+  opacity: 1;
+  filter: grayscale(0);
+}
+.mySwiper2 .swiper-button-prev,
+.mySwiper2 .swiper-button-next {
+  background-color: rgba(0, 0, 0, 0.671);
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+@media (min-width: 767px) {
+  .mySwiper2 .swiper-button-prev,
+  .mySwiper2 .swiper-button-next {
+    opacity: 0;
+    width: 40px;
+    height: 40px;
+  }
+}
+.mySwiper2:hover .swiper-button-prev,
+.mySwiper2:hover .swiper-button-next {
+  opacity: 1;
+}
+.mySwiper2 .swiper-button-prev::after,
+.mySwiper2 .swiper-button-next::after {
+  font-size: 12px;
+}
+
+@media (min-width: 767px) {
+  .mySwiper2 .swiper-button-prev::after,
+  .mySwiper2 .swiper-button-next::after {
+    font-size: 17px;
+  }
+}
+.recaptcha {
+  width: fit-content;
+}
+.recaptcha > div > div {
+  width: 100% !important;
+}
+
+.recaptcha iframe {
+  width: 200px !important;
+}
+@media (min-width: 1300px) {
+  .recaptcha div {
+    width: 100%;
+  }
+  .recaptcha iframe {
+    width: 300px !important;
+  }
+}
+
+.boat {
+  animation: sail 2s infinite alternate ease-in-out; /* Slower, smoother animation */
+}
+
+/* Keyframes for the smooth rocking motion */
+@keyframes sail {
+  0% {
+    transform: rotate(-4deg); /* Smaller rotation for a subtle effect */
+  }
+  100% {
+    transform: rotate(4deg); /* Smaller rotation to the other side */
+  }
+}

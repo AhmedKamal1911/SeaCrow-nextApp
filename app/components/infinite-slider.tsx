@@ -1,4 +1,5 @@
-import { useLanguage } from "@/contexts/LanguageProvider";
+"use client";
+// import { useLanguage } from "@/contexts/LanguageProvider";
 import clsx from "clsx";
 
 import React, { Children, cloneElement, ReactNode } from "react";
@@ -21,15 +22,22 @@ export default function InfiniteSlider({ children }: Props) {
     }
     return child; // Return non-React elements as-is
   });
-  const { isRTL } = useLanguage();
+  // const { isRTL } = useLanguage();
 
   return (
     <div className="overflow-hidden">
       <div
+        // className={clsx(
+        //   {
+        //     "animate-infiniteSlideRTL": isRTL,
+        //     "animate-infiniteSlideLTR": !isRTL,
+        //   },
+        //   `w-[max-content] py-10 bg-white flex gap-[50px]`
+        // )}
         className={clsx(
           {
-            "animate-infiniteSlideRTL": isRTL,
-            "animate-infiniteSlideLTR": !isRTL,
+            // "animate-infiniteSlideRTL": isRTL,
+            "animate-infiniteSlideLTR": true,
           },
           `w-[max-content] py-10 bg-white flex gap-[50px]`
         )}

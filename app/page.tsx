@@ -6,22 +6,35 @@ import AboutUsSection from "./components/sections/about-us-section";
 import WhyChooseUsSection from "./components/sections/why-choose-us-section";
 import { getWhyChooseUsData } from "@/lib/queries/getWhyChooseUsData";
 import TripsSection from "./components/sections/trips-section";
-import { getTripsSectionData } from "@/lib/queries/getTripsSectionData";
+
+import SpecialOffersSection from "./components/sections/special-offers-section";
+import { Suspense } from "react";
+
+import Loading from "@/components/common/loading";
+import SpecialTripsViewer from "./components/speical-trips-viewer";
+import TripGridCardsViewer from "./components/trip-grid-cards-viewer";
 
 export default async function Home() {
   const heroSectionData = await getHeroSectionData();
   const introSectionData = await getIntroSectionData();
   const whyChooseUsData = await getWhyChooseUsData();
-  const tripsSectionData = await getTripsSectionData("all");
 
   return (
     <main>
       <HeroSection data={heroSectionData} />
       <IntroSection data={introSectionData} />
       <AboutUsSection />
-      {/* <SpecialOffersSection /> */}
+      <SpecialOffersSection>
+        <Suspense fallback={<Loading className="h-[30vh]" />}>
+          <SpecialTripsViewer />
+        </Suspense>
+      </SpecialOffersSection>
       <WhyChooseUsSection data={whyChooseUsData} />
-      <TripsSection data={tripsSectionData} />
+      <TripsSection>
+        <Suspense fallback={<Loading className="h-[30vh]" />}>
+          <TripGridCardsViewer />
+        </Suspense>
+      </TripsSection>
     </main>
   );
 }

@@ -1,18 +1,14 @@
 import { customFetch } from "../helpers/custom-fetch";
 import { Trip } from "../types/trips";
 
-export async function getTripsSectionData(typeName: string) {
+export async function getSpeicalOffersData() {
   const data: { data: Trip[]; meta: {} } = await customFetch("trips", {
     populate: "*",
-    ...(typeName !== "all"
-      ? {
-          filters: {
-            type: {
-              $eq: typeName,
-            },
-          },
-        }
-      : {}),
+    filters: {
+      offer: {
+        $ne: null,
+      },
+    },
   });
   console.log({ data });
   return data;

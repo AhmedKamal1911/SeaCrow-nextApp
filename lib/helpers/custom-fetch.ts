@@ -2,7 +2,7 @@ import qs from "qs";
 import { flattenAttributes } from "../utils";
 
 type Query = {
-  [key: string]: string | boolean | number | Query;
+  [key: string]: string | boolean | number | Query | null;
 };
 export async function customFetch(pathname: string, query: Query) {
   const response = await fetch(

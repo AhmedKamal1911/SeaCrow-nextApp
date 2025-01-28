@@ -1,14 +1,14 @@
 "use client";
 
-import { useLanguage } from "@/contexts/LanguageProvider";
+// import { useLanguage } from "@/contexts/LanguageProvider";
 import { useScroll, motion, useMotionValueEvent } from "framer-motion";
 import { MoveUp } from "lucide-react";
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
+// import { useTranslation } from "react-i18next";
 
 export default function ScrollToTopButton() {
-  const { t } = useTranslation("global");
-  const { isRTL } = useLanguage();
+  // const { t } = useTranslation("global");
+  // const { isRTL } = useLanguage();
   const { scrollYProgress } = useScroll();
   const [isVisible, setIsVisible] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -48,11 +48,15 @@ export default function ScrollToTopButton() {
       <div className="flex flex-col justify-center items-center  gap-8 min-[376px]:gap-8 h-full bg-white rounded-t-3xl rounded-b-3xl">
         <MoveUp className="h-5 w-5 min-[376px]:h-6 min-[376px]:w-6" />
         <span
+          // className={`${
+          //   isRTL ? "rotate-90" : "-rotate-90"
+          // } text-[17px] min-[376px]:text-xl text-nowrap`}
           className={`${
-            isRTL ? "rotate-90" : "-rotate-90"
+            true ? "rotate-90" : "-rotate-90"
           } text-[17px] min-[376px]:text-xl text-nowrap`}
         >
-          {t("global.toTopButtonLabel")}
+          {/* {t("global.toTopButtonLabel")} */}
+          hfhdfhgfhjg
         </span>
       </div>
     </motion.div>

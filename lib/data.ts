@@ -314,7 +314,7 @@ export const aboutInfoList = [
   },
   {
     id: 4,
-    img: "images/online-shop.png",
+    img: "/images/online-shop.png",
     count: 800,
     about: "Reviews",
   },

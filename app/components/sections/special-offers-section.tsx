@@ -1,44 +1,41 @@
-import useQueryWithLocale from "@/hooks/useQueryWithLocale";
+"use client";
+// import useQueryWithLocale from "@/hooks/useQueryWithLocale";
 
-import { fetchSpecialTrips } from "@/services/trips/queries";
-import { useTranslation } from "react-i18next";
-import useSectionInView from "@/hooks/useSectionInView";
-import { Trip } from "@/lib/types/trips";
+// import { useTranslation } from "react-i18next";
+
+// import SectionHeader from "@/components/common/section-header";
+
+import useSectionInView from "@/hooks/use-section-view";
+import { ReactNode } from "react";
+import InViewContextProvider from "@/providers/in-view-provider";
 import SectionHeader from "@/components/common/section-header";
-import TripsSlider from "../trips-slider";
-import { Suspense } from "react";
 type Props = {
-  data: Trip[];
+  children: ReactNode;
 };
-const SpecialOffersSection = ({ data }: Props) => {
-  const { t } = useTranslation("global");
-  const { ref, inView } = useSectionInView();
+const SpecialOffersSection = ({ children }: Props) => {
+  // const { t } = useTranslation("global");
+  const { ref, inView } = useSectionInView<HTMLElement>();
 
   return (
-    <section ref={ref} className="py-10">
-      <div className="container">
-        <SectionHeader
-          subTitle={t("homePage.specialOffersSection.subTitle")}
-          introText={t("homePage.specialOffersSection.introText")}
-        />
-        <div className="mt-10">
-          <Loading
-            isFetching={isFetching}
-            error={error}
-            loadingElementClassName="h-[20vh]"
-            errorElementClassName="h-[20vh] "
-          >
-            <Suspense fallback={}>
-              <TripsSlider
-                className="h-[300px] sm:h-[400px]"
-                tripsList={data}
-                inView={inView}
-              />
-            </Suspense>
-          </Loading>
+    <InViewContextProvider isInview={inView}>
+      <section ref={ref} className="py-10">
+        <div className="container">
+          <SectionHeader
+            // subTitle={
+            //   t("homePage.specialOffersSection.subTitle")
+            // }
+            // introText={
+            //   t("homePage.specialOffersSection.introText")
+
+            // }
+            subTitle={"tatatatata"}
+            introText={"ascsdfgfgdgdsgfhdfhgfhdfhgdfhfd"}
+          />
+
+          <div className="mt-10">{children}</div>
         </div>
-      </div>
-    </section>
+      </section>
+    </InViewContextProvider>
   );
 };
 

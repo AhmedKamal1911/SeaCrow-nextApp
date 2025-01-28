@@ -1,10 +1,11 @@
 import SectionHeader from "@/components/common/section-header";
 
-import useQueryWithLocale from "@/hooks/useQueryWithLocale";
+// import useQueryWithLocale from "@/hooks/useQueryWithLocale";
 import { ImageType } from "@/lib/types/shared";
 
-import { useTranslation } from "react-i18next";
-import FeaturesList from "../common/features-list";
+// import { useTranslation } from "react-i18next";
+import FeaturesList from "../features-list";
+
 type Icon = {
   id: number;
   name: string;
@@ -47,7 +48,7 @@ type Props = {
   data: IntroSectionData;
 };
 const IntroSection = ({ data }: Props) => {
-  const { t } = useTranslation("global");
+  // const { t } = useTranslation("global");
 
   const featuresList = data.featuresBox;
   const introHeading =
@@ -70,7 +71,8 @@ const IntroSection = ({ data }: Props) => {
             <SectionHeader
               className="lg:w-[400px] mx-auto"
               subTitleRevealClassName="mx-auto"
-              subTitle={t("homePage.introSection.subTitle")}
+              // subTitle={t("homePage.introSection.subTitle")}
+              subTitle={"asfasfsafasfas"}
               introText={introHeading}
               introTextRevealClassName="max-lg:mx-auto"
               desc={introDesc}
@@ -78,10 +80,12 @@ const IntroSection = ({ data }: Props) => {
             <div className="mt-16 space-y-10">
               <h3 className="font-signature text-4xl">Seif Haraz</h3>
               <h6 className="text-xl">
-                {t("homePage.introSection.managerName")}
+                {/* {t("homePage.introSection.managerName")} */}
+                test
               </h6>
               <span className="text-xl text-grayDesc font-bold  font-mono">
-                {t("homePage.introSection.managerRank")}
+                {/* {t("homePage.introSection.managerRank")} */}
+                tstststst
               </span>
             </div>
           </div>

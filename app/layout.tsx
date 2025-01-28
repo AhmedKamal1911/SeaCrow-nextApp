@@ -38,9 +38,9 @@ export default async function RootLayout({
       >
         <Header data={headerData} />
         {children}
-        {/* <Footer data={footerData} /> */}
-        {/* <ScrollToTopButton /> */}
-        {/* <SocialContainer /> */}
+        <Footer data={footerData} />
+        <ScrollToTopButton />
+        <SocialContainer />
       </body>
     </html>
   );

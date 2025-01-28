@@ -1,11 +1,12 @@
-import { fetchFooterData } from "@/services/trips/queries";
+"use client";
+// import { fetchFooterData } from "@/services/trips/queries";
 
-import useQueryWithLocale from "@/hooks/useQueryWithLocale";
-import { useTranslation } from "react-i18next";
+// import useQueryWithLocale from "@/hooks/useQueryWithLocale";
+// import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "../ui/button";
-import { ChevronsLeft, ChevronsRight } from "lucide-react";
+// import { ChevronsLeft, ChevronsRight } from "lucide-react";
 type Props = {
   data: {
     id: number;
@@ -43,7 +44,7 @@ type NavLinksData = {
   isExternal: boolean;
 }[];
 export default function Footer({ data }: Props) {
-  const { t } = useTranslation("global");
+  // const { t } = useTranslation("global");
 
   const linksList = data.navLinks;
   const contactLinks = data.contactLinks;
@@ -53,7 +54,7 @@ export default function Footer({ data }: Props) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 py-16">
           <div
             className="absolute w-[494px] h-[465px] start-[-100px] top-0 bottom-0 "
-            style={{ backgroundImage: `url("/images/wave-lines.png")` }}
+            style={{ backgroundImage: `url("/images/Uneven-waves.png")` }}
           />
           <div
             className="absolute w-[247px] h-[477px] end-[0px] top-0 bottom-0"
@@ -61,27 +62,38 @@ export default function Footer({ data }: Props) {
           />
           <div>
             <FooterSectionHeader
-              title={t("footer.aboutUsSection.title")}
-              desc={t("footer.aboutUsSection.desc")}
+              // title={t("footer.aboutUsSection.title")}
+              // desc={t("footer.aboutUsSection.desc")}
+              title={"fdhgfdhf"}
+              desc={"vasfasfas"}
             />
             <Button asChild variant="primary" className="py-6 px-7">
               <Link href="/about-us">
-                {t("footer.aboutUsSection.aboutUsButtonLabel")}
+                {/* {t("footer.aboutUsSection.aboutUsButtonLabel")} */}
+                afgasfag
               </Link>
             </Button>
           </div>
           <div>
-            <FooterSectionHeader title={t("footer.contactUsSectionTitle")} />
+            <FooterSectionHeader
+              // title={t("footer.contactUsSectionTitle")}
+              title={"fdhgdfhdfh"}
+            />
             <DynamicInfoSection infoList={contactLinks} />
           </div>
           <div>
-            <FooterSectionHeader title={t("footer.quickLinksSectionTitle")} />
+            <FooterSectionHeader
+              // title={t("footer.quickLinksSectionTitle")}
+              title={"fghgfhgfh"}
+            />
             <DynamicInfoSection infoList={linksList} />
           </div>
           <div>
             <FooterSectionHeader
-              title={t("footer.reachUsSection.title")}
-              desc={t("footer.reachUsSection.desc")}
+              // title={t("footer.reachUsSection.title")}
+              // desc={t("footer.reachUsSection.desc")}
+              title={"fdhgfdhf"}
+              desc={"vasfasfas"}
             />
             <div className="flex gap-3 mt-5">
               <a
@@ -116,13 +128,14 @@ export default function Footer({ data }: Props) {
             </div>
           </div>
         </div>
-        <div className="relative flex flex-col sm:flex-row justify-between p-5 bg-[#363d5371]  gap-10 rounded-md">
-          <p className="text-main text-xl text-center sm:text-start">
-            &copy; {t("footer.copyRightReference")}
+        <div className="relative text-center  flex flex-col sm:flex-row justify-between p-5 bg-[#363d5371]  gap-10 rounded-md">
+          <p className="text-main text-xl ">
+            {/* &copy; {t("footer.copyRightReference")} */}
+            fgdffh
           </p>
           <span className="text-white text-xl">
-            {t("footer.poweredBy")}
-
+            {/* {t("footer.poweredBy")} */}
+            asfasfadggd
             <a
               href="mailto:khmedamal@gmail.com"
               target="_blank"
@@ -163,17 +176,17 @@ function DynamicInfoSection({
 }: {
   infoList: NavLinksData | ContactLinksData;
 }) {
-  const { isRTL } = useLanguage();
+  // const { isRTL } = useLanguage();
   return (
     <div>
       <ul className="flex flex-col gap-3 z-40 relative">
         {infoList.map((info) => (
-          <li className="flex items-center gap-2" key={id}>
-            {isRTL ? (
+          <li className="flex items-center gap-2" key={info.id}>
+            {/* {isRTL ? (
               <ChevronsLeft className="text-main" />
             ) : (
               <ChevronsRight className="text-main" />
-            )}
+            )} */}
             {isContactInfo(info) ? (
               <a
                 href={`${
