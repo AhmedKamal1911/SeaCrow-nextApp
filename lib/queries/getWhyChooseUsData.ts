@@ -1,4 +1,4 @@
-import { WhyUsData } from "@/app/components/sections/why-choose-us-section";
+import { WhyUsData } from "@/app/[locale]/components/sections/why-choose-us-section";
 import { customFetch } from "../helpers/custom-fetch";
 
 export async function getWhyChooseUsData() {

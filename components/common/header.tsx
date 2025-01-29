@@ -1,9 +1,7 @@
 "use client";
 
-// import { useLanguage } from "@/contexts/LanguageProvider";
-
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+
 import { useEffect, useRef, useState } from "react";
 import { Portal } from "@radix-ui/react-portal";
 import Image from "next/image";
@@ -17,7 +15,16 @@ import {
 } from "../ui/select";
 import { languages } from "@/lib/data";
 import { Menu, X } from "lucide-react";
-import useMediaQuery from "@/hooks/use-media-query";
+// import useMediaQuery from "@/hooks/use-media-query";
+import clsx from "clsx";
+
+import {
+  useRouter,
+  Locale,
+  routing,
+  usePathname as useI18nPathname,
+} from "@/i18n/routing";
+import { useLocale } from "next-intl";
 
 export type NavbarData = {
   id: number;
@@ -42,8 +49,9 @@ export default function Header({ data }: Props) {
   // const isMatched = useMediaQuery("(max-width: 1280px)");
   // FIXME:Fix aside in media query
   const isMatched = false;
+  const pathname = useI18nPathname();
 
-  const pathname = usePathname();
+  console.log({ pathname });
   const isHomepage = pathname === "/";
   const ref = useRef(null);
   const [isAnimateHeader, setIsAnimateHeader] = useState(false);
@@ -74,9 +82,11 @@ export default function Header({ data }: Props) {
     <>
       <div ref={ref} />
       <header
-        className={cn(
-          isAnimateHeader && "animate-fadeDown bg-black",
-          !isHomepage && "bg-black",
+        className={clsx(
+          {
+            "animate-fadeDown bg-black": isAnimateHeader,
+            "bg-black": !isHomepage,
+          },
           "fixed transition-all top-0 start-0 end-0 z-[999] py-4 flex items-center"
         )}
       >
@@ -95,7 +105,7 @@ export default function Header({ data }: Props) {
               ) : (
                 <>
                   <NavLinks navLinks={data?.navLinks} />
-                  {/* <LanguageSelectMenu /> */}
+                  <LanguageSelectMenu />
                 </>
               )}
             </div>
@@ -156,7 +166,7 @@ function AsideDrawer({ navLinks }: { navLinks: NavbarData["navLinks"] }) {
                 )}
               />
             </div>
-            {/* <LanguageSelectMenu className="mt-3 mx-auto" /> */}
+            <LanguageSelectMenu className="mt-3 mx-auto" />
           </div>
         </aside>
       </Portal>
@@ -197,27 +207,23 @@ function NavLinks({
 }
 
 function LanguageSelectMenu({ className }: { className?: string }) {
-  const { selectedLanguage, onLanguageChange } = useLanguage();
+  // const { selectedLanguage, onLanguageChange } = useLanguage();
+  // const DEFUALT_LANGUAGE = routing.defaultLocale;
+  const langLocale = useLocale();
+  const router = useRouter();
 
+  const pathname = useI18nPathname();
+
+  function onLanguageChange(langCode: string) {
+    router.replace({ pathname }, { locale: langCode });
+    console.log({ langCode });
+  }
   return (
-    <Select onValueChange={onLanguageChange}>
+    <Select value={langLocale} onValueChange={onLanguageChange}>
       <SelectTrigger
         className={cn("text-[17px] text-white w-[120px]", className)}
       >
-        <SelectValue
-          placeholder={
-            <div className="flex gap-2 items-center">
-              {selectedLanguage?.languageName}
-              <Image
-                height={28}
-                width={28}
-                alt={selectedLanguage?.countryName ?? "flag"}
-                className="h-7 w-7 mr-2"
-                src={`https://flagsapi.com/${selectedLanguage?.countryName}/flat/64.png`}
-              />
-            </div>
-          }
-        />
+        <SelectValue />
       </SelectTrigger>
       <SelectContent
         ref={(ref) => {
@@ -229,20 +235,22 @@ function LanguageSelectMenu({ className }: { className?: string }) {
         {languages.map((language, i) => (
           <SelectItem
             key={i}
-            value={language.countryName}
-            className={`text-[17px] cursor-pointer hover:bg-[#ebeaea] transition-all capitalize w-full ${
-              language.countryName === selectedLanguage?.countryName
-                ? "bg-[#acacad]"
-                : ""
-            } mb-1`}
+            value={language.langCode}
+            className={clsx(
+              {
+                "bg-[#acacad]": language.langCode === langLocale,
+              },
+              `text-[17px] cursor-pointer hover:!bg-[#c9c8c8] transition-all uppercase w-full  mb-1`
+            )}
           >
-            {language.languageName}
+            {language.langCode === langLocale}
+            {language.langCode}
             {
               <Image
                 width={18}
                 height={18}
                 src={`https://flagsapi.com/${language.countryName}/flat/64.png`}
-                alt="flag"
+                alt="Country flag"
               />
             }
           </SelectItem>

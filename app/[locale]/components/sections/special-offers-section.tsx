@@ -1,19 +1,16 @@
 "use client";
 // import useQueryWithLocale from "@/hooks/useQueryWithLocale";
 
-// import { useTranslation } from "react-i18next";
-
-// import SectionHeader from "@/components/common/section-header";
-
 import useSectionInView from "@/hooks/use-section-view";
 import { ReactNode } from "react";
 import InViewContextProvider from "@/providers/in-view-provider";
 import SectionHeader from "@/components/common/section-header";
+import { useTranslations } from "next-intl";
 type Props = {
   children: ReactNode;
 };
 const SpecialOffersSection = ({ children }: Props) => {
-  // const { t } = useTranslation("global");
+  const t = useTranslations();
   const { ref, inView } = useSectionInView<HTMLElement>();
 
   return (
@@ -21,15 +18,8 @@ const SpecialOffersSection = ({ children }: Props) => {
       <section ref={ref} className="py-10">
         <div className="container">
           <SectionHeader
-            // subTitle={
-            //   t("homePage.specialOffersSection.subTitle")
-            // }
-            // introText={
-            //   t("homePage.specialOffersSection.introText")
-
-            // }
-            subTitle={"tatatatata"}
-            introText={"ascsdfgfgdgdsgfhdfhgfhdfhgdfhfd"}
+            subTitle={t("homePage.specialOffersSection.subTitle")}
+            introText={t("homePage.specialOffersSection.introText")}
           />
 
           <div className="mt-10">{children}</div>

@@ -3,8 +3,8 @@ import SectionHeader from "@/components/common/section-header";
 // import useQueryWithLocale from "@/hooks/useQueryWithLocale";
 import { ImageType } from "@/lib/types/shared";
 
-// import { useTranslation } from "react-i18next";
 import FeaturesList from "../features-list";
+import { useTranslations } from "next-intl";
 
 type Icon = {
   id: number;
@@ -48,8 +48,8 @@ type Props = {
   data: IntroSectionData;
 };
 const IntroSection = ({ data }: Props) => {
-  // const { t } = useTranslation("global");
-
+  const t = useTranslations();
+  console.log(t.raw);
   const featuresList = data.featuresBox;
   const introHeading =
     data?.heading ?? "We are here to help you have the best trip";
@@ -71,8 +71,7 @@ const IntroSection = ({ data }: Props) => {
             <SectionHeader
               className="lg:w-[400px] mx-auto"
               subTitleRevealClassName="mx-auto"
-              // subTitle={t("homePage.introSection.subTitle")}
-              subTitle={"asfasfsafasfas"}
+              subTitle={t("homePage.introSection.subTitle")}
               introText={introHeading}
               introTextRevealClassName="max-lg:mx-auto"
               desc={introDesc}
@@ -80,12 +79,10 @@ const IntroSection = ({ data }: Props) => {
             <div className="mt-16 space-y-10">
               <h3 className="font-signature text-4xl">Seif Haraz</h3>
               <h6 className="text-xl">
-                {/* {t("homePage.introSection.managerName")} */}
-                test
+                {t("homePage.introSection.managerName")}
               </h6>
               <span className="text-xl text-grayDesc font-bold  font-mono">
-                {/* {t("homePage.introSection.managerRank")} */}
-                tstststst
+                {t("homePage.introSection.managerRank")}
               </span>
             </div>
           </div>

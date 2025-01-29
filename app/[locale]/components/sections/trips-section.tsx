@@ -1,6 +1,5 @@
 "use client";
 // import useQueryWithLocale from "@/hooks/useQueryWithLocale";
-// import { useTranslation } from "react-i18next";
 
 import SectionHeader from "@/components/common/section-header";
 import { Button } from "@/components/ui/button";
@@ -9,9 +8,10 @@ import Link from "next/link";
 import InViewContextProvider from "@/providers/in-view-provider";
 import useSectionInView from "@/hooks/use-section-view";
 import { ReactNode } from "react";
+import { useTranslations } from "next-intl";
 
 const TripsSection = ({ children }: { children: ReactNode }) => {
-  // const { t } = useTranslation("global");
+  const t = useTranslations();
   const { ref, inView } = useSectionInView();
 
   return (
@@ -19,15 +19,12 @@ const TripsSection = ({ children }: { children: ReactNode }) => {
       <section ref={ref} className="py-20">
         <div className="container h-full">
           <SectionHeader
-            // subTitle={t("homePage.tripsSection.subTitle")}
-            // introText={t("homePage.tripsSection.introText")}
-            subTitle={"fasfasf"}
-            introText={"dfghbgfh"}
+            subTitle={t("homePage.tripsSection.subTitle")}
+            introText={t("homePage.tripsSection.introText")}
           />
           <Button asChild variant="primary">
             <Link href="/trips" className="py-6 block !my-7">
-              {/* {t("homePage.tripsSection.tripsButtonLabel")} */}
-              tests
+              {t("homePage.tripsSection.tripsButtonLabel")}
             </Link>
           </Button>
 

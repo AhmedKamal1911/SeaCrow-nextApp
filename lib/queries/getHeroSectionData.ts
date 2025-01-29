@@ -1,4 +1,4 @@
-import { HeroSectionData } from "@/app/components/sections/hero-section";
+import { HeroSectionData } from "@/app/[locale]/components/sections/hero-section";
 import { customFetch } from "../helpers/custom-fetch";
 
 export async function getHeroSectionData() {

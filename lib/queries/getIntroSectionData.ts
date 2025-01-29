@@ -1,4 +1,4 @@
-import { IntroSectionData } from "@/app/components/sections/intro-section";
+import { IntroSectionData } from "@/app/[locale]/components/sections/intro-section";
 import { customFetch } from "../helpers/custom-fetch";
 
 export async function getIntroSectionData() {

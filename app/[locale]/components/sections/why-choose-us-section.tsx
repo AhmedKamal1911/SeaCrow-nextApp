@@ -11,7 +11,6 @@ const iconMap: Record<string, React.ComponentType> = {
 
 // import useQueryWithLocale from "@/hooks/useQueryWithLocale";
 // import { useLanguage } from "@/contexts/LanguageProvider";
-// import { useTranslation } from "react-i18next";
 
 import Image from "next/image";
 import { getStrapiMediaURL } from "@/lib/utils";
@@ -26,6 +25,7 @@ import clsx from "clsx";
 import { ImageType } from "@/lib/types/shared";
 import SectionHeader from "@/components/common/section-header";
 import AboutInfoBox from "@/components/common/about-info-box";
+import { useTranslations } from "next-intl";
 
 type Service = {
   id: number;
@@ -63,7 +63,7 @@ type Props = {
 export default function WhyChooseUsSection({ data }: Props) {
   // const { isRTL, selectedLanguage } = useLanguage();
 
-  // const { t } = useTranslation("global");
+  const t = useTranslations();
 
   const services = data?.services ?? [];
   const imagesList = data?.images.data ?? [];
@@ -94,7 +94,7 @@ export default function WhyChooseUsSection({ data }: Props) {
         <div className="mt-16 relative">
           <div>
             <h2
-              // data-text={t("homePage.whyChooseUsSection.heading")}
+              data-text={t("homePage.whyChooseUsSection.heading")}
               // className={clsx(
               //   {
               //     "text-5xl sm:text-8xl xl:text-[120px]":
@@ -104,14 +104,12 @@ export default function WhyChooseUsSection({ data }: Props) {
               //   },
               //   "stroke-fill font-mainFont w-fit mx-auto whitespace-nowrap mb-5 text-center relative after:content-[attr(data-text)] after:absolute after:inset-0 after:w-0 after:z-[1] after:transition-all after:duration-500 hover:after:w-full after:overflow-hidden"
               // )}
-              // data-text={t("homePage.whyChooseUsSection.heading")}
-              data-text={"asgasgfas"}
+
               className={
                 "stroke-fill font-mainFont w-fit mx-auto whitespace-nowrap mb-5 text-center relative after:content-[attr(data-text)] after:absolute after:inset-0 after:w-0 after:z-[1] after:transition-all after:duration-500 hover:after:w-full after:overflow-hidden"
               }
             >
-              {/* {t("homePage.whyChooseUsSection.heading")} */}
-              asfasdfgfdfghd
+              {t("homePage.whyChooseUsSection.heading")}
             </h2>
             <div className="flex flex-col xl:flex-row lg:items-center">
               <div className="flex-1">
@@ -144,8 +142,7 @@ export default function WhyChooseUsSection({ data }: Props) {
               </div>
               <div className="flex-1 w-full">
                 <SectionHeader
-                  // subTitle={t("homePage.whyChooseUsSection.subTitle")}
-                  subTitle={"asfasffvfgf"}
+                  subTitle={t("homePage.whyChooseUsSection.subTitle")}
                   subTitleClassName={"text-2xl sm:text-6xl"}
                   subTitleRevealClassName="mx-auto"
                   className="mb-8 text-center"

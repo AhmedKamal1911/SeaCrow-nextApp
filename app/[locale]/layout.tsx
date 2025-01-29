@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Geist, Geist_Mono } from "next/font/google";
 import Header from "@/components/common/header";
 import ScrollToTopButton from "@/components/common/scroll-to-top-button";
 import SocialContainer from "@/components/common/social-container";
 import Footer from "@/components/common/footer";
+import { AbstractIntlMessages, NextIntlClientProvider } from "next-intl";
 import { getHeaderData } from "@/lib/queries/getHeaderData";
 import { getFooterData } from "@/lib/queries/getFooterData";
+import { getMessages } from "next-intl/server";
+import { notFound } from "next/navigation";
+import { Locale, routing } from "@/i18n/routing";
+import { ReactNode } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,22 +30,35 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+  params,
+}: {
+  children: ReactNode;
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  // Ensure that the incoming `locale` is valid
+  if (!routing.locales.includes(locale as Locale)) {
+    notFound();
+  }
+  // Providing all messages to the client
+  // side is the easiest way to get started
+  const messages: AbstractIntlMessages = await getMessages();
+
   const headerData = await getHeaderData();
   const footerData = await getFooterData();
 
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
       >
-        <Header data={headerData} />
-        {children}
-        <Footer data={footerData} />
-        <ScrollToTopButton />
-        <SocialContainer />
+        <NextIntlClientProvider messages={messages}>
+          <Header data={headerData} />
+          {children}
+          <Footer data={footerData} />
+          <ScrollToTopButton />
+          <SocialContainer />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

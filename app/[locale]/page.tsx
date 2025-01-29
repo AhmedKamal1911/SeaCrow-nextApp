@@ -1,17 +1,15 @@
+import { Suspense } from "react";
 import { getHeroSectionData } from "@/lib/queries/getHeroSectionData";
-import HeroSection from "./components/sections/hero-section";
 import { getIntroSectionData } from "@/lib/queries/getIntroSectionData";
+import { getWhyChooseUsData } from "@/lib/queries/getWhyChooseUsData";
+import HeroSection from "./components/sections/hero-section";
 import IntroSection from "./components/sections/intro-section";
 import AboutUsSection from "./components/sections/about-us-section";
-import WhyChooseUsSection from "./components/sections/why-choose-us-section";
-import { getWhyChooseUsData } from "@/lib/queries/getWhyChooseUsData";
-import TripsSection from "./components/sections/trips-section";
-
 import SpecialOffersSection from "./components/sections/special-offers-section";
-import { Suspense } from "react";
-
 import Loading from "@/components/common/loading";
 import SpecialTripsViewer from "./components/speical-trips-viewer";
+import WhyChooseUsSection from "./components/sections/why-choose-us-section";
+import TripsSection from "./components/sections/trips-section";
 import TripGridCardsViewer from "./components/trip-grid-cards-viewer";
 
 export default async function Home() {

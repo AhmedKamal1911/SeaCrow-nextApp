@@ -2,10 +2,11 @@
 // import { fetchFooterData } from "@/services/trips/queries";
 
 // import useQueryWithLocale from "@/hooks/useQueryWithLocale";
-// import { useTranslation } from "react-i18next";
+
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "../ui/button";
+import { useTranslations } from "next-intl";
 // import { ChevronsLeft, ChevronsRight } from "lucide-react";
 type Props = {
   data: {
@@ -44,7 +45,7 @@ type NavLinksData = {
   isExternal: boolean;
 }[];
 export default function Footer({ data }: Props) {
-  // const { t } = useTranslation("global");
+  const t = useTranslations();
 
   const linksList = data.navLinks;
   const contactLinks = data.contactLinks;
@@ -62,38 +63,27 @@ export default function Footer({ data }: Props) {
           />
           <div>
             <FooterSectionHeader
-              // title={t("footer.aboutUsSection.title")}
-              // desc={t("footer.aboutUsSection.desc")}
-              title={"fdhgfdhf"}
-              desc={"vasfasfas"}
+              title={t("footer.aboutUsSection.title")}
+              desc={t("footer.aboutUsSection.desc")}
             />
             <Button asChild variant="primary" className="py-6 px-7">
               <Link href="/about-us">
-                {/* {t("footer.aboutUsSection.aboutUsButtonLabel")} */}
-                afgasfag
+                {t("footer.aboutUsSection.aboutUsButtonLabel")}
               </Link>
             </Button>
           </div>
           <div>
-            <FooterSectionHeader
-              // title={t("footer.contactUsSectionTitle")}
-              title={"fdhgdfhdfh"}
-            />
+            <FooterSectionHeader title={t("footer.contactUsSectionTitle")} />
             <DynamicInfoSection infoList={contactLinks} />
           </div>
           <div>
-            <FooterSectionHeader
-              // title={t("footer.quickLinksSectionTitle")}
-              title={"fghgfhgfh"}
-            />
+            <FooterSectionHeader title={t("footer.quickLinksSectionTitle")} />
             <DynamicInfoSection infoList={linksList} />
           </div>
           <div>
             <FooterSectionHeader
-              // title={t("footer.reachUsSection.title")}
-              // desc={t("footer.reachUsSection.desc")}
-              title={"fdhgfdhf"}
-              desc={"vasfasfas"}
+              title={t("footer.reachUsSection.title")}
+              desc={t("footer.reachUsSection.desc")}
             />
             <div className="flex gap-3 mt-5">
               <a
@@ -130,12 +120,11 @@ export default function Footer({ data }: Props) {
         </div>
         <div className="relative text-center  flex flex-col sm:flex-row justify-between p-5 bg-[#363d5371]  gap-10 rounded-md">
           <p className="text-main text-xl ">
-            {/* &copy; {t("footer.copyRightReference")} */}
-            fgdffh
+            &copy; {t("footer.copyRightReference")}
           </p>
           <span className="text-white text-xl">
-            {/* {t("footer.poweredBy")} */}
-            asfasfadggd
+            {t("footer.poweredBy")}
+
             <a
               href="mailto:khmedamal@gmail.com"
               target="_blank"

@@ -245,15 +245,15 @@ export const countries = [
 export const languages = [
   {
     countryName: "US",
-    languageName: "en",
+    langCode: "en",
   },
   {
     countryName: "EG",
-    languageName: "ar",
+    langCode: "ar",
   },
   {
     countryName: "RU",
-    languageName: "ru",
+    langCode: "ru",
   },
 ] as const;
 
