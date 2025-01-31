@@ -1,6 +1,7 @@
 "use client";
 import TripCard from "@/components/common/trip-card";
 import { Trip } from "@/lib/types/trips";
+
 import { useInView } from "@/providers/in-view-provider";
 
 type Props = {

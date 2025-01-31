@@ -1,79 +1,15 @@
-import { ImageType } from "./shared";
+import { z } from "zod";
+import {
+  imageTypeSchema,
+  metaSchema,
+  paginationSchema,
+  TripsResponseSchema,
+  tripSchema,
+} from "../validations/shared";
 
-type Highlight = {
-  id: number;
-  name: string;
-};
-
-type TourPlan = {
-  id: number;
-  name: string;
-};
-
-type IncludedService = {
-  id: number;
-  name: string;
-};
-
-type NotIncluded = {
-  id: number;
-  name: string;
-};
-
-type DontForget = {
-  id: number;
-  name: string;
-};
-
-type Localization = {
-  id: number;
-  title: string;
-  time: string;
-  departureTime: string;
-  tripDays: string;
-  returnTime: string;
-  maxGuests: number;
-  tourFrom: string;
-  desc: string;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-  offer: number;
-  adultPrice: number;
-  childPrice: number;
-  type: string;
-  locale: string;
-  slug: string;
-};
-
-export type Trip = {
-  id: number;
-  title: string;
-  time: string;
-  departureTime: string;
-  tripDays: string;
-  returnTime: string;
-  maxGuests: number;
-  tourFrom: string;
-  desc: string;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-  offer: number;
-  adultPrice: number;
-  childPrice: number;
-  type: string;
-  locale: string;
-  slug: string;
-  imgs: {
-    data: ImageType[];
-  };
-  highlights: Highlight[];
-  tourPlan: TourPlan[];
-  includedServices: IncludedService[];
-  notIncluded: NotIncluded[];
-  dontForget: DontForget[];
-  localizations: {
-    data: Localization[];
-  };
-};
+// TypeScript types
+export type TripsResponse = z.infer<typeof TripsResponseSchema>;
+export type ImageType = z.infer<typeof imageTypeSchema>;
+export type Trip = z.infer<typeof tripSchema>;
+export type Meta = z.infer<typeof metaSchema>;
+export type Pagination = z.infer<typeof paginationSchema>;

@@ -3,12 +3,12 @@
 import "swiper/css";
 import "swiper/css/pagination";
 
-import { Trip } from "@/lib/types/trips";
 import { sliderBreakPoints } from "@/lib/data";
 import TripCard from "@/components/common/trip-card";
 import { useInView } from "@/providers/in-view-provider";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
+import { Trip } from "@/lib/types/trips";
 
 // import required modules
 type Props = {

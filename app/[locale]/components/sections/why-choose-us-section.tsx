@@ -1,7 +1,18 @@
-import { BookOpen, Compass, HeartHandshake, Star } from "lucide-react";
+import {
+  BookOpen,
+  Compass,
+  HeartHandshake,
+  LucideProps,
+  Star,
+} from "lucide-react";
 
 // Map of icon names to their respective components
-const iconMap: Record<string, React.ComponentType> = {
+export const iconMap: Record<
+  string,
+  ForwardRefExoticComponent<
+    Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
+  >
+> = {
   FaBookOpen: BookOpen,
   FaHandsHelping: HeartHandshake,
   FaRegCompass: Compass,
@@ -22,47 +33,49 @@ import {
 } from "@/components/ui/accordion";
 import { aboutInfoList } from "@/lib/data";
 import clsx from "clsx";
-import { ImageType } from "@/lib/types/shared";
+// import { ImageType } from "@/lib/types/shared";
 import SectionHeader from "@/components/common/section-header";
 import AboutInfoBox from "@/components/common/about-info-box";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { whyChooseUsDataSchemaType } from "@/lib/validations/whyChooseUsDataValidation";
+import { ForwardRefExoticComponent, RefAttributes } from "react";
 
-type Service = {
-  id: number;
-  desc: string;
-  icon: string;
-  name: string;
-};
+// type Service = {
+//   id: number;
+//   desc: string;
+//   icon: string;
+//   name: string;
+// };
 
-type Localization = {
-  id: number;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-  locale: string;
-};
+// type Localization = {
+//   id: number;
+//   createdAt: string;
+//   updatedAt: string;
+//   publishedAt: string;
+//   locale: string;
+// };
 
-export type WhyUsData = {
-  id: number;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-  locale: string;
-  services: Service[];
-  images: {
-    data: ImageType[];
-  };
-  localizations: {
-    data: Localization[];
-  };
-  meta: Record<string, unknown>;
-};
+// export type WhyUsData = {
+//   id: number;
+//   createdAt: string;
+//   updatedAt: string;
+//   publishedAt: string;
+//   locale: string;
+//   services: Service[];
+//   images: {
+//     data: ImageType[];
+//   };
+//   localizations: {
+//     data: Localization[];
+//   };
+//   meta: Record<string, unknown>;
+// };
 type Props = {
-  data: WhyUsData;
+  data: whyChooseUsDataSchemaType;
 };
 export default function WhyChooseUsSection({ data }: Props) {
   // const { isRTL, selectedLanguage } = useLanguage();
-
+  const langCode = useLocale();
   const t = useTranslations();
 
   const services = data?.services ?? [];
@@ -89,25 +102,20 @@ export default function WhyChooseUsSection({ data }: Props) {
       <div className="container">
         <AboutInfoBox
           aboutInfoList={aboutInfoList}
-          className="bg-[#ffffff9c] gap-28 relative"
+          className="bg-[#ffffff9c] gap-10 relative"
         />
         <div className="mt-16 relative">
           <div>
             <h2
               data-text={t("homePage.whyChooseUsSection.heading")}
-              // className={clsx(
-              //   {
-              //     "text-5xl sm:text-8xl xl:text-[120px]":
-              //       selectedLanguage.languageName !== "ru",
-              //     "max-[350px]:text-[20px] text-[30px] sm:text-5xl lg:text-6xl xl:text-8xl":
-              //       selectedLanguage.languageName === "ru",
-              //   },
-              //   "stroke-fill font-mainFont w-fit mx-auto whitespace-nowrap mb-5 text-center relative after:content-[attr(data-text)] after:absolute after:inset-0 after:w-0 after:z-[1] after:transition-all after:duration-500 hover:after:w-full after:overflow-hidden"
-              // )}
-
-              className={
+              className={clsx(
+                {
+                  "text-5xl sm:text-8xl xl:text-[120px]": langCode !== "ru",
+                  "max-[350px]:text-[20px] text-[30px] sm:text-5xl lg:text-6xl xl:text-8xl":
+                    langCode === "ru",
+                },
                 "stroke-fill font-mainFont w-fit mx-auto whitespace-nowrap mb-5 text-center relative after:content-[attr(data-text)] after:absolute after:inset-0 after:w-0 after:z-[1] after:transition-all after:duration-500 hover:after:w-full after:overflow-hidden"
-              }
+              )}
             >
               {t("homePage.whyChooseUsSection.heading")}
             </h2>

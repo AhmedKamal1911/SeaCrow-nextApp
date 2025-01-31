@@ -6,31 +6,33 @@ import Link from "next/link";
 
 import clsx from "clsx";
 import HeroSlider from "../hero-slider";
-import { ImageType } from "@/lib/types/shared";
+
 import HeroSectionHeading from "../hero-section-heading";
+import { HeroSectionDataSchemaType } from "@/lib/validations/heroSectionDataValidation";
+// import { ImageType } from "@/lib/validations/shared";
 
-type HeroButton = {
-  id: number;
-  text: string;
-  url: string;
-  isExternal: boolean;
-};
+// type HeroButton = {
+//   id: number;
+//   text: string;
+//   url: string;
+//   isExternal: boolean;
+// };
 
-export type HeroSectionData = {
-  id: number;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-  heading: string;
-  locale: string;
-  heroButton: HeroButton;
-  heroImages: {
-    data: ImageType[];
-  };
-};
+// export type HeroSectionData = {
+//   id: number;
+//   createdAt: string;
+//   updatedAt: string;
+//   publishedAt: string;
+//   heading: string;
+//   locale: string;
+//   heroButton: HeroButton;
+//   heroImages: {
+//     data: ImageType[];
+//   };
+// };
 
 type Props = {
-  data: HeroSectionData;
+  data: HeroSectionDataSchemaType;
 };
 const HeroSection = ({ data }: Props) => {
   // const { selectedLanguage } = useLanguage();

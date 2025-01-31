@@ -1,30 +1,22 @@
-"use client";
-// import { useTranslation } from "react-i18next";
-
-import { animate } from "framer-motion";
-import { useState, useEffect } from "react";
-
 import { cn } from "@/lib/utils";
 
 import Image from "next/image";
 import { aboutInfoListType } from "@/lib/types/shared";
-import useSectionInView from "@/hooks/use-section-view";
+
+import { useTranslations } from "next-intl";
+import NumberCounter from "@/app/[locale]/components/number-counter";
 
 type Props = {
   className?: string;
   aboutInfoList: aboutInfoListType;
 };
-type NumberCounterProps = {
-  from?: number;
-  to?: number;
-  numberProps?: string;
-};
+
 export default function AboutInfoBox({ aboutInfoList, className }: Props) {
-  // const { t } = useTranslation("global");
+  const t = useTranslations();
   return (
     <div
       className={cn(
-        "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  xl:gap-10 bg-[#f1f1f1] p-6 xl:p-10 rounded-lg shadow-md",
+        "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 xl:gap-10 bg-[#f1f1f1] p-6 xl:p-10 rounded-lg shadow-md",
         className
       )}
     >
@@ -49,46 +41,11 @@ export default function AboutInfoBox({ aboutInfoList, className }: Props) {
               <span className="text-main text-6xl">+</span>
             </h3>
             <span className="text-xl">
-              {/* {t(`homePage.whyChooseUsSection.achievementsSection.${i}`)} */}
-              asfsdgghdfhddfhdf
+              {t(`homePage.whyChooseUsSection.achievementsSection.${i}`)}
             </span>
           </div>
         </div>
       ))}
     </div>
-  );
-}
-
-function NumberCounter({
-  from = 0,
-  to = 1000,
-  numberProps,
-}: NumberCounterProps) {
-  const { ref, inView } = useSectionInView();
-  const [currentValue, setCurrentValue] = useState(from);
-
-  useEffect(() => {
-    if (inView) {
-      const start = Number(from);
-      const end = Number(to);
-
-      const controls = animate(start, end, {
-        duration: 2,
-        ease: "easeInOut",
-        onUpdate(value) {
-          setCurrentValue(Number(value.toFixed(0))); // Update the state instead of textContent
-        },
-      });
-
-      return () => {
-        controls.stop(); // Cleanup
-      };
-    }
-  }, [from, to, inView]);
-
-  return (
-    <span ref={ref} className={cn("text-4xl", numberProps)}>
-      {currentValue}
-    </span>
   );
 }

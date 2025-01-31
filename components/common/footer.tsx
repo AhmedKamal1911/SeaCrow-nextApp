@@ -7,43 +7,45 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import { useTranslations } from "next-intl";
+import { FooterDataSchemaTypes } from "@/lib/validations/footerDataValidation";
 // import { ChevronsLeft, ChevronsRight } from "lucide-react";
 type Props = {
-  data: {
-    id: number;
-    createdAt: string;
-    updatedAt: string;
-    publishedAt: string;
-    logoText: string;
-    locale: string;
-    navLinks: NavLinksData;
-    contactLinks: ContactLinksData;
-    meta: Record<string, unknown>;
-  };
+  // data: {
+  //   id: number;
+  //   createdAt: string;
+  //   updatedAt: string;
+  //   publishedAt: string;
+  //   logoText: string;
+  //   locale: string;
+  //   navLinks: NavLinksData;
+  //   contactLinks: ContactLinksData;
+  //   meta: Record<string, unknown>;
+  // };
+  data: FooterDataSchemaTypes;
 };
-export type FooterData = {
-  id: number;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-  logoText: string;
-  locale: string;
-  navLinks: NavLinksData;
-  contactLinks: ContactLinksData;
-  meta: Record<string, unknown>;
-};
-type ContactLinksData = {
-  id: number;
-  url: string;
-  text: string;
-  type: "mail" | "tel"; // Restrict to specific values
-}[];
-type NavLinksData = {
-  id: number;
-  text: string;
-  url: string;
-  isExternal: boolean;
-}[];
+// export type FooterData = {
+//   id: number;
+//   createdAt: string;
+//   updatedAt: string;
+//   publishedAt: string;
+//   logoText: string;
+//   locale: string;
+//   navLinks: NavLinksData;
+//   contactLinks: ContactLinksData;
+//   meta: Record<string, unknown>;
+// };
+// type ContactLinksData = {
+//   id: number;
+//   url: string;
+//   text: string;
+//   type: "mail" | "tel"; // Restrict to specific values
+// }[];
+// type NavLinksData = {
+//   id: number;
+//   text: string;
+//   url: string;
+//   isExternal: boolean;
+// }[];
 export default function Footer({ data }: Props) {
   const t = useTranslations();
 
@@ -163,7 +165,9 @@ function FooterSectionHeader({
 function DynamicInfoSection({
   infoList,
 }: {
-  infoList: NavLinksData | ContactLinksData;
+  infoList:
+    | FooterDataSchemaTypes["navLinks"]
+    | FooterDataSchemaTypes["contactLinks"];
 }) {
   // const { isRTL } = useLanguage();
   return (
@@ -206,7 +210,9 @@ function DynamicInfoSection({
 }
 
 function isContactInfo(
-  info: NavLinksData[0] | ContactLinksData[0]
-): info is ContactLinksData[0] {
+  info:
+    | FooterDataSchemaTypes["navLinks"][0]
+    | FooterDataSchemaTypes["contactLinks"][0]
+): info is FooterDataSchemaTypes["contactLinks"][0] {
   return "type" in info && !("isExternal" in info);
 }

@@ -4,13 +4,14 @@ import Image from "next/image";
 import { twMerge } from "tailwind-merge";
 
 import Link from "next/link";
-import { FeaturesBox } from "./sections/intro-section";
+// import { FeaturesBox } from "./sections/intro-section";
 import { useTranslations } from "next-intl";
+import { FeaturesBoxType } from "@/lib/validations/introSectionDataValidation";
 
 // Adjust text alignment
 type Props = {
   className?: string;
-  features: FeaturesBox[];
+  features: FeaturesBoxType[];
 };
 export default function FeaturesList({ className, features }: Props) {
   return (
@@ -23,14 +24,14 @@ export default function FeaturesList({ className, features }: Props) {
         className
       )}
     >
-      {features?.map((feature, idx) => (
+      {features.map((feature, idx) => (
         <FeatureListItem key={idx} feature={feature} />
       ))}
     </div>
   );
 }
 
-function FeatureListItem({ feature }: { feature: FeaturesBox }) {
+function FeatureListItem({ feature }: { feature: FeaturesBoxType }) {
   const t = useTranslations();
   return (
     <div

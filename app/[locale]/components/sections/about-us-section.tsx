@@ -4,10 +4,10 @@ import { travelCategories } from "@/lib/data";
 import { Button } from "@/components/ui/button";
 import SectionHeader from "@/components/common/section-header";
 import InfiniteSlider from "../infinite-slider";
-import { useTranslations } from "next-intl";
+import { useTranslations as getTranslation } from "next-intl";
 
 export default function AboutUsSection() {
-  const t = useTranslations();
+  const t = getTranslation();
   return (
     <section className="bg-light overflow-hidden">
       <div className="relative px-4 min-[1400px]:ms-auto min-[1400px]:w-8/12 z-[1]  lg:overflow-visible">

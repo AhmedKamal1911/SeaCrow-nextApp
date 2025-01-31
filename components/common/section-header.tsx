@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import Reveal from "./reveal";
 
 type Props = {
-  subTitle: string;
+  subTitle?: string;
   introText?: string;
   desc?: string;
   className?: string;

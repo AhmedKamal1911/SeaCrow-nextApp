@@ -2,12 +2,12 @@
 
 import Image from "next/image";
 import { getStrapiMediaURL } from "@/lib/utils";
-import { ImageType } from "@/lib/types/shared";
 
 import "swiper/css";
 import "swiper/css/effect-fade";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, Autoplay, EffectFade } from "swiper/modules";
+import { ImageType } from "@/lib/types/trips";
 
 type Props = { heroImagesList: ImageType[] };
 function HeroSlider({ heroImagesList }: Props) {

@@ -12,6 +12,7 @@ import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Locale, routing } from "@/i18n/routing";
 import { ReactNode } from "react";
+import ReactQueryProvider from "@/providers/query-client-provier";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -48,16 +49,18 @@ export default async function RootLayout({
   const footerData = await getFooterData();
 
   return (
-    <html lang={locale}>
+    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
       >
         <NextIntlClientProvider messages={messages}>
-          <Header data={headerData} />
-          {children}
-          <Footer data={footerData} />
-          <ScrollToTopButton />
-          <SocialContainer />
+          <ReactQueryProvider>
+            <Header data={headerData} />
+            {children}
+            <Footer data={footerData} />
+            <ScrollToTopButton />
+            <SocialContainer />
+          </ReactQueryProvider>
         </NextIntlClientProvider>
       </body>
     </html>

@@ -163,7 +163,8 @@
       "types": {
         "activities": "Activities",
         "safari": "Safari",
-        "sea": "Sea"
+        "sea": "Sea",
+        "all": "All"
       }
     }
   },

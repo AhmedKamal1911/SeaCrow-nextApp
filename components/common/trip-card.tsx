@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
 
 import Link from "next/link";
-import { Trip } from "@/lib/types/trips";
+
 import { getStrapiMediaURL } from "@/lib/utils";
 import { useTranslations } from "next-intl";
+import { Trip } from "@/lib/validations/shared";
+
 type Props = {
   trip: Trip;
   i: number;

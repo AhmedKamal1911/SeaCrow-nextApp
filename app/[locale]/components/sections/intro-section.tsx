@@ -1,55 +1,57 @@
 import SectionHeader from "@/components/common/section-header";
 
 // import useQueryWithLocale from "@/hooks/useQueryWithLocale";
-import { ImageType } from "@/lib/types/shared";
 
 import FeaturesList from "../features-list";
 import { useTranslations } from "next-intl";
+import { IntroSectionDataSchemaType } from "@/lib/validations/introSectionDataValidation";
+// import { ImageType } from "@/lib/validations/shared";
 
-type Icon = {
-  id: number;
-  name: string;
-  alternativeText: string | null;
-  caption: string | null;
-  width: number;
-  height: number;
-  formats: null;
-  hash: string;
-  ext: string;
-  mime: string;
-  size: number;
-  url: string;
-  previewUrl: string | null;
-  provider: string;
-  provider_metadata: string | null;
-  createdAt: string;
-  updatedAt: string;
-};
-export type FeaturesBox = {
-  id: number;
-  title: string;
-  url: string;
-  icon: Icon;
-  travelImg: ImageType;
-};
+// type Icon = {
+//   id: number;
+//   name: string;
+//   alternativeText: string | null;
+//   caption: string | null;
+//   width: number;
+//   height: number;
+//   formats: null;
+//   hash: string;
+//   ext: string;
+//   mime: string;
+//   size: number;
+//   url: string;
+//   previewUrl: string | null;
+//   provider: string;
+//   provider_metadata: string | null;
+//   createdAt: string;
+//   updatedAt: string;
+// };
 
-export type IntroSectionData = {
-  id: number;
-  heading: string;
-  desc: string;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-  locale: string;
-  featuresBox: FeaturesBox[];
-};
+// export type FeaturesBox = {
+//   id: number;
+//   title: string;
+//   url: string;
+//   icon: Icon;
+//   travelImg: ImageType;
+// };
+
+// export type IntroSectionData = {
+//   id: number;
+//   heading: string;
+//   desc: string;
+//   createdAt: string;
+//   updatedAt: string;
+//   publishedAt: string;
+//   locale: string;
+//   featuresBox: FeaturesBox[];
+// };
 
 type Props = {
-  data: IntroSectionData;
+  data: IntroSectionDataSchemaType;
 };
 const IntroSection = ({ data }: Props) => {
   const t = useTranslations();
-  console.log(t.raw);
+
   const featuresList = data.featuresBox;
   const introHeading =
     data?.heading ?? "We are here to help you have the best trip";

@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-
 import { useEffect, useRef, useState } from "react";
 import { Portal } from "@radix-ui/react-portal";
 import Image from "next/image";
@@ -20,29 +18,30 @@ import clsx from "clsx";
 
 import {
   useRouter,
-  Locale,
-  routing,
   usePathname as useI18nPathname,
+  Link,
 } from "@/i18n/routing";
 import { useLocale } from "next-intl";
 
-export type NavbarData = {
-  id: number;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-  logoText: string;
-  locale: string;
-  navLinks: {
-    id: number;
-    text: string;
-    url: string;
-    isExternal: boolean;
-  }[];
-  meta: Record<string, unknown>;
-};
+import { HeaderDataSchemaTypes } from "@/lib/validations/headerDataValidation";
+
+// export type NavbarData = {
+//   id: number;
+//   createdAt: string;
+//   updatedAt: string;
+//   publishedAt: string;
+//   logoText: string;
+//   locale: string;
+//   navLinks: {
+//     id: number;
+//     text: string;
+//     url: string;
+//     isExternal: boolean;
+//   }[];
+//   meta: Meta;
+// };
 type Props = {
-  data: NavbarData;
+  data: HeaderDataSchemaTypes;
 };
 
 export default function Header({ data }: Props) {
@@ -116,7 +115,11 @@ export default function Header({ data }: Props) {
   );
 }
 
-function AsideDrawer({ navLinks }: { navLinks: NavbarData["navLinks"] }) {
+function AsideDrawer({
+  navLinks,
+}: {
+  navLinks: HeaderDataSchemaTypes["navLinks"];
+}) {
   const [showDrawer, setShowDrawer] = useState(false);
   const [isAnimateDrawerLinks, setIsAnimateDrawerLinks] = useState(false);
 
@@ -176,7 +179,7 @@ function AsideDrawer({ navLinks }: { navLinks: NavbarData["navLinks"] }) {
 type NavLinksProps = {
   className?: string;
   disableInitialAnimation?: boolean;
-  navLinks: NavbarData["navLinks"];
+  navLinks: HeaderDataSchemaTypes["navLinks"];
 };
 function NavLinks({
   className,

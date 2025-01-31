@@ -1,10 +1,32 @@
-import { FooterData } from "@/components/common/footer";
 import { customFetch } from "../helpers/custom-fetch";
+import {
+  footerDataSchema,
+  FooterDataSchemaTypes,
+} from "../validations/footerDataValidation";
 
 export async function getFooterData() {
-  const data: FooterData = await customFetch("global", {
-    populate: "navLinks,contactLinks",
-  });
-  console.log({ data });
-  return data;
+  try {
+    // Fetch data from API
+    const data = await customFetch("global", {
+      populate: "navLinks,contactLinks",
+    });
+
+    const validationResult = footerDataSchema.safeParse(data);
+
+    if (!validationResult.success) {
+      const errorMessage = JSON.stringify(
+        validationResult.error.flatten(),
+        null,
+        2
+      );
+      throw new Error(`Footer data validation failed: ${errorMessage}`);
+    }
+
+    return validationResult.data;
+  } catch (error) {
+    console.error("Footer data error:", error);
+
+    // Optional: Return fallback data or re-throw
+    throw error; // Remove this if you want to suppress the error
+  }
 }
