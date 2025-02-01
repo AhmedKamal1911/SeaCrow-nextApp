@@ -5,6 +5,7 @@ import { getTripsSectionData } from "@/lib/queries/getTripsSectionData";
 export default async function Trips() {
   const tripTypes = await getTripTypes();
   const initialTripsList = await getTripsSectionData("all");
+  // TODO: create pagination
   return (
     <>
       <TripsPageView

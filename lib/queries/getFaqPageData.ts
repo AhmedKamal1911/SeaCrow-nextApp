@@ -1,12 +1,9 @@
 import { customFetch } from "../helpers/custom-fetch";
-import {
-  FaqsPageDataType,
-  FaqsPageSchema,
-} from "../validations/faqPageDataValidation";
+import { FaqsPageSchema } from "../validations/faqPageDataValidation";
 
 export default async function getFaqPageData() {
   try {
-    const data: FaqsPageDataType = await customFetch("faq-page", {
+    const data = await customFetch("faq-page", {
       populate: "*",
     });
     console.log({ faq: data });

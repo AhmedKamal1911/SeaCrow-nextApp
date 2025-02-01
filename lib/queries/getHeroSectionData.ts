@@ -1,12 +1,9 @@
 import { customFetch } from "../helpers/custom-fetch";
-import {
-  heroSectionDataSchema,
-  HeroSectionDataSchemaType,
-} from "../validations/heroSectionDataValidation";
+import { heroSectionDataSchema } from "../validations/heroSectionDataValidation";
 
 export async function getHeroSectionData() {
   try {
-    const data: HeroSectionDataSchemaType = await customFetch("hero-section", {
+    const data = await customFetch("hero-section", {
       populate: "*",
     });
     const result = heroSectionDataSchema.safeParse(data);
@@ -14,7 +11,7 @@ export async function getHeroSectionData() {
       const errorMessage = JSON.stringify(result.error.flatten(), null, 2);
       throw new Error(`Hero data validation failed: ${errorMessage}`);
     }
-    console.log({ data });
+
     return result.data;
   } catch (error) {
     console.error("HeroSection data error:", error);

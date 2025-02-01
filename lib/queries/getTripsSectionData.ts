@@ -1,10 +1,10 @@
 import { customFetch } from "../helpers/custom-fetch";
-import { TripsResponse } from "../types/trips";
+
 import { TripsResponseSchema } from "../validations/shared";
 
 export async function getTripsSectionData(typeName: string) {
   try {
-    const data: TripsResponse = await customFetch("trips", {
+    const data = await customFetch("trips", {
       populate: "*",
       ...(typeName !== "all"
         ? {

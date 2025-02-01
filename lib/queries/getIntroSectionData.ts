@@ -1,24 +1,18 @@
 import { customFetch } from "../helpers/custom-fetch";
-import {
-  IntroSectionDataSchemaType,
-  introSectionSchemaData,
-} from "../validations/introSectionDataValidation";
+import { introSectionSchemaData } from "../validations/introSectionDataValidation";
 
 export async function getIntroSectionData() {
   try {
-    const response: IntroSectionDataSchemaType = await customFetch(
-      "intro-section",
-      {
-        populate: {
-          featuresBox: {
-            populate: {
-              icon: true,
-              travelImg: true,
-            },
+    const response = await customFetch("intro-section", {
+      populate: {
+        featuresBox: {
+          populate: {
+            icon: true,
+            travelImg: true,
           },
         },
-      }
-    );
+      },
+    });
     console.log({ response });
     const result = introSectionSchemaData.safeParse(response);
     if (!result.success) {

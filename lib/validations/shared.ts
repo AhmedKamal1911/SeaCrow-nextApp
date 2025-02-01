@@ -61,7 +61,7 @@ const notIncludedSchema = z.object({
   name: z.string(),
 });
 
-const dontForgetSchema = z.object({
+export const dontForgetSchema = z.object({
   id: z.number(),
   name: z.string(),
 });

@@ -1,12 +1,9 @@
 import { customFetch } from "../helpers/custom-fetch";
-import {
-  HeaderDataSchemaTypes,
-  navbarDataSchema,
-} from "../validations/headerDataValidation";
+import { navbarDataSchema } from "../validations/headerDataValidation";
 
 export async function getHeaderData() {
   try {
-    const data: HeaderDataSchemaTypes = await customFetch("global", {
+    const data = await customFetch("global", {
       populate: "logoText,navLinks",
     });
 

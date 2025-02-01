@@ -2,17 +2,23 @@ import { customFetch } from "../helpers/custom-fetch";
 
 import { TripsResponseSchema } from "../validations/shared";
 
-export async function getSpeicalOffersData() {
+export default async function getRelatedTripsData(
+  typeName: string,
+  slug: string
+) {
   try {
     const data = await customFetch("trips", {
       populate: "*",
       filters: {
-        offer: {
-          $ne: null,
+        type: {
+          $eq: typeName,
+        },
+        slug: {
+          $ne: slug,
         },
       },
     });
-    console.log(data);
+
     const result = TripsResponseSchema.safeParse(data);
     if (!result.success) {
       const errorMessage = JSON.stringify(
@@ -22,14 +28,12 @@ export async function getSpeicalOffersData() {
       );
       console.log(result.error);
       throw new Error(
-        `SpecialOffers Section data validation failed: ${errorMessage}`
+        `relatedTrips Section data validation failed: ${errorMessage}`
       );
     }
-    console.log({ data });
-    return result.data;
+
+    return result.data.data;
   } catch (error) {
-    console.error("HeroSection data error:", error);
-    // Optional: Return fallback data or re-throw
-    throw error; // Remove this if you want to suppress the error
+    throw error;
   }
 }

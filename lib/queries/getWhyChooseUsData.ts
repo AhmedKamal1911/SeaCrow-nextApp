@@ -1,24 +1,18 @@
 import { customFetch } from "../helpers/custom-fetch";
-import {
-  whyChooseUsDataSchema,
-  whyChooseUsDataSchemaType,
-} from "../validations/whyChooseUsDataValidation";
+import { whyChooseUsDataSchema } from "../validations/whyChooseUsDataValidation";
 
 export async function getWhyChooseUsData() {
   try {
-    const data: whyChooseUsDataSchemaType = await customFetch(
-      "why-us-section",
-      {
-        populate: "*",
-      }
-    );
+    const data = await customFetch("why-us-section", {
+      populate: "*",
+    });
     const result = whyChooseUsDataSchema.safeParse(data);
     if (!result.success) {
       const errorMessage = JSON.stringify(result.error.flatten(), null, 2);
       throw new Error(`whyChooseUs data validation failed: ${errorMessage}`);
     }
     console.log({ whyUs: data });
-    return data;
+    return result.data;
   } catch (error) {
     console.error("Header data error:", error);
 

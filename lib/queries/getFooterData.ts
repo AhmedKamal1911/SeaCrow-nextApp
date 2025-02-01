@@ -1,8 +1,5 @@
 import { customFetch } from "../helpers/custom-fetch";
-import {
-  footerDataSchema,
-  FooterDataSchemaTypes,
-} from "../validations/footerDataValidation";
+import { footerDataSchema } from "../validations/footerDataValidation";
 
 export async function getFooterData() {
   try {

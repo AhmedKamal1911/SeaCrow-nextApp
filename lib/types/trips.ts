@@ -5,10 +5,12 @@ import {
   paginationSchema,
   TripsResponseSchema,
   tripSchema,
+  dontForgetSchema,
 } from "../validations/shared";
 
 // TypeScript types
 export type TripsResponse = z.infer<typeof TripsResponseSchema>;
+export type RuleType = z.infer<typeof dontForgetSchema>;
 export type ImageType = z.infer<typeof imageTypeSchema>;
 export type Trip = z.infer<typeof tripSchema>;
 export type Meta = z.infer<typeof metaSchema>;
