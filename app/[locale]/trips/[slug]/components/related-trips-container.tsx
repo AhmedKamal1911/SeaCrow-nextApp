@@ -20,7 +20,7 @@ export default function RelatedTripsContainer({
       </div>
     ))
   ) : (
-    <span className="text-4xl text-center text-yellow-500">
+    <span className="font-bold text-center text-teal-800">
       {t("tripInfo.emptyRelatedTripsText")}
     </span>
   );

@@ -13,6 +13,7 @@ import { notFound } from "next/navigation";
 import { Locale, routing } from "@/i18n/routing";
 import { ReactNode } from "react";
 import ReactQueryProvider from "@/providers/query-client-provier";
+import { Toaster } from "@/components/ui/toaster";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -58,6 +59,7 @@ export default async function RootLayout({
             <Header data={headerData} />
             {children}
             <Footer data={footerData} />
+            <Toaster />
             <ScrollToTopButton />
             <SocialContainer />
           </ReactQueryProvider>

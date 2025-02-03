@@ -36,6 +36,8 @@
       "contactFormButtonLabel": "Submit",
       "validation": {
         "emailRequired": "Please enter your email address.",
+        "fullNameRequierd": "Please enter your full name.",
+        "subjectRequierd": "Subject is Requierd",
         "emailInvalid": "Please provide a valid email address.",
         "messageRequired": "Please enter your message.",
         "nameMin": "Your name must be at least 2 characters long.",
@@ -54,6 +56,7 @@
 
       "adult": "Adult",
       "child": "Child",
+      "babies": "Babies",
       "message": "Type Your Message Here.",
       "bookTripFormButtonLabel": "Submit",
       "validation": {
@@ -69,6 +72,7 @@
         "hotelNameRequired": "Hotel Name Is Required",
         "adultNumberMin": "Adult number must be at least 1",
         "childNumberNegative": "Child number must be at least 0 or more",
+        "babiesNumberNegative": "Babies number must be at least 0 or more",
         "checkDateRequired": "Check-in date is required",
         "countryRequired": "Country is required"
       }

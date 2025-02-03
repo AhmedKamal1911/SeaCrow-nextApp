@@ -7,6 +7,11 @@ import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType } from "swiper";
 import { getStrapiMediaURL } from "@/lib/utils";
+
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
 export default function TripSlider({
   imagesList,
 }: {
@@ -16,20 +21,21 @@ export default function TripSlider({
 
   console.log({ active: thumbsSwiper?.activeIndex });
   return (
-    <div className="select-none bg-red-500">
+    <div className="select-none ">
       <div className=" aspect-[6/3.8]">
         <Swiper
-          style={{
-            "--swiper-navigation-color": "#fff",
-            "--swiper-pagination-color": "#fff",
-          }}
+          style={
+            {
+              "--swiper-navigation-color": "#fff",
+              "--swiper-pagination-color": "#fff",
+            } as React.CSSProperties
+          }
           loop
           spaceBetween={10}
           navigation
           thumbs={{ swiper: thumbsSwiper }}
           modules={[FreeMode, Navigation, Thumbs]}
           className="mySwiper2 h-full"
-          lazy={"true"}
         >
           {imagesList.map(({ url, id }) => (
             <SwiperSlide key={id} className="active:cursor-grab">
@@ -69,7 +75,7 @@ export default function TripSlider({
                 fill
                 src={getStrapiMediaURL(url) ?? ""}
                 alt="mini trip image"
-                className="h-full object-cover w-full"
+                className=" object-cover "
               />
             </SwiperSlide>
           ))}

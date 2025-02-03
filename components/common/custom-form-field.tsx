@@ -4,9 +4,9 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import FaqInput from "./faq-form-fields";
+import CustomInput from "./custom-input";
 import { Control, FieldPath, FieldValues } from "react-hook-form";
-import { HTMLInputTypeAttribute } from "react";
+import { HTMLInputTypeAttribute, ReactNode } from "react";
 type Props<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
@@ -15,8 +15,9 @@ type Props<
   name: TName;
   placeholder?: string;
   type?: HTMLInputTypeAttribute | undefined;
+  icon?: ReactNode;
 };
-const FaqFormField = <
+const CustomFormField = <
   T extends FieldValues = FieldValues,
   K extends FieldPath<T> = FieldPath<T>
 >({
@@ -24,6 +25,7 @@ const FaqFormField = <
   name,
   placeholder,
   type,
+  icon,
 }: Props<T, K>) => {
   return (
     <FormField
@@ -31,9 +33,14 @@ const FaqFormField = <
       name={name}
       render={({ field }) => {
         return (
-          <FormItem className="w-full">
+          <FormItem className="relative w-full">
             <FormControl>
-              <FaqInput type={type} placeholder={placeholder} {...field} />
+              <CustomInput
+                type={type}
+                placeholder={placeholder}
+                {...field}
+                icon={icon}
+              />
             </FormControl>
             <FormMessage className="text-red-600 text-[16px]" />
           </FormItem>
@@ -43,4 +50,4 @@ const FaqFormField = <
   );
 };
 
-export default FaqFormField;
+export default CustomFormField;

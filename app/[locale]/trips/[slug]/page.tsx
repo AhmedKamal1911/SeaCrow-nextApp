@@ -19,6 +19,7 @@ import RelatedTripsWrapper from "./components/related-trips-wrapper";
 import TripInfoContainer from "./components/trip-info-container";
 import TourPlanInfoContainer from "./components/tour-plan-info-container";
 import TripOverviewHeader from "./components/trip-overview-header";
+import BookTripForm from "./components/book-trip-form";
 type Props = {
   params: Promise<{ slug: string }>;
 };
@@ -47,7 +48,7 @@ export default async function Trip({ params }: Props) {
 
             <TripOverviewHeader tripData={tripData} />
 
-            {/* {tripImagesList && <TripSlider imagesList={tripImagesList} />} */}
+            <TripSlider imagesList={tripImagesList} />
 
             <TripOverview desc={tripData?.desc} title={tripData?.title} />
 
@@ -69,10 +70,11 @@ export default async function Trip({ params }: Props) {
           </div>
           {/* Form AND RELATED TRIPS */}
           <div className="lg:w-[30%]">
-            {/* <BookTripForm tripSlug={trip?.slug} /> */}
+            <BookTripForm tripSlug={tripData?.slug} />
 
             <RelatedTripsWrapper>
               <Suspense
+                key={Math.random()}
                 fallback={
                   <Loading
                     loadingElement={<SkeletonLoaderCard />}

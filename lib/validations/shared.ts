@@ -130,7 +130,7 @@ export const metaSchema = z.object({
   pagination: paginationSchema,
 });
 
-export const TripsResponseSchema = z.object({
+export const tripsResponseSchema = z.object({
   data: z.array(tripSchema),
   meta: metaSchema,
 });

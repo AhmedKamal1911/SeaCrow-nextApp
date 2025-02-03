@@ -25,7 +25,8 @@ export default function TripCard({ trip, i, inView }: Props) {
       }}
       exit={{ opacity: 0 }}
       custom={i}
-      className="h-full"
+      style={{ height: "100%" }}
+      // className="h-full"
     >
       <Link
         href={`/trips/${trip.slug}`}

@@ -45,9 +45,6 @@ type Props = {
 };
 
 export default function Header({ data }: Props) {
-  // const isMatched = useMediaQuery("(max-width: 1280px)");
-  // FIXME:Fix aside in media query
-  const isMatched = false;
   const pathname = useI18nPathname();
 
   console.log({ pathname });
@@ -98,16 +95,14 @@ export default function Header({ data }: Props) {
                 </h2>
               </Link>
             </div>
-            <div className="flex gap-16 items-center">
-              {isMatched ? (
-                <AsideDrawer navLinks={data?.navLinks} />
-              ) : (
-                <>
-                  <NavLinks navLinks={data?.navLinks} />
-                  <LanguageSelectMenu />
-                </>
-              )}
-            </div>
+            <nav>
+              <AsideDrawer navLinks={data?.navLinks} />
+
+              <nav className="flex gap-16 items-center nav-container">
+                <NavLinks navLinks={data?.navLinks} />
+                <LanguageSelectMenu />
+              </nav>
+            </nav>
           </div>
         </div>
       </header>
@@ -141,7 +136,7 @@ function AsideDrawer({
     };
   }, [showDrawer]);
   return (
-    <>
+    <div className="aside-drawer">
       <button onClick={toggleShowAside}>
         <Menu className="text-white size-10" />
       </button>
@@ -173,7 +168,7 @@ function AsideDrawer({
           </div>
         </aside>
       </Portal>
-    </>
+    </div>
   );
 }
 type NavLinksProps = {

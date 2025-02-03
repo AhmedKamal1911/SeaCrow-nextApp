@@ -14,12 +14,12 @@ export default async function TripOverviewHeader({ tripData }: Props) {
       <div className="flex flex-wrap justify-center gap-5">
         <TripDetailBox
           detail={t(`tripInfo.tripTime.${tripData?.time}`)}
-          icon={<Clock className="text-main w-7 h-7" />}
+          icon={<Clock className="text-main size-7" />}
         />
 
         <TripDetailBox
           detail={`${t("tripInfo.toursFrom")} ${tripData?.tourFrom}`}
-          icon={<Map className="text-main w-7 h-7" />}
+          icon={<Map className="text-main size-7" />}
         />
       </div>
 

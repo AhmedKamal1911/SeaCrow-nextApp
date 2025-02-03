@@ -42,7 +42,13 @@ function Reveal({ children, className }: Props) {
         initial="hidden"
         animate={slideControls}
         transition={{ duration: 0.4, ease: "easeInOut" }}
-        className="absolute inset-0 bg-main z-20"
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundColor: "#bfa888",
+          zIndex: "20px",
+        }}
+        // className="absolute inset-0 bg-main "
       />
     </div>
   );

@@ -6,6 +6,7 @@ import { DayPicker } from "react-day-picker";
 
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
+import { startOfTomorrow } from "date-fns";
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 
@@ -40,21 +41,21 @@ function Calendar({
         head_row: "flex",
         head_cell: "text-black  w-8 font-bold text-[0.9rem]",
         row: "flex w-full mt-2",
-        cell: "h-7 m-[2px] w-7 text-center text-sm p-0 relative [&:has([aria-selected].day-range-end)]:rounded-r-sm [&:has([aria-selected].day-outside)]:bg-slate-100/50 [&:has([aria-selected])]:bg-slate-100 first:[&:has([aria-selected])]:rounded-l-sm last:[&:has([aria-selected])]:rounded-r-sm focus-within:relative focus-within:z-20 dark:[&:has([aria-selected].day-outside)]:bg-slate-800/50 ",
+        cell: "h-7 m-[2px] w-7 text-center text-sm p-0 relative [&:has([aria-selected].day-range-end)]:rounded-r-sm [&:has([aria-selected].day-outside)]:bg-gray-100/50 [&:has([aria-selected])]:bg-gray-100 first:[&:has([aria-selected])]:rounded-l-sm last:[&:has([aria-selected])]:rounded-r-sm focus-within:relative focus-within:z-20 dark:[&:has([aria-selected].day-outside)]:bg-gray-800/50 ",
         day: cn(
           buttonVariants({ variant: "ghost" }),
           "h-7 w-7 p-0 font-normal hover:bg-gray-200 rounded-sm"
         ),
         day_range_end: "day-range-end",
         day_selected:
-          "bg-slate-900 text-slate-50 rounded-sm  hover:text-slate-50 focus:bg-slate-900 focus:text-slate-50 dark:bg-main dark:hover:bg-gray-400 dark:hover:text-slate-900 dark:focus:bg-main dark:focus:text-white",
+          "bg-main text-gray-50 rounded-sm  hover:text-gray-50 focus:bg-main focus:text-gray-50 dark:bg-main dark:hover:bg-gray-400 dark:hover:text-gray-900 dark:focus:bg-main dark:focus:text-white",
         day_today:
-          "text-slate-900 dark:bg-blue-800  dark:text-slate-50 rounded-sm",
+          "text-gray-900 dark:bg-blue-500 bg-blue-600  dark:text-gray-50 rounded-sm",
         day_outside:
-          "day-outside text-slate-500 opacity-50 aria-selected:bg-slate-100/50 aria-selected:text-slate-500 aria-selected:opacity-30 dark:text-slate-400 dark:aria-selected:bg-slate-800/50 dark:aria-selected:text-slate-400",
-        day_disabled: "text-slate-500 opacity-50 dark:text-slate-400",
+          "day-outside text-gray-500 opacity-50 aria-selected:bg-gray-100/50 aria-selected:text-gray-500 aria-selected:opacity-30 dark:text-gray-400 dark:aria-selected:bg-gray-800/50 dark:aria-selected:text-gray-400",
+        day_disabled: "text-gray-500 opacity-50 dark:text-gray-400",
         day_range_middle:
-          "aria-selected:bg-slate-100 aria-selected:text-slate-900 dark:aria-selected:bg-slate-800 dark:aria-selected:text-slate-50",
+          "aria-selected:bg-gray-100 aria-selected:text-gray-900  dark:aria-selected:bg-gray-800 dark:aria-selected:text-gray-50",
         day_hidden: "invisible",
         ...classNames,
       }}

@@ -3,13 +3,13 @@ import {
   imageTypeSchema,
   metaSchema,
   paginationSchema,
-  TripsResponseSchema,
+  tripsResponseSchema,
   tripSchema,
   dontForgetSchema,
 } from "../validations/shared";
 
 // TypeScript types
-export type TripsResponse = z.infer<typeof TripsResponseSchema>;
+export type TripsResponse = z.infer<typeof tripsResponseSchema>;
 export type RuleType = z.infer<typeof dontForgetSchema>;
 export type ImageType = z.infer<typeof imageTypeSchema>;
 export type Trip = z.infer<typeof tripSchema>;

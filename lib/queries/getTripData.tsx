@@ -1,6 +1,6 @@
 import { customFetch } from "../helpers/custom-fetch";
 
-import { TripsResponseSchema } from "../validations/shared";
+import { tripsResponseSchema } from "../validations/shared";
 
 export default async function getTripData(slug: string, populateAll = true) {
   try {
@@ -12,7 +12,7 @@ export default async function getTripData(slug: string, populateAll = true) {
         },
       },
     });
-    const result = TripsResponseSchema.safeParse(data);
+    const result = tripsResponseSchema.safeParse(data);
     if (!result.success) {
       const errorMessage = JSON.stringify(
         result.error.flatten().fieldErrors,
