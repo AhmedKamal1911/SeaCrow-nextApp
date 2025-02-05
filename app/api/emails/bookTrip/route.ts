@@ -2,9 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
 import BookTripMessage from "@/emails/BookTripMessage";
-import { BookTripSchema } from "@/lib/validations/bookTripSchema";
+
 import { TripTicket } from "@/lib/types/shared";
-import { revalidatePath } from "next/cache";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -41,7 +40,7 @@ export async function POST(req: NextRequest) {
       subject: "Trip Ticket",
       react: emailHtml,
     });
-    revalidatePath("/admin");
+
     if (error) {
       return NextResponse.json(
         {
@@ -52,6 +51,7 @@ export async function POST(req: NextRequest) {
         { statusText: "Bad Request", status: 400 }
       );
     }
+
     return NextResponse.json({ success: true, data: emailData });
   } catch (error) {
     if (error instanceof Error) {

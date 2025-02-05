@@ -1,11 +1,14 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { Button } from "../ui/button";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { FooterDataSchemaTypes } from "@/lib/validations/footerDataValidation";
-// import { ChevronsLeft, ChevronsRight } from "lucide-react";
+
+import { ChevronsLeft, ChevronsRight } from "lucide-react";
+import { Link } from "@/i18n/routing";
+import useIsRTL from "@/hooks/use-is-rtl";
+
 type Props = {
   data: FooterDataSchemaTypes;
 };
@@ -133,17 +136,17 @@ function DynamicInfoSection({
     | FooterDataSchemaTypes["navLinks"]
     | FooterDataSchemaTypes["contactLinks"];
 }) {
-  // const { isRTL } = useLanguage();
+  const isRTL = useIsRTL();
   return (
     <div>
       <ul className="flex flex-col gap-3 z-40 relative">
         {infoList.map((info) => (
           <li className="flex items-center gap-2" key={info.id}>
-            {/* {isRTL ? (
+            {isRTL ? (
               <ChevronsLeft className="text-main" />
             ) : (
               <ChevronsRight className="text-main" />
-            )} */}
+            )}
             {isContactInfo(info) ? (
               <a
                 href={`${

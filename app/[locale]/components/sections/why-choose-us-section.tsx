@@ -41,8 +41,8 @@ type Props = {
   data: whyChooseUsDataSchemaType;
 };
 export default function WhyChooseUsSection({ data }: Props) {
-  // const { isRTL, selectedLanguage } = useLanguage();
   const langCode = useLocale();
+  const isRTL = langCode === "ar";
   const t = useTranslations();
 
   const services = data?.services ?? [];
@@ -60,8 +60,7 @@ export default function WhyChooseUsSection({ data }: Props) {
       <div
         style={{
           backgroundImage: `url('/images/waves-with-boat.png')`,
-          // rotate: isRTL ? "y 180deg" : undefined,
-          rotate: false ? "y 180deg" : undefined,
+          rotate: isRTL ? "y 180deg" : undefined,
         }}
         className={`absolute animate-bouncing-left-right start-0 bottom-[-90px] md:bottom-0 h-[705px] w-[431px] bg-[50%] bg-no-repeat bg-cover `}
       />

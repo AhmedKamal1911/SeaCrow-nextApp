@@ -1,5 +1,5 @@
 import { TripTicket } from "@/lib/types/shared";
-import { BookTripSchema } from "@/lib/validations/bookTripSchema";
+
 import {
   Body,
   Column,
@@ -42,7 +42,7 @@ export const BookTripMessage = ({
   return (
     <Html>
       <Head />
-      <Preview>Help</Preview>
+      <Preview>SeaCrow</Preview>
       <Body style={main}>
         <Container>
           <Section style={yellowSection}>

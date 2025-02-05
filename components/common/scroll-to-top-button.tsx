@@ -1,14 +1,15 @@
 "use client";
 
+import useIsRTL from "@/hooks/use-is-rtl";
 import { useScroll, motion, useMotionValueEvent } from "framer-motion";
 import { MoveUp } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 export default function ScrollToTopButton() {
   const t = useTranslations();
-  const langCode = useLocale();
-  const isRTL = langCode === "ar";
+
+  const isRTL = useIsRTL();
   const { scrollYProgress } = useScroll();
   const [isVisible, setIsVisible] = useState(false);
   const [progress, setProgress] = useState(0);
