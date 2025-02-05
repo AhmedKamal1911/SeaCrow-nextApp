@@ -2,22 +2,38 @@ import { customFetch } from "../helpers/custom-fetch";
 
 import { tripsResponseSchema } from "../validations/shared";
 
-export async function getTripsSectionData(typeName: string) {
+export async function getTripsSectionData({
+  typeName,
+  pageParam = 1,
+  pageLimit = 8,
+}: {
+  typeName: string;
+  pageParam?: number;
+  pageLimit?: number;
+}) {
   try {
-    const data = await customFetch("trips", {
-      populate: "*",
-      ...(typeName !== "all"
-        ? {
-            filters: {
-              type: {
-                $eq: typeName,
+    const data = await customFetch({
+      pathname: "trips",
+      query: {
+        populate: "*",
+        sort: "offer:desc",
+        "pagination[withCount]": true,
+        "pagination[pageSize]": pageLimit,
+        "pagination[page]": pageParam,
+        ...(typeName !== "all"
+          ? {
+              filters: {
+                type: {
+                  $eq: typeName,
+                },
               },
-            },
-          }
-        : {}),
+            }
+          : {}),
+      },
     });
-    console.log("trips section", data);
+
     const result = tripsResponseSchema.safeParse(data);
+
     if (!result.success) {
       const errorMessage = JSON.stringify(
         result.error.flatten().fieldErrors,
@@ -27,7 +43,7 @@ export async function getTripsSectionData(typeName: string) {
       console.log(result.error);
       throw new Error(`trips Section data validation failed: ${errorMessage}`);
     }
-
+    console.log({ data, resultFromSchena: result.data.meta });
     return result.data;
   } catch (error) {
     console.error("trips Section data error:", error);

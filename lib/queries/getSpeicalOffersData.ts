@@ -4,15 +4,20 @@ import { tripsResponseSchema } from "../validations/shared";
 
 export async function getSpeicalOffersData() {
   try {
-    const data = await customFetch("trips", {
-      populate: "*",
-      filters: {
-        offer: {
-          $ne: null,
+    const data = await customFetch({
+      pathname: "trips",
+      query: {
+        populate: "*",
+        "pagination[pageSize]": 5,
+        filters: {
+          offer: {
+            $ne: null,
+          },
         },
+        sort: "offer:desc",
       },
     });
-    console.log(data);
+    console.log({ specialOffers: data });
     const result = tripsResponseSchema.safeParse(data);
     if (!result.success) {
       const errorMessage = JSON.stringify(
@@ -20,7 +25,7 @@ export async function getSpeicalOffersData() {
         null,
         2
       );
-      console.log(result.error);
+      console.log(result.error.errors);
       throw new Error(
         `SpecialOffers Section data validation failed: ${errorMessage}`
       );

@@ -4,8 +4,11 @@ import { footerDataSchema } from "../validations/footerDataValidation";
 export async function getFooterData() {
   try {
     // Fetch data from API
-    const data = await customFetch("global", {
-      populate: "navLinks,contactLinks",
+    const data = await customFetch({
+      pathname: "global",
+      query: {
+        populate: "navLinks,contactLinks",
+      },
     });
 
     const validationResult = footerDataSchema.safeParse(data);

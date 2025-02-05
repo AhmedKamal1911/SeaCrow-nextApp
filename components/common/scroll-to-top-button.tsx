@@ -28,10 +28,15 @@ export default function ScrollToTopButton() {
   };
 
   return (
-    <div onClick={scrollToTop} className="fixed cursor-pointer end-2 bottom-4">
+    <div
+      onClick={scrollToTop}
+      className="fixed z-[999] cursor-pointer end-2 bottom-4 "
+    >
       <motion.div
         style={{
           background: `conic-gradient(#bfa888 ${progress}%, #dfdfdf ${progress}%)`,
+          position: "relative",
+          zIndex: 999,
         }}
         initial={{ x: 100, opacity: 0, zIndex: 999 }} // Hidden by default
         animate={{

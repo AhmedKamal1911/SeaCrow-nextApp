@@ -3,8 +3,11 @@ import { FaqsPageSchema } from "../validations/faqPageDataValidation";
 
 export default async function getFaqPageData() {
   try {
-    const data = await customFetch("faq-page", {
-      populate: "*",
+    const data = await customFetch({
+      pathname: "faq-page",
+      query: {
+        populate: "*",
+      },
     });
     console.log({ faq: data });
     const result = FaqsPageSchema.safeParse(data);

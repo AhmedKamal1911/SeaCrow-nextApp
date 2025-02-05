@@ -21,15 +21,15 @@ export default async function signIn(credentials: {
   password: string;
 }) {
   try {
-    const response = await customFetch(
-      `auth/local`,
-      undefined,
-      "POST"
-      // credentials
-    );
+    const response = await customFetch({
+      pathname: `auth/local`,
+      query: undefined,
+      method: "POST",
+      body: credentials,
+    });
 
     const result = AuthResponseSchema.safeParse(response);
-    // TODO:revalidate path admin
+
     return result.data;
   } catch (error) {
     console.log({ error });

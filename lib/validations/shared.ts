@@ -68,7 +68,7 @@ export const dontForgetSchema = z.object({
 
 const localizationSchema = z.object({
   id: z.number(),
-  title: z.string(),
+  name: z.string(),
   time: z.string(),
   departureTime: z.string(),
   tripDays: z.string(),
@@ -89,7 +89,7 @@ const localizationSchema = z.object({
 
 export const tripSchema = z.object({
   id: z.number(),
-  title: z.string(),
+  name: z.string(),
   time: z.string(),
   departureTime: z.string(),
   tripDays: z.string(),
@@ -120,10 +120,10 @@ export const tripSchema = z.object({
 });
 
 export const paginationSchema = z.object({
-  page: z.number(),
-  pageSize: z.number(),
-  pageCount: z.number(),
-  total: z.number(),
+  page: z.number().optional(),
+  pageSize: z.number().optional(),
+  pageCount: z.number().optional(),
+  total: z.number().optional(),
 });
 
 export const metaSchema = z.object({

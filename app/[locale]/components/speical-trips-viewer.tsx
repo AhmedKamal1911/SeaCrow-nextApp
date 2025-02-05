@@ -4,8 +4,8 @@ import { getSpeicalOffersData } from "@/lib/queries/getSpeicalOffersData";
 
 export default async function SpecialTripsViewer() {
   const specialOffersData = await getSpeicalOffersData();
-  // TODO: only show top 5
-  return specialOffersData ? (
+
+  return specialOffersData.data.length >= 1 ? (
     <TripsSlider
       tripsList={specialOffersData.data}
       className="h-[300px] sm:h-[400px]"

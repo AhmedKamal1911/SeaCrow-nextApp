@@ -32,12 +32,13 @@ export default async function Trip({ params }: Props) {
   const faqData = await getFaqPageData();
   const questionsList = faqData.faqsList;
   const tripImagesList = tripData?.imgs?.data;
+  console.log({ tripImagesList });
   const tripType = tripData.type;
   return (
     <div className="min-h-screen py-[72px] bg-light">
       <TripBanner
         imgSrc={tripData?.imgs.data[0]?.url}
-        title={tripData?.title}
+        title={tripData?.name}
         type={tripData?.type}
       />
 
@@ -50,7 +51,7 @@ export default async function Trip({ params }: Props) {
 
             <TripSlider imagesList={tripImagesList} />
 
-            <TripOverview desc={tripData?.desc} title={tripData?.title} />
+            <TripOverview desc={tripData?.desc} title={tripData?.name} />
 
             {/* Info Box */}
             <TripInfoContainer tripData={tripData} />

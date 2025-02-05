@@ -12,7 +12,7 @@ export default function TripBanner({ imgSrc, type, title }: Props) {
   const t = useTranslations();
   return (
     <div className="h-[300px] relative after:inset-0 after:bg-[#0c0c0c81] after:absolute">
-      <div className="h-full">
+      <div className=" h-full">
         <Image
           src={getStrapiMediaURL(imgSrc) ?? ""}
           alt="trip banner"

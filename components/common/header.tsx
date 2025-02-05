@@ -47,7 +47,6 @@ type Props = {
 export default function Header({ data }: Props) {
   const pathname = useI18nPathname();
 
-  console.log({ pathname });
   const isHomepage = pathname === "/";
   const ref = useRef(null);
   const [isAnimateHeader, setIsAnimateHeader] = useState(false);

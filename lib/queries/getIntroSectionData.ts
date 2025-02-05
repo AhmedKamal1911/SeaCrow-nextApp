@@ -3,12 +3,15 @@ import { introSectionSchemaData } from "../validations/introSectionDataValidatio
 
 export async function getIntroSectionData() {
   try {
-    const response = await customFetch("intro-section", {
-      populate: {
-        featuresBox: {
-          populate: {
-            icon: true,
-            travelImg: true,
+    const response = await customFetch({
+      pathname: "intro-section",
+      query: {
+        populate: {
+          featuresBox: {
+            populate: {
+              icon: true,
+              travelImg: true,
+            },
           },
         },
       },

@@ -13,15 +13,12 @@ export const iconMap: Record<
     Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
   >
 > = {
-  FaBookOpen: BookOpen,
-  FaHandsHelping: HeartHandshake,
-  FaRegCompass: Compass,
-  FaStar: Star,
+  BookOpen: BookOpen,
+  HeartHandshake: HeartHandshake,
+  Compass: Compass,
+  Star: Star,
   // Add more icons as needed
 };
-
-// import useQueryWithLocale from "@/hooks/useQueryWithLocale";
-// import { useLanguage } from "@/contexts/LanguageProvider";
 
 import Image from "next/image";
 import { getStrapiMediaURL } from "@/lib/utils";
@@ -33,43 +30,13 @@ import {
 } from "@/components/ui/accordion";
 import { aboutInfoList } from "@/lib/data";
 import clsx from "clsx";
-// import { ImageType } from "@/lib/types/shared";
+
 import SectionHeader from "@/components/common/section-header";
 import AboutInfoBox from "@/components/common/about-info-box";
 import { useLocale, useTranslations } from "next-intl";
 import { whyChooseUsDataSchemaType } from "@/lib/validations/whyChooseUsDataValidation";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 
-// type Service = {
-//   id: number;
-//   desc: string;
-//   icon: string;
-//   name: string;
-// };
-
-// type Localization = {
-//   id: number;
-//   createdAt: string;
-//   updatedAt: string;
-//   publishedAt: string;
-//   locale: string;
-// };
-
-// export type WhyUsData = {
-//   id: number;
-//   createdAt: string;
-//   updatedAt: string;
-//   publishedAt: string;
-//   locale: string;
-//   services: Service[];
-//   images: {
-//     data: ImageType[];
-//   };
-//   localizations: {
-//     data: Localization[];
-//   };
-//   meta: Record<string, unknown>;
-// };
 type Props = {
   data: whyChooseUsDataSchemaType;
 };

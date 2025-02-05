@@ -16,7 +16,7 @@ export default function LoginFormWrapper({
       <div className="flex-1 md:block hidden">
         <Image
           src={"/images/login-background.jpg"}
-          alt=""
+          alt="login background"
           width={380}
           height={700}
           className="w-full h-full object-cover"

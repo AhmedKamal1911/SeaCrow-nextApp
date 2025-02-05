@@ -10,37 +10,56 @@ import {
 } from "@/components/ui/select";
 import useSectionInView from "@/hooks/use-section-view";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import TripCard from "@/components/common/trip-card";
+import { useInView } from "react-intersection-observer";
 
-import { TripsResponse } from "@/lib/types/trips";
 import { getTripsSectionData } from "@/lib/queries/getTripsSectionData";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import ErrorViewer from "@/components/common/error-viewer";
+import { LoaderCircle } from "lucide-react";
 type Props = {
   tripsTypes: string[];
-  initialTripsList: TripsResponse;
 };
-export default function TripsPageView({ tripsTypes, initialTripsList }: Props) {
+export default function TripsPageView({ tripsTypes }: Props) {
   const t = useTranslations();
   const { ref, inView } = useSectionInView<HTMLDivElement>();
-  const [tripType, setTripType] = useState("all");
+  const { ref: interSectedElement, inView: isInterSectedElementInView } =
+    useInView({
+      /* Optional options */
+      threshold: 0,
+    });
 
-  const { data, isFetching, error } = useQuery({
-    queryKey: ["trips", tripType], // Object form for query key
-    queryFn: () => getTripsSectionData(tripType), // Function to fetch data
-    initialData: initialTripsList,
-    refetchOnMount: false,
-  });
-  const allTrips = data.data;
-  console.log("trips page", error?.message);
+  const [tripType, setTripType] = useState("all");
+  const { data, status, error, fetchNextPage, isFetchingNextPage } =
+    useInfiniteQuery({
+      queryKey: ["trips", tripType], // Object form for query key
+      queryFn: ({ pageParam }) =>
+        getTripsSectionData({ pageParam, typeName: tripType }),
+      initialPageParam: 1,
+      getNextPageParam: ({ meta }) => {
+        const totalPages = meta.pagination.pageCount as number;
+        const nextPage = (meta?.pagination?.page ?? 1) + 1;
+        console.log({ nextPage, totalPages });
+        return nextPage > totalPages ? undefined : nextPage;
+      },
+
+      refetchOnWindowFocus: false,
+    });
 
   const onTripValueChange = (value: string) => {
     setTripType(value);
   };
 
-  // useScrollToTop();
+  useEffect(() => {
+    if (isInterSectedElementInView) {
+      console.log("inview now");
+      fetchNextPage();
+    } else {
+      console.log("not inview now");
+    }
+  }, [fetchNextPage, isInterSectedElementInView]);
   return (
     <div ref={ref} className="min-h-screen py-24">
       <div className="container">
@@ -71,19 +90,37 @@ export default function TripsPageView({ tripsTypes, initialTripsList }: Props) {
             </SelectContent>
           </Select>
         </div>
-        {isFetching ? (
+        {status === "pending" ? (
           <Loading />
-        ) : error ? (
-          <ErrorViewer />
+        ) : status === "error" ? (
+          <ErrorViewer errorText={error.message} />
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-5 relative z-10">
-            <AnimatePresence>
-              {allTrips?.map((trip, i) => (
-                <div key={trip.id} className="h-[300px] sm:h-[400px] ">
-                  <TripCard inView={inView} i={i} trip={trip} />
-                </div>
-              ))}
-            </AnimatePresence>
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-5 relative z-10">
+              <AnimatePresence>
+                {data?.pages.map((page, i) => (
+                  <Fragment key={`page_${i}`}>
+                    {page.data.length >= 1 ? (
+                      page.data?.map((trip, i) => (
+                        <div key={trip.id} className="h-[300px] sm:h-[400px] ">
+                          <TripCard inView={inView} i={i} trip={trip} />
+                        </div>
+                      ))
+                    ) : (
+                      <ErrorViewer errorText={"There is no any trips"} />
+                    )}
+                  </Fragment>
+                ))}
+                {/* TODO:translate the error text */}
+              </AnimatePresence>
+            </div>
+            <div ref={interSectedElement} aria-hidden />
+          </>
+        )}
+
+        {isFetchingNextPage && (
+          <div className="bg-[#000000] w-fit mx-auto mt-3 rounded-xl p-1">
+            <LoaderCircle className=" text-main size-10 animate-spin transition-[rotate] duration-1000" />
           </div>
         )}
       </div>

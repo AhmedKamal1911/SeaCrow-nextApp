@@ -1,6 +1,7 @@
 import { format, isValid, parse } from "date-fns";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { getLocale } from "next-intl/server";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -77,4 +78,10 @@ export function formatTime(time: string) {
     console.error("Invalid time format:", time);
     return "Invalid Time";
   }
+}
+
+export async function getCurrentLocale() {
+  return typeof window === "undefined"
+    ? await getLocale()
+    : new URL(location.href).pathname.split("/")[1];
 }

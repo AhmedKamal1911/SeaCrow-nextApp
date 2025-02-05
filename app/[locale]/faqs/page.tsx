@@ -1,15 +1,11 @@
 import QuestionsList from "@/components/common/questions-list";
 import SectionHeader from "@/components/common/section-header";
 import getFaqPageData from "@/lib/queries/getFaqPageData";
-// import useQueryWithLocale from "@/hooks/useQueryWithLocale";
-// import useScrollToTop from "@/hooks/useScrollToTop";
 
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import FaqForm from "./components/faq-form";
 
 export default async function Faqs() {
-  const locale = await getLocale();
-
   const t = await getTranslations();
   const data = await getFaqPageData();
   const faqsList = data.faqsList;
@@ -31,7 +27,7 @@ export default async function Faqs() {
               introText={t("faqsPage.formIntroText")}
               introTextRevealClassName="mx-auto"
             />
-            <FaqForm locale={locale} />
+            <FaqForm />
           </div>
         </div>
       </div>

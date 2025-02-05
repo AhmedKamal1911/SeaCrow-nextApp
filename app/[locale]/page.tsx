@@ -28,7 +28,7 @@ export default async function Home() {
         </Suspense>
       </SpecialOffersSection>
       <WhyChooseUsSection data={whyChooseUsData} />
-      {/* TODO:only show 4 in trips section */}
+
       <TripsSection>
         <Suspense fallback={<Loading className="h-[30vh]" />}>
           <TripGridCardsViewer />

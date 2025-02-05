@@ -13,7 +13,7 @@ import { Trip } from "@/lib/types/trips";
 // import required modules
 type Props = {
   className?: string;
-  tripsList?: Trip[];
+  tripsList: Trip[];
   isReversed?: boolean;
   delay?: number;
   speed?: number;
@@ -58,7 +58,7 @@ export default function TripsSlider({
         modules={[Pagination, Autoplay]}
         className="mySwiper h-full w-full"
       >
-        {tripsList?.map((trip, i) => (
+        {tripsList.map((trip, i) => (
           <SwiperSlide key={trip.id}>
             <TripCard inView={isInview} i={i} trip={trip} />
           </SwiperSlide>

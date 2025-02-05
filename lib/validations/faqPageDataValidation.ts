@@ -13,7 +13,7 @@ const LocalizationDataSchema = z.object({
   createdAt: z.string(),
   updatedAt: z.string(),
   publishedAt: z.string(),
-  locale: z.enum(["en", "ru", "ar"]),
+  locale: z.string().nullable(),
 });
 
 // Localizations Schema

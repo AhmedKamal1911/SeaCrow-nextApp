@@ -4,11 +4,14 @@ import { tripsResponseSchema } from "../validations/shared";
 
 export default async function getTripData(slug: string, populateAll = true) {
   try {
-    const data = await customFetch("trips", {
-      ...(populateAll ? { populate: "*" } : {}),
-      filters: {
-        slug: {
-          $eq: slug,
+    const data = await customFetch({
+      pathname: "trips",
+      query: {
+        ...(populateAll ? { populate: "*" } : {}),
+        filters: {
+          slug: {
+            $eq: slug,
+          },
         },
       },
     });

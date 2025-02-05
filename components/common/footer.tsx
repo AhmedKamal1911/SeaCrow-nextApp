@@ -1,7 +1,4 @@
 "use client";
-// import { fetchFooterData } from "@/services/trips/queries";
-
-// import useQueryWithLocale from "@/hooks/useQueryWithLocale";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -10,42 +7,9 @@ import { useTranslations } from "next-intl";
 import { FooterDataSchemaTypes } from "@/lib/validations/footerDataValidation";
 // import { ChevronsLeft, ChevronsRight } from "lucide-react";
 type Props = {
-  // data: {
-  //   id: number;
-  //   createdAt: string;
-  //   updatedAt: string;
-  //   publishedAt: string;
-  //   logoText: string;
-  //   locale: string;
-  //   navLinks: NavLinksData;
-  //   contactLinks: ContactLinksData;
-  //   meta: Record<string, unknown>;
-  // };
   data: FooterDataSchemaTypes;
 };
-// export type FooterData = {
-//   id: number;
-//   createdAt: string;
-//   updatedAt: string;
-//   publishedAt: string;
-//   logoText: string;
-//   locale: string;
-//   navLinks: NavLinksData;
-//   contactLinks: ContactLinksData;
-//   meta: Record<string, unknown>;
-// };
-// type ContactLinksData = {
-//   id: number;
-//   url: string;
-//   text: string;
-//   type: "mail" | "tel"; // Restrict to specific values
-// }[];
-// type NavLinksData = {
-//   id: number;
-//   text: string;
-//   url: string;
-//   isExternal: boolean;
-// }[];
+
 export default function Footer({ data }: Props) {
   const t = useTranslations();
 
@@ -186,8 +150,8 @@ function DynamicInfoSection({
                   info.type === "tel"
                     ? "tel:"
                     : info.type === "mail"
-                    ? "mailto:"
-                    : ""
+                      ? "mailto:"
+                      : ""
                 }${info.url}`}
                 // target={info.type === "externalLink" ? "_blank" : ""}
                 className="text-[#d3d3d3] text-[18px] hover:text-white transition-all duration-300 relative after:absolute after:bg-main after:rounded-lg after:start-0 after:bottom-0 after:h-[2px] after:w-0 after:transition-all after:duration-500 hover:after:w-full"

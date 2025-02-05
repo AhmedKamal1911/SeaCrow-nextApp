@@ -15,7 +15,7 @@ const localizationSchema = z.object({
   createdAt: z.string(),
   updatedAt: z.string(),
   publishedAt: z.string(),
-  locale: z.string(),
+  locale: z.string().nullable(),
 });
 
 // Main schema for the entire object

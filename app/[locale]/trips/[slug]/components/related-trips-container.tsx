@@ -12,9 +12,9 @@ export default function RelatedTripsContainer({
 }) {
   const t = useTranslations();
   const { isInview } = useInView();
-
+  console.log({ relatedTrips });
   return relatedTrips.length >= 1 ? (
-    relatedTrips.slice(0, 5).map((trip, i) => (
+    relatedTrips.map((trip, i) => (
       <div key={trip.id} className="max-[300px]:h-[300px] h-[350px] ">
         <TripCard i={i} inView={isInview} trip={trip} />
       </div>

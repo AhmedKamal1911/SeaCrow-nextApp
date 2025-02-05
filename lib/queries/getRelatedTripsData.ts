@@ -7,14 +7,19 @@ export default async function getRelatedTripsData(
   slug: string
 ) {
   try {
-    const data = await customFetch("trips", {
-      populate: "*",
-      filters: {
-        type: {
-          $eq: typeName,
-        },
-        slug: {
-          $ne: slug,
+    const data = await customFetch({
+      pathname: "trips",
+
+      query: {
+        populate: "*",
+        "pagination[pageSize]": 3,
+        filters: {
+          type: {
+            $eq: typeName,
+          },
+          slug: {
+            $ne: slug,
+          },
         },
       },
     });

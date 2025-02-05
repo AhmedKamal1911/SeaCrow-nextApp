@@ -3,24 +3,19 @@ import { ordersTicketsSchema } from "../validations/ordersTicketsDataValidation"
 
 export async function getTripOrders(token: string) {
   try {
-    const data = await customFetch("trips", {
-      headers: {
-        Authorization: `Bearer ${token}`, // Add the token to the Authorization header
-      },
+    const data = await customFetch({
+      pathname: "orders",
+      token: `Bearer ${token}`,
     });
-    console.log({ data });
+    console.log("data", { data });
     const result = ordersTicketsSchema.safeParse(data);
     if (!result.success) {
-      const errorMessage = JSON.stringify(
-        result.error.flatten().fieldErrors,
-        null,
-        2
-      );
+      const errorMessage = JSON.stringify(result.error.name, null, 2);
       console.log(result.error);
-      throw new Error(`Orders Tickets data validation failed: ${errorMessage}`);
+      throw new Error(`Orders Tickets data Error: ${errorMessage}`);
     }
     console.log("fromgettrip", { data });
-    return result.data;
+    return result.data.data;
   } catch (error) {
     console.error("Orders Tickets data error:", error);
     // Optional: Return fallback data or re-throw

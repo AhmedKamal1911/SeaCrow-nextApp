@@ -39,6 +39,7 @@ export default function BookTripForm({ tripSlug }: { tripSlug: string }) {
   const t = useTranslations();
   const formRef = useRef(null);
   const { toast } = useToast();
+
   // const captcha = useRef(null);
   // const [isCaptchaSuccess, setIsCaptchaSuccess] = useState(false);
   // const onChange = () => {
@@ -82,10 +83,12 @@ export default function BookTripForm({ tripSlug }: { tripSlug: string }) {
         icon: <CircleCheckBig className="size-7" />,
       });
       console.log("toast show");
+
       setTimeout(() => {
         reset();
       }, 1000);
-      // TODO:Revalidate the admin path
+      // TODO:DONT FORGET MAKING CAPTCHA
+
       // if (isCaptchaSuccess) {
       //   // toast({
       //   //   description: t("global.toasts.messageToast.successMessage"),

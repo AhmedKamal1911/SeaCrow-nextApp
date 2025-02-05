@@ -3,8 +3,11 @@ import { navbarDataSchema } from "../validations/headerDataValidation";
 
 export async function getHeaderData() {
   try {
-    const data = await customFetch("global", {
-      populate: "logoText,navLinks",
+    const data = await customFetch({
+      pathname: "global",
+      query: {
+        populate: "logoText,navLinks",
+      },
     });
 
     const result = navbarDataSchema.safeParse(data);

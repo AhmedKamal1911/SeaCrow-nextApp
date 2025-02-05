@@ -1,14 +1,13 @@
 "use client";
-// import useQueryWithLocale from "@/hooks/useQueryWithLocale";
 
 import SectionHeader from "@/components/common/section-header";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 
 import InViewContextProvider from "@/providers/in-view-provider";
 import useSectionInView from "@/hooks/use-section-view";
 import { ReactNode } from "react";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 
 const TripsSection = ({ children }: { children: ReactNode }) => {
   const t = useTranslations();
@@ -23,7 +22,7 @@ const TripsSection = ({ children }: { children: ReactNode }) => {
             introText={t("homePage.tripsSection.introText")}
           />
           <Button asChild variant="primary">
-            <Link href="/trips" className="py-6 block !my-7">
+            <Link href={"/trips"} className="py-6 block !my-7">
               {t("homePage.tripsSection.tripsButtonLabel")}
             </Link>
           </Button>

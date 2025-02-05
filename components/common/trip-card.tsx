@@ -49,7 +49,7 @@ export default function TripCard({ trip, i, inView }: Props) {
             {trip.adultPrice}$/ {t(`tripInfo.tripTime.${trip.time}`)}
           </h3>
           <h4 className="absolute bottom-[30px] start-0 end-0 text-white text-3xl my-2 line-clamp-2 group-hover:bottom-[80px] transition-all duration-300 delay-[50ms] ">
-            {trip.title}
+            {trip.name}
           </h4>
           <button className="absolute py-2 px-5 bg-main text-white bottom-[-50px] opacity-0 group-hover:bottom-[30px] group-hover:opacity-[1] transition-all  duration-500 delay-[30ms]">
             {t("tripInfo.exploreButtonLabel")}

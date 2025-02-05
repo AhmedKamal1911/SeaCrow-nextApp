@@ -3,6 +3,8 @@ import { Resend } from "resend";
 
 import BookTripMessage from "@/emails/BookTripMessage";
 import { BookTripSchema } from "@/lib/validations/bookTripSchema";
+import { TripTicket } from "@/lib/types/shared";
+import { revalidatePath } from "next/cache";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -29,7 +31,7 @@ const ERRORS = {
 export async function POST(req: NextRequest) {
   try {
     // Extract data from the request body
-    const formData: BookTripSchema = await req.json();
+    const formData: TripTicket = await req.json();
     // Render React Email component to HTML
     const emailHtml = BookTripMessage({ ...formData });
     // Send email via Resend
@@ -39,6 +41,7 @@ export async function POST(req: NextRequest) {
       subject: "Trip Ticket",
       react: emailHtml,
     });
+    revalidatePath("/admin");
     if (error) {
       return NextResponse.json(
         {

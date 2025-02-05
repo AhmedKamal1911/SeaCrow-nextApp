@@ -7,7 +7,7 @@ const useSectionInView = <T extends HTMLElement>() => {
 
   // useInView hook from framer-motion
   const inView = useInView(ref as React.RefObject<Element>, {
-    amount: 0.5,
+    amount: 0.2,
     once: true,
   });
 

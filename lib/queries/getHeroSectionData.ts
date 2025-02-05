@@ -3,8 +3,11 @@ import { heroSectionDataSchema } from "../validations/heroSectionDataValidation"
 
 export async function getHeroSectionData() {
   try {
-    const data = await customFetch("hero-section", {
-      populate: "*",
+    const data = await customFetch({
+      pathname: "hero-section",
+      query: {
+        populate: "*",
+      },
     });
     const result = heroSectionDataSchema.safeParse(data);
     if (!result.success) {

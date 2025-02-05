@@ -3,8 +3,11 @@ import { whyChooseUsDataSchema } from "../validations/whyChooseUsDataValidation"
 
 export async function getWhyChooseUsData() {
   try {
-    const data = await customFetch("why-us-section", {
-      populate: "*",
+    const data = await customFetch({
+      pathname: "why-us-section",
+      query: {
+        populate: "*",
+      },
     });
     const result = whyChooseUsDataSchema.safeParse(data);
     if (!result.success) {

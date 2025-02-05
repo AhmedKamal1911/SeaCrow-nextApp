@@ -4,15 +4,19 @@ import { tripsResponseSchema } from "../validations/shared";
 export default async function getTripTypes() {
   // TODO:create relation to get trips types fast
   try {
-    const data = await customFetch("trips", {
-      populate: "*",
+    const data = await customFetch({
+      pathname: "trips",
+      query: {
+        populate: "*",
+      },
     });
     const result = tripsResponseSchema.safeParse(data);
+    console.log("teststststststststst", { data });
     if (!result.success) {
       const errorMessage = JSON.stringify(result.error.flatten(), null, 2);
+      console.log(result.error.errors);
       throw new Error(`TripsTypes data validation failed: ${errorMessage}`);
     }
-    console.log({ data });
     const set = [...new Set(result.data.data.map((trip) => trip.type))];
 
     const uniqueTripTypes = [...set, "all"];

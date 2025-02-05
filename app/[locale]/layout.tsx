@@ -45,7 +45,7 @@ export default async function RootLayout({
   // Providing all messages to the client
   // side is the easiest way to get started
   const messages: AbstractIntlMessages = await getMessages();
-
+  // TODO: set the font here
   const headerData = await getHeaderData();
   const footerData = await getFooterData();
 
