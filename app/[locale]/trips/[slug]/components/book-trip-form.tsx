@@ -8,6 +8,7 @@ import { useTranslations } from "next-intl";
 import { format } from "date-fns";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import ReCAPTCHA from "react-google-recaptcha";
 import {
   Form,
   FormControl,
@@ -34,17 +35,18 @@ import { CountryComboBox } from "./country-combo-box";
 import FormSubmitButton from "@/components/common/form-submit-button";
 import { sendTicketMail } from "@/lib/mutations/send-ticket-mail";
 import { useToast } from "@/hooks/use-toast";
-
+const siteKey = process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY as string;
+console.log(siteKey);
 export default function BookTripForm({ tripSlug }: { tripSlug: string }) {
   const t = useTranslations();
   const formRef = useRef(null);
   const { toast } = useToast();
 
-  // const captcha = useRef(null);
-  // const [isCaptchaSuccess, setIsCaptchaSuccess] = useState(false);
-  // const onChange = () => {
-  //   setIsCaptchaSuccess(true);
-  // };
+  const captcha = useRef<ReCAPTCHA>(null);
+  const [isCaptchaSuccess, setIsCaptchaSuccess] = useState(false);
+  const onChange = () => {
+    setIsCaptchaSuccess(true);
+  };
   const methods = useForm<BookTripSchema>({
     mode: "onSubmit",
     resolver: zodResolver(bookTripFormSchema(t)),
@@ -74,34 +76,24 @@ export default function BookTripForm({ tripSlug }: { tripSlug: string }) {
   const onSubmit = async (data: BookTripSchema) => {
     const formattedDate = format(new Date(data.checkDate), "yyyy-MM-dd");
     try {
-      await bookTrip({ ...data, checkDate: formattedDate });
-      await sendTicketMail({ ...data, checkDate: formattedDate });
+      if (isCaptchaSuccess) {
+        await bookTrip({ ...data, checkDate: formattedDate });
+        await sendTicketMail({ ...data, checkDate: formattedDate });
 
-      toast({
-        description: t("global.toasts.messageToast.successMessage"),
-        variant: "success",
-        icon: <CircleCheckBig className="size-7" />,
-      });
+        toast({
+          description: t("global.toasts.messageToast.successMessage"),
+          variant: "success",
+          icon: <CircleCheckBig className="size-7" />,
+        });
 
-      setTimeout(() => {
-        reset();
-      }, 1000);
-      // TODO:DONT FORGET MAKING CAPTCHA
-
-      // if (isCaptchaSuccess) {
-      //   // toast({
-      //   //   description: t("global.toasts.messageToast.successMessage"),
-      //   //   variant: "success",
-      //   //   icon: <IoMdCheckmarkCircleOutline className="size-7" />,
-      //   // });
-      //   // setTimeout(() => {
-      //   //   reset();
-      //   //   if (captcha.current) {
-      //   //     captcha.current.reset();
-      //   //     setIsCaptchaSuccess(false);
-      //   //   }
-      //   // }, 1000);
-      // }
+        setTimeout(() => {
+          reset();
+          if (captcha.current) {
+            captcha.current.reset();
+            setIsCaptchaSuccess(false);
+          }
+        }, 1000);
+      }
     } catch (e) {
       toast({
         description: t("global.toasts.messageToast.failedMessage"),
@@ -266,14 +258,19 @@ export default function BookTripForm({ tripSlug }: { tripSlug: string }) {
               </FormItem>
             )}
           />
-
-          {/* <ReCAPTCHA
-            className="recaptcha"
-            ref={captcha}
-            sitekey={import.meta.env.VITE_SITE_KEY}
-            onChange={onChange}
-          /> */}
-
+          <div>
+            <ReCAPTCHA
+              className="recaptcha"
+              ref={captcha}
+              sitekey={siteKey}
+              onChange={onChange}
+            />
+            {!isCaptchaSuccess && (
+              <span className="text-red-600 mt-2 block">
+                Recaptcha Required
+              </span>
+            )}
+          </div>
           <FormSubmitButton
             isSubmitting={isSubmitting}
             loadingText={t("global.loadingText")}

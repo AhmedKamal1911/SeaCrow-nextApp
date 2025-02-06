@@ -319,3 +319,5 @@ export const aboutInfoList = [
     about: "Reviews",
   },
 ];
+
+export const tripsTypes = ["activities", "sea", "safari", "all"] as const;

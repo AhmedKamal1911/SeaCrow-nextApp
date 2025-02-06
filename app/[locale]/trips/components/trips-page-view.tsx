@@ -19,10 +19,9 @@ import { getTripsSectionData } from "@/lib/queries/getTripsSectionData";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import ErrorViewer from "@/components/common/error-viewer";
 import { LoaderCircle } from "lucide-react";
-type Props = {
-  tripsTypes: string[];
-};
-export default function TripsPageView({ tripsTypes }: Props) {
+import { tripsTypes } from "@/lib/data";
+
+export default function TripsPageView() {
   const t = useTranslations();
   const { ref, inView } = useSectionInView<HTMLDivElement>();
   const { ref: interSectedElement, inView: isInterSectedElementInView } =
@@ -106,7 +105,7 @@ export default function TripsPageView({ tripsTypes }: Props) {
                         </div>
                       ))
                     ) : (
-                      <ErrorViewer errorText={"There is no any trips"} />
+                      <ErrorViewer errorText={"There is no trips"} />
                     )}
                   </Fragment>
                 ))}

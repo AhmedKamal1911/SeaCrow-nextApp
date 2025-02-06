@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { questionsListSchema } from "./shared";
+import { metaObject, questionsListSchema } from "./shared";
 
 export const tripQuestionsSchema = z.object({
   clientQuestionsList: questionsListSchema,
