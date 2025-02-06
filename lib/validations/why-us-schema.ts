@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { imageTypeSchema } from "./shared";
+import { imageTypeSchema, metaObject } from "./shared";
 
 // Schema for services
 const serviceSchema = z.object({
@@ -17,7 +17,7 @@ export const whyChooseUsDataSchema = z.object({
   images: z.object({
     data: z.array(imageTypeSchema),
   }),
-  meta: z.object({}).catchall(z.unknown()),
+  meta: metaObject,
 });
 
 // Optional inferred type

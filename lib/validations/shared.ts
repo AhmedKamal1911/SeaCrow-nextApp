@@ -41,8 +41,6 @@ export const imageTypeSchema = z.object({
   updatedAt: z.string(),
 });
 
-// TODO:remove localization schema
-
 export const paginationSchema = z.object({
   page: z.number().optional(),
   pageSize: z.number().optional(),
@@ -59,5 +57,7 @@ export const questionItemSchema = z.object({
   question: z.string(),
   answer: z.string(),
 });
+
+export const metaObject = z.object({}).catchall(z.unknown());
 
 export const questionsListSchema = z.array(questionItemSchema);

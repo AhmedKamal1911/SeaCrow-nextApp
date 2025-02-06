@@ -1,10 +1,11 @@
 import Image from "next/image";
-import Link from "next/link";
+
 import { travelCategories } from "@/lib/data";
 import { Button } from "@/components/ui/button";
 import SectionHeader from "@/components/common/section-header";
 import InfiniteSlider from "../infinite-slider";
 import { useTranslations as getTranslation } from "next-intl";
+import { Link } from "@/i18n/routing";
 
 export default function AboutUsSection() {
   const t = getTranslation();

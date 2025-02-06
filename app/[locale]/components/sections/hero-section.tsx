@@ -1,35 +1,8 @@
-// Import Swiper styles
-
-// import { useLanguage } from "@/contexts/LanguageProvider";
-
-import Link from "next/link";
-
-import clsx from "clsx";
 import HeroSlider from "../hero-slider";
 
 import HeroSectionHeading from "../hero-section-heading";
 import { HeroSectionDataSchemaType } from "@/lib/validations/hero-section-schema";
-// import { ImageType } from "@/lib/validations/shared";
-
-// type HeroButton = {
-//   id: number;
-//   text: string;
-//   url: string;
-//   isExternal: boolean;
-// };
-
-// export type HeroSectionData = {
-//   id: number;
-//   createdAt: string;
-//   updatedAt: string;
-//   publishedAt: string;
-//   heading: string;
-//   locale: string;
-//   heroButton: HeroButton;
-//   heroImages: {
-//     data: ImageType[];
-//   };
-// };
+import { Link } from "@/i18n/routing";
 
 type Props = {
   data: HeroSectionDataSchemaType;

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { metaObject } from "./shared";
 
 // NavLinks schema (reusable if needed)
 const navLinksSchema = z.array(
@@ -19,7 +20,7 @@ export const navbarDataSchema = z.object({
   logoText: z.string(),
   locale: z.string(),
   navLinks: navLinksSchema,
-  meta: z.object({}).catchall(z.unknown()),
+  meta: metaObject,
 });
 
 // Optional inferred type

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { metaObject } from "./shared";
 
 const contactLinksSchema = z.array(
   z.object({
@@ -27,7 +28,7 @@ export const footerDataSchema = z.object({
   locale: z.string(),
   navLinks: navLinksSchema,
   contactLinks: contactLinksSchema,
-  meta: z.object({}).catchall(z.unknown()),
+  meta: metaObject,
 });
 
 // Optional: Create inferred TypeScript type from Zod schema

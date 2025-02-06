@@ -3,10 +3,9 @@ import Image from "next/image";
 
 import { twMerge } from "tailwind-merge";
 
-import Link from "next/link";
-// import { FeaturesBox } from "./sections/intro-section";
 import { useTranslations } from "next-intl";
 import { FeaturesBoxType } from "@/lib/validations/intro-section-schema";
+import { Link } from "@/i18n/routing";
 
 // Adjust text alignment
 type Props = {
