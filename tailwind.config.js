@@ -16,9 +16,9 @@ const config = {
           "linear-gradient(180deg, rgba(86, 97, 108, 0) 0%, rgba(33, 52, 69, 0.7) 100%)",
       },
       fontFamily: {
-        logoFont: "Audiowide",
-        signature: "Playwrite CO",
-        mainFont: "Bebas Neue",
+        logoFont: ["var(--font-audio-wide)"],
+        signature: ["var(--font-playwrite-co)"],
+        mainFont: ["var(--font-bebas-neue)"],
       },
       boxShadow: {
         lighter:

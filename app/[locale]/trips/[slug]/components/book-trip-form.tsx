@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import bookTrip from "@/lib/mutations/book-trip";
 import bookTripFormSchema, {
   BookTripSchema,
-} from "@/lib/validations/bookTripSchema";
+} from "@/lib/validations/book-trip-schema";
 import { useTranslations } from "next-intl";
 import { format } from "date-fns";
 import { useRef, useState } from "react";
@@ -76,13 +76,12 @@ export default function BookTripForm({ tripSlug }: { tripSlug: string }) {
     try {
       await bookTrip({ ...data, checkDate: formattedDate });
       await sendTicketMail({ ...data, checkDate: formattedDate });
-      console.log("ticket send");
+
       toast({
         description: t("global.toasts.messageToast.successMessage"),
         variant: "success",
         icon: <CircleCheckBig className="size-7" />,
       });
-      console.log("toast show");
 
       setTimeout(() => {
         reset();

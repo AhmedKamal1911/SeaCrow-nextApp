@@ -41,7 +41,7 @@ export default function TripsPageView({ tripsTypes }: Props) {
       getNextPageParam: ({ meta }) => {
         const totalPages = meta.pagination.pageCount as number;
         const nextPage = (meta?.pagination?.page ?? 1) + 1;
-        console.log({ nextPage, totalPages });
+
         return nextPage > totalPages ? undefined : nextPage;
       },
 
@@ -54,10 +54,9 @@ export default function TripsPageView({ tripsTypes }: Props) {
 
   useEffect(() => {
     if (isInterSectedElementInView) {
-      console.log("inview now");
       fetchNextPage();
     } else {
-      console.log("not inview now");
+      return;
     }
   }, [fetchNextPage, isInterSectedElementInView]);
   return (

@@ -34,11 +34,11 @@ import clsx from "clsx";
 import SectionHeader from "@/components/common/section-header";
 import AboutInfoBox from "@/components/common/about-info-box";
 import { useLocale, useTranslations } from "next-intl";
-import { whyChooseUsDataSchemaType } from "@/lib/validations/whyChooseUsDataValidation";
+import { WhyChooseUsDataSchemaType } from "@/lib/validations/why-us-schema";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 
 type Props = {
-  data: whyChooseUsDataSchemaType;
+  data: WhyChooseUsDataSchemaType;
 };
 export default function WhyChooseUsSection({ data }: Props) {
   const langCode = useLocale();

@@ -1,9 +1,9 @@
-import { Trip } from "@/lib/types/trips";
+import { TripDetails } from "@/lib/types/trips";
 import TripPriceDetail from "./trip-price-detail";
 import { getTranslations } from "next-intl/server";
 
 type Props = {
-  tripData: Trip;
+  tripData: TripDetails;
 };
 export default async function PriceDetailsContainer({ tripData }: Props) {
   const t = await getTranslations();

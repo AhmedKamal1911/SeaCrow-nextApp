@@ -1,6 +1,5 @@
 import { customFetch } from "../helpers/custom-fetch";
-
-import { tripsResponseSchema } from "../validations/shared";
+import { tripsResponseSchema } from "../validations/trips-schema";
 
 export default async function getRelatedTripsData(
   typeName: string,
@@ -11,7 +10,19 @@ export default async function getRelatedTripsData(
       pathname: "trips",
 
       query: {
-        populate: "*",
+        populate: {
+          imgs: "*", // Populate all fields inside imgs
+        },
+        fields: [
+          "id",
+          "offer",
+          "adultPrice",
+          "locale",
+          "name",
+          "time",
+          "slug",
+          "type",
+        ],
         "pagination[pageSize]": 3,
         filters: {
           type: {

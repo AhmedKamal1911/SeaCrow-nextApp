@@ -2,7 +2,7 @@ import qs from "qs";
 import { flattenAttributes, getCurrentLocale } from "../utils";
 
 type Query = {
-  [key: string]: string | boolean | number | Query | null;
+  [key: string]: string | boolean | number | Query | null | string[];
 };
 type CustomFetchArgs = {
   pathname: string;
@@ -34,15 +34,11 @@ export async function customFetch({
       },
     }
   );
-  console.log(
-    `${process.env.NEXT_PUBLIC_STRAPI_BASE_URL}/api/${pathname}?${qs.stringify(
-      query
-    )}`
-  );
+
   if (!response.ok && response.status === 404) {
     return undefined;
   }
   const data = await response.json();
-  console.log({ d: data });
+
   return flattenAttributes(data);
 }

@@ -1,5 +1,5 @@
 import { customFetch } from "../helpers/custom-fetch";
-import { footerDataSchema } from "../validations/footerDataValidation";
+import { footerDataSchema } from "../validations/footer-schema";
 
 export async function getFooterData() {
   try {

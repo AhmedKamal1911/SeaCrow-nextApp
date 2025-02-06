@@ -38,7 +38,7 @@ export const BookTripMessage = ({
     dateStyle: "long",
     timeStyle: "short",
   }).format(new Date());
-  console.log(formattedDate);
+
   return (
     <Html>
       <Head />

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Bebas_Neue, Cairo, Audiowide, Playwrite_CO } from "next/font/google";
 import Header from "@/components/common/header";
 import ScrollToTopButton from "@/components/common/scroll-to-top-button";
 import SocialContainer from "@/components/common/social-container";
@@ -15,14 +15,38 @@ import { ReactNode } from "react";
 import ReactQueryProvider from "@/providers/query-client-provier";
 import { Toaster } from "@/components/ui/toaster";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const bebasNeueFont = Bebas_Neue({
+  variable: "--font-bebas-neue",
+  weight: ["400"],
   subsets: ["latin"],
+  fallback: ["sans-serif", "Arial"], // Specify fallback fonts
+  style: "normal",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const audioWideFont = Audiowide({
+  variable: "--font-audio-wide",
+  weight: ["400"],
   subsets: ["latin"],
+  fallback: ["sans-serif", "Arial"], // Specify fallback fonts
+  style: "normal",
+  display: "swap",
+});
+
+const playWriteCoFont = Playwrite_CO({
+  variable: "--font-playwrite-co",
+  weight: ["400", "300", "200"],
+  fallback: ["Arial", "sans-serif"], // Specify fallback fonts
+  style: "normal",
+  display: "swap",
+});
+const cairoFont = Cairo({
+  variable: "--font-cairo",
+  weight: ["400", "600", "700"],
+  fallback: ["Arial", "sans-serif"], // Specify fallback fonts
+  subsets: ["arabic"],
+  style: "normal",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -45,15 +69,18 @@ export default async function RootLayout({
   // Providing all messages to the client
   // side is the easiest way to get started
   const messages: AbstractIntlMessages = await getMessages();
-  // TODO: set the font here
+
   const headerData = await getHeaderData();
   const footerData = await getFooterData();
 
   return (
-    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
-      >
+    <html
+      lang={locale}
+      dir={locale === "ar" ? "rtl" : "ltr"}
+      className={`${bebasNeueFont.variable} ${audioWideFont.variable}  ${playWriteCoFont.variable} ${cairoFont.variable}`}
+    >
+      {/* ${geistMono.variable} */}
+      <body className={`antialiased min-h-screen `}>
         <NextIntlClientProvider messages={messages}>
           <ReactQueryProvider>
             <Header data={headerData} />

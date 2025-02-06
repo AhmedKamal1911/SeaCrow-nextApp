@@ -1,10 +1,10 @@
-import { Trip } from "@/lib/types/trips";
+import { TripDetails } from "@/lib/types/trips";
 import TourPlanBox from "./tour-plan-box";
 import TripOverview from "./trip-overview";
 import { getTranslations } from "next-intl/server";
 
 type Props = {
-  tripData: Trip;
+  tripData: TripDetails;
 };
 export default async function TourPlanInfoContainer({ tripData }: Props) {
   const t = await getTranslations();

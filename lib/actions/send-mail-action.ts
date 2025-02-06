@@ -1,6 +1,6 @@
 "use server";
 import { parseWithZod } from "@conform-to/zod";
-import questionFormSchema from "../validations/questionsFormSchema";
+import questionFormSchema from "../validations/questions-form-schema";
 import { getTranslations } from "next-intl/server";
 
 export default async function sendMailAction(
@@ -14,7 +14,6 @@ export default async function sendMailAction(
   });
 
   if (submission.status !== "success") {
-    console.log("not success");
     return submission.reply();
   }
 

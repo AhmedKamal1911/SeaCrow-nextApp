@@ -19,7 +19,6 @@ export default function TripSlider({
 }) {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
 
-  console.log({ active: thumbsSwiper?.activeIndex });
   return (
     <div className="select-none ">
       <div className=" aspect-[6/3.8]">

@@ -1,24 +1,25 @@
 import { customFetch } from "../helpers/custom-fetch";
-import { FaqsPageSchema } from "../validations/faq-page-schema";
 
-export default async function getFaqPageData() {
+import { tripQuestionsSchema } from "../validations/trip-questions-schema";
+
+export default async function getTripQuestionsData() {
   try {
     const data = await customFetch({
-      pathname: "faq-page",
+      pathname: "trip-question",
       query: {
         fields: ["id", "locale"],
         populate: {
-          faqsList: {
+          clientQuestionsList: {
             fields: ["id", "question", "answer"],
           },
         },
       },
     });
 
-    const result = FaqsPageSchema.safeParse(data);
+    const result = tripQuestionsSchema.safeParse(data);
     if (!result.success) {
       const errorMessage = JSON.stringify(result.error, null, 2);
-      throw new Error(`Faq page data validation failed: ${errorMessage}`);
+      throw new Error(`trip questions data validation failed: ${errorMessage}`);
     }
     return result.data;
   } catch (error) {

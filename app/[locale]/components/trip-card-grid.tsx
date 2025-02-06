@@ -1,11 +1,11 @@
 "use client";
 import TripCard from "@/components/common/trip-card";
-import { Trip } from "@/lib/types/trips";
+import { TripData } from "@/lib/types/trips";
 
 import { useInView } from "@/providers/in-view-provider";
 
 type Props = {
-  data: Trip[];
+  data: TripData[];
 };
 export default function TripCardGrid({ data }: Props) {
   const { isInview } = useInView();

@@ -23,23 +23,8 @@ import {
 } from "@/i18n/routing";
 import { useLocale } from "next-intl";
 
-import { HeaderDataSchemaTypes } from "@/lib/validations/headerDataValidation";
+import { HeaderDataSchemaTypes } from "@/lib/validations/header-schema";
 
-// export type NavbarData = {
-//   id: number;
-//   createdAt: string;
-//   updatedAt: string;
-//   publishedAt: string;
-//   logoText: string;
-//   locale: string;
-//   navLinks: {
-//     id: number;
-//     text: string;
-//     url: string;
-//     isExternal: boolean;
-//   }[];
-//   meta: Meta;
-// };
 type Props = {
   data: HeaderDataSchemaTypes;
 };
@@ -213,7 +198,6 @@ function LanguageSelectMenu({ className }: { className?: string }) {
 
   function onLanguageChange(langCode: string) {
     router.replace({ pathname }, { locale: langCode });
-    console.log({ langCode });
   }
   return (
     <Select value={langLocale} onValueChange={onLanguageChange}>

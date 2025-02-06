@@ -2,8 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
+/* GLOBAL */
+/* CSS for Arabic (when the language is set to 'ar') */
+html[lang="ar"] body {
+  font-family: var(--font-cairo);
+}
+html {
+  scroll-behavior: smooth;
+}
+/* CSS for other languages (e.g., default to English or others) */
+html[lang="en"] body,
+html[lang="ru"] body {
+  font-family: "Bebas Neue", sans-serif;
+  /* font-family:  var(--font-bebas-neue); */
 }
 
 @layer base {
@@ -101,6 +112,8 @@ body {
   -ms-text-fill-color: #bfa888;
   text-fill-color: #bfa888;
 }
+
+/* SWIPER JS */
 .swiper-pagination {
   background-color: rgba(218, 218, 218, 0.493);
   padding: 5px;
@@ -163,6 +176,8 @@ body {
     font-size: 17px;
   }
 }
+
+/* RECAPTCHA */
 .recaptcha {
   width: fit-content;
 }
@@ -182,6 +197,7 @@ body {
   }
 }
 
+/* ANIMATIONS */
 .boat {
   animation: sail 2s infinite alternate ease-in-out; /* Slower, smoother animation */
 }

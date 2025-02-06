@@ -1,6 +1,5 @@
 import { customFetch } from "../helpers/custom-fetch";
-
-import { tripsResponseSchema } from "../validations/shared";
+import { tripsResponseSchema } from "../validations/trips-schema";
 
 export async function getTripsSectionData({
   typeName,
@@ -15,13 +14,38 @@ export async function getTripsSectionData({
     const data = await customFetch({
       pathname: "trips",
       query: {
-        populate: "*",
+        populate: {
+          imgs: "*", // Populate all fields inside imgs
+        },
+        fields: [
+          "id",
+          "offer",
+          "adultPrice",
+          "locale",
+          "name",
+          "time",
+          "slug",
+          "type",
+        ],
         sort: "offer:desc",
         "pagination[withCount]": true,
         "pagination[pageSize]": pageLimit,
         "pagination[page]": pageParam,
         ...(typeName !== "all"
           ? {
+              populate: {
+                imgs: "*", // Populate all fields inside imgs
+              },
+              fields: [
+                "id",
+                "offer",
+                "adultPrice",
+                "locale",
+                "name",
+                "time",
+                "slug",
+                "type",
+              ],
               filters: {
                 type: {
                   $eq: typeName,
@@ -35,15 +59,11 @@ export async function getTripsSectionData({
     const result = tripsResponseSchema.safeParse(data);
 
     if (!result.success) {
-      const errorMessage = JSON.stringify(
-        result.error.flatten().fieldErrors,
-        null,
-        2
-      );
+      const errorMessage = JSON.stringify(result.error.message, null, 2);
       console.log(result.error);
       throw new Error(`trips Section data validation failed: ${errorMessage}`);
     }
-    console.log({ data, resultFromSchena: result.data.meta });
+
     return result.data;
   } catch (error) {
     console.error("trips Section data error:", error);

@@ -7,7 +7,7 @@ import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import questionFormSchema, {
   QuestionFormSchema,
-} from "@/lib/validations/questionsFormSchema";
+} from "@/lib/validations/questions-form-schema";
 import {
   Form,
   FormControl,

@@ -1,5 +1,5 @@
 import { customFetch } from "../helpers/custom-fetch";
-import { introSectionSchemaData } from "../validations/introSectionDataValidation";
+import { introSectionSchemaData } from "../validations/intro-section-schema";
 
 export async function getIntroSectionData() {
   try {
@@ -16,7 +16,7 @@ export async function getIntroSectionData() {
         },
       },
     });
-    console.log({ response });
+
     const result = introSectionSchemaData.safeParse(response);
     if (!result.success) {
       const errorMessage = JSON.stringify(
@@ -27,7 +27,7 @@ export async function getIntroSectionData() {
       console.log(result.error.flatten());
       throw new Error(`IntroSection data validation failed: ${errorMessage}`);
     }
-    // console.log({ data: result.data });
+
     return result.data;
   } catch (error) {
     console.error("introSection data error:", error);

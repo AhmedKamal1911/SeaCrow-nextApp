@@ -1,12 +1,12 @@
-import { FaqItem } from "@/lib/validations/faqPageDataValidation";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "../ui/accordion";
+import { QuestionItem } from "@/lib/types/shared";
 type Props = {
-  list: FaqItem[];
+  list: QuestionItem[];
 };
 export default function QuestionsList({ list }: Props) {
   return (

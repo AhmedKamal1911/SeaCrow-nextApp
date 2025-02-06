@@ -1,17 +1,15 @@
 import { z } from "zod";
+import { imageTypeSchema } from "../validations/shared";
+
 import {
-  imageTypeSchema,
-  metaSchema,
-  paginationSchema,
+  tripDataSchema,
   tripsResponseSchema,
-  tripSchema,
-  dontForgetSchema,
-} from "../validations/shared";
+} from "../validations/trips-schema";
+import { tripItem, tripSchema } from "../validations/trip-schema";
 
 // TypeScript types
 export type TripsResponse = z.infer<typeof tripsResponseSchema>;
-export type RuleType = z.infer<typeof dontForgetSchema>;
+export type RuleType = z.infer<typeof tripItem>;
 export type ImageType = z.infer<typeof imageTypeSchema>;
-export type Trip = z.infer<typeof tripSchema>;
-export type Meta = z.infer<typeof metaSchema>;
-export type Pagination = z.infer<typeof paginationSchema>;
+export type TripData = z.infer<typeof tripDataSchema>;
+export type TripDetails = z.infer<typeof tripSchema>;

@@ -1,11 +1,11 @@
 import { Clock, Map } from "lucide-react";
 import TripDetailBox from "./trip-detail-box";
 import PriceDetailsContainer from "./price-details-container";
-import { Trip } from "@/lib/types/trips";
+import { TripDetails } from "@/lib/types/trips";
 import { getTranslations } from "next-intl/server";
 
 type Props = {
-  tripData: Trip;
+  tripData: TripDetails;
 };
 export default async function TripOverviewHeader({ tripData }: Props) {
   const t = await getTranslations();

@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { Button } from "../ui/button";
-import { useLocale, useTranslations } from "next-intl";
-import { FooterDataSchemaTypes } from "@/lib/validations/footerDataValidation";
+import { useTranslations } from "next-intl";
+import { FooterDataSchemaTypes } from "@/lib/validations/footer-schema";
 
 import { ChevronsLeft, ChevronsRight } from "lucide-react";
 import { Link } from "@/i18n/routing";

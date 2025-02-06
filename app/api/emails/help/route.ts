@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-import { QuestionFormSchema } from "@/lib/validations/questionsFormSchema";
+import { QuestionFormSchema } from "@/lib/validations/questions-form-schema";
 import { HelpMessage } from "@/emails/HelpMessage";
 
 const resend = new Resend(process.env.RESEND_API_KEY);

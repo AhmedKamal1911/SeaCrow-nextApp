@@ -1,5 +1,5 @@
 import { customFetch } from "../helpers/custom-fetch";
-import { tripsResponseSchema } from "../validations/shared";
+import { tripsResponseSchema } from "../validations/trips-schema";
 
 export default async function getTripTypes() {
   // TODO:create relation to get trips types fast
@@ -7,11 +7,23 @@ export default async function getTripTypes() {
     const data = await customFetch({
       pathname: "trips",
       query: {
-        populate: "*",
+        populate: {
+          imgs: "*", // Populate all fields inside imgs
+        },
+        fields: [
+          "id",
+          "offer",
+          "adultPrice",
+          "locale",
+          "name",
+          "time",
+          "slug",
+          "type",
+        ],
       },
     });
     const result = tripsResponseSchema.safeParse(data);
-    console.log("teststststststststst", { data });
+
     if (!result.success) {
       const errorMessage = JSON.stringify(result.error.flatten(), null, 2);
       console.log(result.error.errors);

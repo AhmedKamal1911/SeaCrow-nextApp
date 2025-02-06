@@ -6,7 +6,7 @@ import TripSlider from "./components/trip-slider";
 import TripOverview from "./components/trip-overview";
 
 import TripQuestionsBox from "./components/trip-questions-box";
-import getFaqPageData from "@/lib/queries/getFaqPageData";
+
 import TripReviewBox from "./components/trip-review-box";
 
 import { Suspense } from "react";
@@ -20,19 +20,20 @@ import TripInfoContainer from "./components/trip-info-container";
 import TourPlanInfoContainer from "./components/tour-plan-info-container";
 import TripOverviewHeader from "./components/trip-overview-header";
 import BookTripForm from "./components/book-trip-form";
+import getTripQuestionsData from "@/lib/queries/getTripQuestionsData";
 type Props = {
   params: Promise<{ slug: string }>;
 };
 export default async function Trip({ params }: Props) {
   const { slug } = await params;
-  console.log(slug);
+
   const t = await getTranslations();
 
   const tripData = await getTripData(slug);
-  const faqData = await getFaqPageData();
-  const questionsList = faqData.faqsList;
+  const questions = await getTripQuestionsData();
+
   const tripImagesList = tripData?.imgs?.data;
-  console.log({ tripImagesList });
+
   const tripType = tripData.type;
   return (
     <div className="min-h-screen py-[72px] bg-light">
@@ -59,7 +60,7 @@ export default async function Trip({ params }: Props) {
             <TourPlanInfoContainer tripData={tripData} />
             {/* Questions BOX */}
             <div id="faq">
-              <TripQuestionsBox questionsList={questionsList} />
+              <TripQuestionsBox questionsList={questions.clientQuestionsList} />
             </div>
             <div id="reviews">
               <TripOverview title={t("tripInfo.clientReviews.introText")} />

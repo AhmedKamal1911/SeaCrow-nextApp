@@ -1,13 +1,24 @@
 import { customFetch } from "../helpers/custom-fetch";
-
-import { tripsResponseSchema } from "../validations/shared";
+import { tripsResponseSchema } from "../validations/trips-schema";
 
 export async function getSpeicalOffersData() {
   try {
     const data = await customFetch({
       pathname: "trips",
       query: {
-        populate: "*",
+        populate: {
+          imgs: "*", // Populate all fields inside imgs
+        },
+        fields: [
+          "id",
+          "offer",
+          "adultPrice",
+          "locale",
+          "name",
+          "time",
+          "slug",
+          "type",
+        ],
         "pagination[pageSize]": 5,
         filters: {
           offer: {
@@ -17,7 +28,7 @@ export async function getSpeicalOffersData() {
         sort: "offer:desc",
       },
     });
-    console.log({ specialOffers: data });
+
     const result = tripsResponseSchema.safeParse(data);
     if (!result.success) {
       const errorMessage = JSON.stringify(
@@ -30,7 +41,7 @@ export async function getSpeicalOffersData() {
         `SpecialOffers Section data validation failed: ${errorMessage}`
       );
     }
-    console.log({ data });
+
     return result.data;
   } catch (error) {
     console.error("HeroSection data error:", error);

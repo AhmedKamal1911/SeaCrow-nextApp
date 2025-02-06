@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 
 import loginFormSchema, {
   LoginFormSchema,
-} from "@/lib/validations/loginFormSchema";
+} from "@/lib/validations/login-form-schema";
 import { useTranslations } from "next-intl";
 import { Form } from "@/components/ui/form";
 import FormSubmitButton from "@/components/common/form-submit-button";

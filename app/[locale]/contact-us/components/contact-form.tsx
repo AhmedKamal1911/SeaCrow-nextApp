@@ -14,7 +14,7 @@ import { Textarea } from "@/components/ui/textarea";
 import FormSubmitButton from "@/components/common/form-submit-button";
 import questionFormSchema, {
   QuestionFormSchema,
-} from "@/lib/validations/questionsFormSchema";
+} from "@/lib/validations/questions-form-schema";
 import { useTranslations } from "next-intl";
 import { useRef } from "react";
 import { CircleCheckBig, CircleX, Mail, Pen } from "lucide-react";

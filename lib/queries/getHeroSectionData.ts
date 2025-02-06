@@ -1,5 +1,5 @@
 import { customFetch } from "../helpers/custom-fetch";
-import { heroSectionDataSchema } from "../validations/heroSectionDataValidation";
+import { heroSectionDataSchema } from "../validations/hero-section-schema";
 
 export async function getHeroSectionData() {
   try {

@@ -1,4 +1,4 @@
-import { QuestionFormSchema } from "../validations/questionsFormSchema";
+import { QuestionFormSchema } from "../validations/questions-form-schema";
 
 // Example in a React component
 export async function sendMail(data: QuestionFormSchema) {

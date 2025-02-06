@@ -9,31 +9,16 @@ const serviceSchema = z.object({
   name: z.string(),
 });
 
-// Schema for localizations
-const localizationSchema = z.object({
-  id: z.number(),
-  createdAt: z.string(),
-  updatedAt: z.string(),
-  publishedAt: z.string(),
-  locale: z.string().nullable(),
-});
-
 // Main schema for the entire object
 export const whyChooseUsDataSchema = z.object({
   id: z.number(),
-  createdAt: z.string(),
-  updatedAt: z.string(),
-  publishedAt: z.string(),
   locale: z.string(),
   services: z.array(serviceSchema),
   images: z.object({
     data: z.array(imageTypeSchema),
   }),
-  localizations: z.object({
-    data: z.array(localizationSchema),
-  }),
   meta: z.object({}).catchall(z.unknown()),
 });
 
 // Optional inferred type
-export type whyChooseUsDataSchemaType = z.infer<typeof whyChooseUsDataSchema>;
+export type WhyChooseUsDataSchemaType = z.infer<typeof whyChooseUsDataSchema>;

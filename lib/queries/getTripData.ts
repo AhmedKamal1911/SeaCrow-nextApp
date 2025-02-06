@@ -1,13 +1,36 @@
 import { customFetch } from "../helpers/custom-fetch";
+import { tripResponseSchema } from "../validations/trip-schema";
 
-import { tripsResponseSchema } from "../validations/shared";
-
-export default async function getTripData(slug: string, populateAll = true) {
+export default async function getTripData(slug: string) {
   try {
     const data = await customFetch({
       pathname: "trips",
       query: {
-        ...(populateAll ? { populate: "*" } : {}),
+        populate: {
+          imgs: "*", // Populate all fields inside imgs
+          dontForget: "*",
+          highlights: "*",
+          includedServices: "*",
+          notIncluded: "*",
+          tourPlan: "*",
+        },
+        fields: [
+          "adultPrice",
+          "childPrice",
+          "departureTime",
+          "desc",
+          "id",
+          "locale",
+          "maxGuests",
+          "name",
+          "offer",
+          "returnTime",
+          "slug",
+          "time",
+          "tourFrom",
+          "tripDays",
+          "type",
+        ],
         filters: {
           slug: {
             $eq: slug,
@@ -15,7 +38,8 @@ export default async function getTripData(slug: string, populateAll = true) {
         },
       },
     });
-    const result = tripsResponseSchema.safeParse(data);
+
+    const result = tripResponseSchema.safeParse(data);
     if (!result.success) {
       const errorMessage = JSON.stringify(
         result.error.flatten().fieldErrors,
@@ -25,7 +49,6 @@ export default async function getTripData(slug: string, populateAll = true) {
       console.log(result.error);
       throw new Error(`Trip data validation failed: ${errorMessage}`);
     }
-
     return result.data.data[0];
   } catch (error) {
     throw error;

@@ -2,11 +2,12 @@ import { motion } from "framer-motion";
 
 import { getStrapiMediaURL } from "@/lib/utils";
 import { useTranslations } from "next-intl";
-import { Trip } from "@/lib/types/trips";
+
 import { Link } from "@/i18n/routing";
+import { TripData } from "@/lib/types/trips";
 
 type Props = {
-  trip: Trip;
+  trip: TripData;
   i: number;
   inView: boolean;
 };

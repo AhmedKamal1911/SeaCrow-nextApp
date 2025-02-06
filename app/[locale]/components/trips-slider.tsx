@@ -8,12 +8,12 @@ import TripCard from "@/components/common/trip-card";
 import { useInView } from "@/providers/in-view-provider";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
-import { Trip } from "@/lib/types/trips";
+import { TripData } from "@/lib/types/trips";
 
 // import required modules
 type Props = {
   className?: string;
-  tripsList: Trip[];
+  tripsList: TripData[];
   isReversed?: boolean;
   delay?: number;
   speed?: number;

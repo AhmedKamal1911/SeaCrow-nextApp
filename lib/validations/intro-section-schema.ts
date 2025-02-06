@@ -19,6 +19,7 @@ export const introSectionSchemaData = z.object({
   featuresBox: z.array(featuresBoxSchema),
   meta: z.object({}).catchall(z.unknown()),
 });
+// TODO:seperate this meta to shared
 
 export type FeaturesBoxType = z.infer<typeof featuresBoxSchema>;
 export type IntroSectionDataSchemaType = z.infer<typeof introSectionSchemaData>;

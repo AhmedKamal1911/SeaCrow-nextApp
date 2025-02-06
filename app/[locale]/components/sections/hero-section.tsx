@@ -8,7 +8,7 @@ import clsx from "clsx";
 import HeroSlider from "../hero-slider";
 
 import HeroSectionHeading from "../hero-section-heading";
-import { HeroSectionDataSchemaType } from "@/lib/validations/heroSectionDataValidation";
+import { HeroSectionDataSchemaType } from "@/lib/validations/hero-section-schema";
 // import { ImageType } from "@/lib/validations/shared";
 
 // type HeroButton = {

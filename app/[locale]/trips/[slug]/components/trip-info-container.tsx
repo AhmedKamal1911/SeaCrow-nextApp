@@ -1,17 +1,17 @@
-import { Trip } from "@/lib/types/trips";
+import { TripDetails } from "@/lib/types/trips";
 import TourOverviewDetails from "./tour-overview-details";
 import TripDetailsBox from "./trip-details-box";
 import { getTranslations } from "next-intl/server";
 
 type Props = {
-  tripData: Trip;
+  tripData: TripDetails;
 };
 export default async function TripInfoContainer({ tripData }: Props) {
   const t = await getTranslations();
   return (
     <div className="border divide-y-2 " id="info">
       <TripDetailsBox
-        tour={tripData?.title}
+        tour={tripData?.name}
         tourFrom={tripData?.tourFrom}
         departureTime={tripData?.departureTime}
         departureTimeSystem={tripData?.departureTime}

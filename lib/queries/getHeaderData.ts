@@ -1,5 +1,5 @@
 import { customFetch } from "../helpers/custom-fetch";
-import { navbarDataSchema } from "../validations/headerDataValidation";
+import { navbarDataSchema } from "../validations/header-schema";
 
 export async function getHeaderData() {
   try {
@@ -15,7 +15,7 @@ export async function getHeaderData() {
       const errorMessage = JSON.stringify(result.error.flatten(), null, 2);
       throw new Error(`Header data validation failed: ${errorMessage}`);
     }
-    console.log({ header: data });
+
     return result.data;
   } catch (error) {
     console.error("Header data error:", error);
