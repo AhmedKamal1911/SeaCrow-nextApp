@@ -1,25 +1,3 @@
-import {
-  BookOpen,
-  Compass,
-  HeartHandshake,
-  LucideProps,
-  Star,
-} from "lucide-react";
-
-// Map of icon names to their respective components
-export const iconMap: Record<
-  string,
-  ForwardRefExoticComponent<
-    Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
-  >
-> = {
-  BookOpen: BookOpen,
-  HeartHandshake: HeartHandshake,
-  Compass: Compass,
-  Star: Star,
-  // Add more icons as needed
-};
-
 import Image from "next/image";
 import { getStrapiMediaURL } from "@/lib/utils";
 import {
@@ -28,14 +6,13 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { aboutInfoList } from "@/lib/data";
+import { aboutInfoList, iconMap } from "@/lib/data";
 import clsx from "clsx";
 
 import SectionHeader from "@/components/common/section-header";
 import AboutInfoBox from "@/components/common/about-info-box";
 import { useLocale, useTranslations } from "next-intl";
 import { WhyChooseUsDataSchemaType } from "@/lib/validations/why-us-schema";
-import { ForwardRefExoticComponent, RefAttributes } from "react";
 
 type Props = {
   data: WhyChooseUsDataSchemaType;

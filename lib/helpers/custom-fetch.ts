@@ -1,5 +1,5 @@
 import qs from "qs";
-import { flattenAttributes, getCurrentLocale } from "../utils";
+import { flattenAttributes } from "../utils";
 
 type Query = {
   [key: string]: string | boolean | number | Query | null | string[];
@@ -19,13 +19,14 @@ export async function customFetch({
   body,
   token,
 }: CustomFetchArgs) {
-  const currentLocale = await getCurrentLocale();
+  // const currentLocale = await getCurrentLocale();
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_STRAPI_BASE_URL}/api/${pathname}?${qs.stringify(
       query
-    )}&locale=${currentLocale}`,
+    )}&locale=en`,
     {
       body: body ? JSON.stringify(body) : undefined,
+      // cache: "force-cache",
 
       method: method,
       headers: {

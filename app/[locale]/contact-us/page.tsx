@@ -1,11 +1,13 @@
 import SectionHeader from "@/components/common/section-header";
-import ContactForm from "@/app/[locale]/contact-us/components/contact-form";
-import { getLocale, getTranslations } from "next-intl/server";
-import Image from "next/image";
 
+import { getTranslations } from "next-intl/server";
+import Image from "next/image";
+import ContactForm from "./components/contact-form";
+export async function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "ar" }, { locale: "ru" }];
+}
 export default async function ContactUs() {
   const t = await getTranslations();
-  const locale = await getLocale();
 
   return (
     <div className="relative min-h-screen py-36 ">
@@ -30,7 +32,7 @@ export default async function ContactUs() {
               introText={t("contactUsPage.introText")}
               desc={t("contactUsPage.desc")}
             />
-            <ContactForm locale={locale} />
+            <ContactForm />
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@ import { TripTicket } from "../types/shared";
 
 export default async function bookTrip(data: TripTicket) {
   try {
-    const response = await customFetch({
+    await customFetch({
       pathname: `orders`,
       query: undefined,
       method: "POST",

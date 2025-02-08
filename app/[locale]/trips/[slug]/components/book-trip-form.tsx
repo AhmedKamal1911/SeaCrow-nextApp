@@ -1,23 +1,4 @@
 "use client";
-import { zodResolver } from "@hookform/resolvers/zod";
-import bookTrip from "@/lib/mutations/book-trip";
-import bookTripFormSchema, {
-  BookTripSchema,
-} from "@/lib/validations/book-trip-schema";
-import { useTranslations } from "next-intl";
-import { format } from "date-fns";
-import { useRef, useState } from "react";
-import { useForm } from "react-hook-form";
-import ReCAPTCHA from "react-google-recaptcha";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
-import { Textarea } from "@/components/ui/textarea";
-import CustomFormField from "@/components/common/custom-form-field";
 import {
   Baby,
   CircleCheckBig,
@@ -30,19 +11,37 @@ import {
   PhoneCall,
   User,
 } from "lucide-react";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import bookTripFormSchema, {
+  BookTripSchema,
+} from "@/lib/validations/book-trip-schema";
+import { useTranslations } from "next-intl";
+import { format } from "date-fns";
+import { useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import { Textarea } from "@/components/ui/textarea";
 import { DatePicker } from "./date-picker";
 import { CountryComboBox } from "./country-combo-box";
-import FormSubmitButton from "@/components/common/form-submit-button";
 import { sendTicketMail } from "@/lib/mutations/send-ticket-mail";
 import { useToast } from "@/hooks/use-toast";
+import bookTrip from "@/lib/mutations/book-trip";
+import ReCAPTCHA from "react-google-recaptcha";
+import CustomFormField from "@/components/common/custom-form-field";
+import FormSubmitButton from "@/components/common/form-submit-button";
 const siteKey = process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY as string;
 console.log(siteKey);
 export default function BookTripForm({ tripSlug }: { tripSlug: string }) {
   const t = useTranslations();
   const formRef = useRef(null);
-  const { toast } = useToast();
-
   const captcha = useRef<ReCAPTCHA>(null);
+  const { toast } = useToast();
   const [isCaptchaSuccess, setIsCaptchaSuccess] = useState(false);
   const onChange = () => {
     setIsCaptchaSuccess(true);
@@ -95,6 +94,7 @@ export default function BookTripForm({ tripSlug }: { tripSlug: string }) {
         }, 1000);
       }
     } catch (e) {
+      console.log(e);
       toast({
         description: t("global.toasts.messageToast.failedMessage"),
         variant: "destructive",

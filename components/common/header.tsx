@@ -13,7 +13,7 @@ import {
 } from "../ui/select";
 import { languages } from "@/lib/data";
 import { Menu, X } from "lucide-react";
-// import useMediaQuery from "@/hooks/use-media-query";
+
 import clsx from "clsx";
 
 import {
@@ -189,8 +189,6 @@ function NavLinks({
 }
 
 function LanguageSelectMenu({ className }: { className?: string }) {
-  // const { selectedLanguage, onLanguageChange } = useLanguage();
-  // const DEFUALT_LANGUAGE = routing.defaultLocale;
   const langLocale = useLocale();
   const router = useRouter();
 

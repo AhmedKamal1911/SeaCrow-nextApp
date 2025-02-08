@@ -1,10 +1,11 @@
 import { z } from "zod";
 import { imageTypeSchema } from "./shared";
+import { pathnames } from "../data";
 
 const heroButtonSchema = z.object({
   id: z.number(),
   text: z.string(),
-  url: z.string(),
+  url: z.enum(pathnames),
   isExternal: z.boolean(),
 });
 

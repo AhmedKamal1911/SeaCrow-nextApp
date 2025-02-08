@@ -7,9 +7,6 @@
 html[lang="ar"] body {
   font-family: var(--font-cairo);
 }
-html {
-  scroll-behavior: smooth;
-}
 /* CSS for other languages (e.g., default to English or others) */
 html[lang="en"] body,
 html[lang="ru"] body {

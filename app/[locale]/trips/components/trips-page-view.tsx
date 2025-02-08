@@ -43,7 +43,7 @@ export default function TripsPageView() {
 
         return nextPage > totalPages ? undefined : nextPage;
       },
-
+      staleTime: 5000,
       refetchOnWindowFocus: false,
     });
 
@@ -52,11 +52,8 @@ export default function TripsPageView() {
   };
 
   useEffect(() => {
-    if (isInterSectedElementInView) {
-      fetchNextPage();
-    } else {
-      return;
-    }
+    if (!isInterSectedElementInView) return;
+    fetchNextPage();
   }, [fetchNextPage, isInterSectedElementInView]);
   return (
     <div ref={ref} className="min-h-screen py-24">
@@ -105,13 +102,15 @@ export default function TripsPageView() {
                         </div>
                       ))
                     ) : (
-                      <ErrorViewer errorText={"There is no trips"} />
+                      <ErrorViewer
+                        errorText={t("global.errors.noTripsError")}
+                      />
                     )}
                   </Fragment>
                 ))}
-                {/* TODO:translate the error text */}
               </AnimatePresence>
             </div>
+
             <div ref={interSectedElement} aria-hidden />
           </>
         )}

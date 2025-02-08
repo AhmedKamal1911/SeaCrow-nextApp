@@ -1,12 +1,13 @@
 import { z } from "zod";
 import { metaObject } from "./shared";
+import { pathnames } from "../data";
 
 // NavLinks schema (reusable if needed)
 const navLinksSchema = z.array(
   z.object({
     id: z.number(),
     text: z.string(),
-    url: z.string(),
+    url: z.enum(pathnames), // "/contact-us" | "/" | "/faqs" | "/trips" | "/about-us"
     isExternal: z.boolean(),
   })
 );

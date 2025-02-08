@@ -32,7 +32,7 @@ export function LoginForm({
     handleSubmit,
     control,
     setError,
-    reset,
+
     formState: { isSubmitting },
   } = methods;
   // ...
@@ -51,8 +51,8 @@ export function LoginForm({
           message: t("global.loginForm.validation.invalidCredentials"),
         });
       }
-      // reset();
     } catch (e) {
+      console.log(e);
       setError("username", {
         type: "manual",
         message: t("global.loginForm.validation.invalidCredentials"), // Assign the error message to the username field

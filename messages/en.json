@@ -88,6 +88,9 @@
         "userName": "Username must be at least 2 characters.",
         "password": "password must be at least 2 characters."
       }
+    },
+    "errors": {
+      "noTripsError": "There is no Trips"
     }
   },
 

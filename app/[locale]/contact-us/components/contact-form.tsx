@@ -55,6 +55,7 @@ const ContactForm = () => {
         reset();
       }, 1000);
     } catch (error) {
+      console.log(error);
       toast({
         description: t("global.toasts.messageToast.failedMessage"),
         variant: "destructive",

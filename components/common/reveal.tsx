@@ -17,7 +17,7 @@ function Reveal({ children, className }: Props) {
       mainControls.start("visible");
       slideControls.start("visible");
     }
-  }, [isInView]);
+  }, [isInView, mainControls, slideControls]);
   return (
     <div
       ref={ref}
@@ -42,13 +42,7 @@ function Reveal({ children, className }: Props) {
         initial="hidden"
         animate={slideControls}
         transition={{ duration: 0.4, ease: "easeInOut" }}
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundColor: "#bfa888",
-          zIndex: "20px",
-        }}
-        // className="absolute inset-0 bg-main "
+        className="absolute inset-0 bg-main z-[20px]"
       />
     </div>
   );

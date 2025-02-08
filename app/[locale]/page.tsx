@@ -11,12 +11,18 @@ import SpecialTripsViewer from "./components/speical-trips-viewer";
 import WhyChooseUsSection from "./components/sections/why-choose-us-section";
 import TripsSection from "./components/sections/trips-section";
 import TripGridCardsViewer from "./components/trip-grid-cards-viewer";
-
+// import { setRequestLocale } from "next-intl/server";
+export const revalidate = 10;
+export async function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "ar" }, { locale: "ru" }];
+}
 export default async function Home() {
+  // TODO: make these fetch requests parallel instead of sequential fetching
+  // const { locale } = await params;
   const heroSectionData = await getHeroSectionData();
   const introSectionData = await getIntroSectionData();
   const whyChooseUsData = await getWhyChooseUsData();
-
+  // setRequestLocale(locale);
   return (
     <main>
       <HeroSection data={heroSectionData} />

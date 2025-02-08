@@ -1,13 +1,15 @@
 import AboutInfoBox from "@/components/common/about-info-box";
 import SectionHeader from "@/components/common/section-header";
-import { aboutInfoList } from "@/lib/data";
+import { aboutInfoList, iconMap } from "@/lib/data";
 import { getWhyChooseUsData } from "@/lib/queries/getWhyChooseUsData";
 
 import Image from "next/image";
-import { iconMap } from "../components/sections/why-choose-us-section";
+
 import OurServiceBox from "./components/our-service-box";
 import { getTranslations } from "next-intl/server";
-
+export async function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "ar" }, { locale: "ru" }];
+}
 export default async function AboutUs() {
   // useScrollToTop();
   const t = await getTranslations();

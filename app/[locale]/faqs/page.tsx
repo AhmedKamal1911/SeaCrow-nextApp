@@ -4,7 +4,9 @@ import getFaqPageData from "@/lib/queries/getFaqPageData";
 
 import { getTranslations } from "next-intl/server";
 import FaqForm from "./components/faq-form";
-
+export async function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "ar" }, { locale: "ru" }];
+}
 export default async function Faqs() {
   const t = await getTranslations();
   const data = await getFaqPageData();

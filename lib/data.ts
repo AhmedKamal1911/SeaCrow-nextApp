@@ -1,3 +1,12 @@
+import {
+  BookOpen,
+  Compass,
+  HeartHandshake,
+  LucideProps,
+  Star,
+} from "lucide-react";
+import { ForwardRefExoticComponent, RefAttributes } from "react";
+
 export const countries = [
   { name: "Afghanistan", code: "AF" },
   { name: "Åland Islands", code: "AX" },
@@ -321,3 +330,26 @@ export const aboutInfoList = [
 ];
 
 export const tripsTypes = ["activities", "sea", "safari", "all"] as const;
+export const locales = { en: "en", ar: "ar", ru: "ru" };
+
+// Map of icon names to their respective components
+export const iconMap: Record<
+  string,
+  ForwardRefExoticComponent<
+    Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
+  >
+> = {
+  BookOpen: BookOpen,
+  HeartHandshake: HeartHandshake,
+  Compass: Compass,
+  Star: Star,
+  // Add more icons as needed
+};
+
+export const pathnames = [
+  "/contact-us",
+  "/",
+  "/faqs",
+  "/trips",
+  "/about-us",
+] as const;

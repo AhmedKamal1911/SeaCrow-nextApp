@@ -156,7 +156,11 @@ function DynamicInfoSection({
                       ? "mailto:"
                       : ""
                 }${info.url}`}
-                // target={info.type === "externalLink" ? "_blank" : ""}
+                target={
+                  info.type === "mail" || info.type === "tel"
+                    ? "_self"
+                    : "_blank"
+                }
                 className="text-[#d3d3d3] text-[18px] hover:text-white transition-all duration-300 relative after:absolute after:bg-main after:rounded-lg after:start-0 after:bottom-0 after:h-[2px] after:w-0 after:transition-all after:duration-500 hover:after:w-full"
               >
                 {info.text}

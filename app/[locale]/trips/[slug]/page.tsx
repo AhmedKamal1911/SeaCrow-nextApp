@@ -21,10 +21,49 @@ import TourPlanInfoContainer from "./components/tour-plan-info-container";
 import TripOverviewHeader from "./components/trip-overview-header";
 import BookTripForm from "./components/book-trip-form";
 import getTripQuestionsData from "@/lib/queries/getTripQuestionsData";
+// import { getTripsSectionData } from "@/lib/queries/getTripsSectionData";
+
+// import { routing } from "@/i18n/routing";
+
+// import { getTripsSectionData } from "@/lib/queries/getTripsSectionData";
+
+// export async function generateStaticParams() {
+//
+//   const tripSlugs = trips.data.map((trip) => ({
+//     slug: trip.slug,
+//   }));
+
+//   console.log({ fromTripPageStatic: tripSlugs });
+//   return trips.data.map((trip) => ({
+//     slug: trip.slug,
+//   }));
+// }
+// Generate static paths for all locales and slugs
+
+export const revalidate = 5;
+export async function generateStaticParams({
+  params: { locale },
+}: {
+  params: { locale: "en" | "ar" | "ru" };
+}) {
+  console.log({ propsFromGenerateStaticParams: locale });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_STRAPI_BASE_URL}/api/trips?locale=${locale}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const data = await response.json();
+  return data.data.map((trip) => ({ slug: trip.slug }));
+}
+
 type Props = {
   params: Promise<{ slug: string }>;
 };
 export default async function Trip({ params }: Props) {
+  console.log("rendered page");
   const { slug } = await params;
 
   const t = await getTranslations();
@@ -76,7 +115,6 @@ export default async function Trip({ params }: Props) {
 
             <RelatedTripsWrapper>
               <Suspense
-                key={Math.random()}
                 fallback={
                   <Loading
                     loadingElement={<SkeletonLoaderCard />}
