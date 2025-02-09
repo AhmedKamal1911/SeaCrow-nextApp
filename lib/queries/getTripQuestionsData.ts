@@ -1,12 +1,18 @@
+import { Locale } from "@/i18n/routing";
 import { customFetch } from "../helpers/custom-fetch";
 
 import { tripQuestionsSchema } from "../validations/trip-questions-schema";
 
-export default async function getTripQuestionsData() {
+export default async function getTripQuestionsData({
+  locale,
+}: {
+  locale: Locale;
+}) {
   try {
     const data = await customFetch({
       pathname: "trip-question",
       query: {
+        locale,
         fields: ["id", "locale"],
         populate: {
           clientQuestionsList: {

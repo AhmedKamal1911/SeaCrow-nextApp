@@ -43,14 +43,14 @@ export function DatePicker({
           variant={"outline"}
           className={cn(
             "w-full text-[16px] ps-0  border-t-0 border-l-0 group border-r-0 border-b-[2px] rounded-none shadow-none focus:border-b-main transition-[border] duration-500 justify-start",
-            !selectedDate && "text-muted-foreground"
+            !selectedDate && "text-gray-800"
           )}
         >
           <CalendarIcon className="me-2 h-4 w-4 text-main" />
           {selectedDate ? (
             format(selectedDate, "PPP")
           ) : (
-            <span className="group-focus:text-main text-gray-400">
+            <span className="group-focus:text-main text-gray-500">
               {placeholder}
             </span>
           )}

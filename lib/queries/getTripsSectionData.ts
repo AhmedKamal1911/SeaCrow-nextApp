@@ -1,5 +1,5 @@
 import { Locale } from "@/i18n/routing";
-import { customFetch } from "../helpers/custom-fetch";
+
 import { tripsResponseSchema } from "../validations/trips-schema";
 import { flattenAttributes } from "../utils";
 
@@ -61,9 +61,11 @@ export async function getTripsSectionData(locale: Locale) {
     const result = tripsResponseSchema.safeParse(flattenAttributes(data));
 
     if (!result.success) {
-      const errorMessage = JSON.stringify(result.error.message, null, 2);
+      // const errorMessage = JSON.stringify(result.error.message, null, 2);
       console.log(result.error);
-      throw new Error(`trips Section data validation failed: ${errorMessage}`);
+      throw new Error(
+        `trips Section data validation failed please call service`
+      );
     }
 
     return result.data;

@@ -33,14 +33,14 @@ export async function getSpeicalOffersData(locale: Locale) {
 
     const result = tripsResponseSchema.safeParse(data);
     if (!result.success) {
-      const errorMessage = JSON.stringify(
-        result.error.flatten().fieldErrors,
-        null,
-        2
-      );
+      // const errorMessage = JSON.stringify(
+      //   result.error.flatten().fieldErrors,
+      //   null,
+      //   2
+      // );
       console.log(result.error.errors);
       throw new Error(
-        `SpecialOffers Section data validation failed: ${errorMessage}`
+        `SpecialOffers Section data validation failed please Call service`
       );
     }
 

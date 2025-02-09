@@ -1,6 +1,8 @@
 import ErrorViewer from "@/components/common/error-viewer";
 import RelatedTripsContainer from "./related-trips-container";
 import getRelatedTripsData from "@/lib/queries/getRelatedTripsData";
+import { Locale } from "@/i18n/routing";
+import { getLocale } from "next-intl/server";
 export default async function RelatedTripsViewer({
   tripType,
   tripSlug,
@@ -8,7 +10,12 @@ export default async function RelatedTripsViewer({
   tripType: string;
   tripSlug: string;
 }) {
-  const relatedTrips = await getRelatedTripsData(tripType, tripSlug);
+  const locale = await getLocale();
+  const relatedTrips = await getRelatedTripsData({
+    typeName: tripType,
+    slug: tripSlug,
+    locale: locale as Locale,
+  });
 
   return relatedTrips ? (
     <RelatedTripsContainer relatedTrips={relatedTrips} />

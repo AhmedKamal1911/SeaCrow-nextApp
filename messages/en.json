@@ -90,7 +90,8 @@
       }
     },
     "errors": {
-      "noTripsError": "There is no Trips"
+      "noTripsError": "There is no Trips to Show",
+      "notFoundPageError": "Page Not Found"
     }
   },
 

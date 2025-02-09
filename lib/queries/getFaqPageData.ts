@@ -1,11 +1,13 @@
+import { Locale } from "@/i18n/routing";
 import { customFetch } from "../helpers/custom-fetch";
 import { FaqsPageSchema } from "../validations/faq-page-schema";
 
-export default async function getFaqPageData() {
+export default async function getFaqPageData({ locale }: { locale: Locale }) {
   try {
     const data = await customFetch({
       pathname: "faq-page",
       query: {
+        locale,
         fields: ["id", "locale"],
         populate: {
           faqsList: {

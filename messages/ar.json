@@ -89,7 +89,8 @@
       }
     },
     "errors": {
-      "noTripsError": "لا يوجد رحلات"
+      "noTripsError": "لا يوجد رحلات",
+      "notFoundPageError": "الصفحة التي تحاول زيارتها غير موجودة"
     }
   },
 

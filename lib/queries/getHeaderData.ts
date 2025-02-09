@@ -1,11 +1,13 @@
+import { Locale } from "@/i18n/routing";
 import { customFetch } from "../helpers/custom-fetch";
 import { navbarDataSchema } from "../validations/header-schema";
 
-export async function getHeaderData() {
+export async function getHeaderData({ locale }: { locale: Locale }) {
   try {
     const data = await customFetch({
       pathname: "global",
       query: {
+        locale,
         populate: "logoText,navLinks",
       },
     });

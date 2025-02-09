@@ -77,8 +77,8 @@ export default async function RootLayout({
   // side is the easiest way to get started
   const messages: AbstractIntlMessages = await getMessages();
 
-  const headerData = await getHeaderData();
-  const footerData = await getFooterData();
+  const headerData = await getHeaderData({ locale: locale as Locale });
+  const footerData = await getFooterData({ locale: locale as Locale });
 
   return (
     <html

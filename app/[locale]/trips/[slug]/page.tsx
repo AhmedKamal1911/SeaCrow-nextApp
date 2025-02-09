@@ -1,4 +1,4 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
 import TripBanner from "./components/trip-banner";
 import TripNavigation from "./components/trip-navigation";
 
@@ -52,13 +52,14 @@ export default async function Trip({ params }: Props) {
   console.log("trip page rendered page");
   const { slug } = await params;
   const t = await getTranslations();
+  const locale = await getLocale();
   const [tripData, questions] = await Promise.all([
-    getTripData(slug),
-    getTripQuestionsData(),
+    getTripData({ slug, locale: locale as Locale }),
+    getTripQuestionsData({ locale: locale as Locale }),
   ]);
   if (tripData === undefined) notFound();
   const tripImagesList = tripData?.imgs?.data;
-
+  setRequestLocale(locale);
   const tripType = tripData.type;
   return (
     <div className="min-h-screen py-[72px] bg-light">

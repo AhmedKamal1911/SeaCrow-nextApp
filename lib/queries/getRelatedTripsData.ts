@@ -1,14 +1,21 @@
+import { Locale } from "@/i18n/routing";
 import { customFetch } from "../helpers/custom-fetch";
 import { tripsResponseSchema } from "../validations/trips-schema";
 
-export default async function getRelatedTripsData(
-  typeName: string,
-  slug: string
-) {
+export default async function getRelatedTripsData({
+  typeName,
+  slug,
+  locale,
+}: {
+  typeName: string;
+  slug: string;
+  locale: Locale;
+}) {
   try {
     const data = await customFetch({
       pathname: "trips",
       query: {
+        locale,
         populate: {
           imgs: "*", // Populate all fields inside imgs
         },

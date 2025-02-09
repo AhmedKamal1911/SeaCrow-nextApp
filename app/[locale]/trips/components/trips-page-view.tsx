@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import useSectionInView from "@/hooks/use-section-view";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Fragment, useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import TripCard from "@/components/common/trip-card";
@@ -20,10 +20,12 @@ import ErrorViewer from "@/components/common/error-viewer";
 import { LoaderCircle } from "lucide-react";
 import { tripsTypes } from "@/lib/data";
 import { getAllTrips } from "@/lib/queries/getAllTrips";
+import { Locale } from "@/i18n/routing";
 
 export default function TripsPageView() {
   const t = useTranslations();
   const { ref, inView } = useSectionInView<HTMLDivElement>();
+  const locale = useLocale();
   const { ref: interSectedElement, inView: isInterSectedElementInView } =
     useInView({
       /* Optional options */
@@ -35,7 +37,11 @@ export default function TripsPageView() {
     useInfiniteQuery({
       queryKey: ["trips", tripType], // Object form for query key
       queryFn: ({ pageParam }) =>
-        getAllTrips({ pageParam, typeName: tripType }),
+        getAllTrips({
+          pageParam,
+          typeName: tripType,
+          locale: locale as Locale,
+        }),
       initialPageParam: 1,
 
       getNextPageParam: ({ meta }) => {

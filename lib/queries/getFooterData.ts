@@ -1,12 +1,14 @@
+import { Locale } from "@/i18n/routing";
 import { customFetch } from "../helpers/custom-fetch";
 import { footerDataSchema } from "../validations/footer-schema";
 
-export async function getFooterData() {
+export async function getFooterData({ locale }: { locale: Locale }) {
   try {
     // Fetch data from API
     const data = await customFetch({
       pathname: "global",
       query: {
+        locale,
         populate: "navLinks,contactLinks",
       },
     });

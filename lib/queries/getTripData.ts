@@ -1,7 +1,14 @@
+import { Locale } from "@/i18n/routing";
 import { customFetch } from "../helpers/custom-fetch";
 import { tripResponseSchema } from "../validations/trip-schema";
 
-export default async function getTripData(slug: string) {
+export default async function getTripData({
+  slug,
+  locale,
+}: {
+  slug: string;
+  locale: Locale;
+}) {
   // TODO: make param of this function as object that accepts slug and locale
   try {
     const data = await customFetch({
@@ -37,6 +44,7 @@ export default async function getTripData(slug: string) {
             $eq: slug,
           },
         },
+        locale,
       },
     });
 

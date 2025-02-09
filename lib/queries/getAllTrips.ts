@@ -1,3 +1,4 @@
+import { Locale } from "@/i18n/routing";
 import { customFetch } from "../helpers/custom-fetch";
 import { tripsResponseSchema } from "../validations/trips-schema";
 
@@ -5,15 +6,18 @@ export async function getAllTrips({
   typeName,
   pageParam = 1,
   pageLimit = 8,
+  locale,
 }: {
   typeName: string;
   pageParam?: number;
   pageLimit?: number;
+  locale: Locale;
 }) {
   try {
     const data = await customFetch({
       pathname: "trips",
       query: {
+        locale,
         populate: {
           imgs: "*", // Populate all fields inside imgs
         },

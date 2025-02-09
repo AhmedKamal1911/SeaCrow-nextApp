@@ -89,7 +89,8 @@
       }
     },
     "errors": {
-      "noTripsError": "Нет никаких поездок"
+      "noTripsError": "Нет никаких поездок",
+      "notFoundPageError": "Страница не найдена"
     }
   },
 

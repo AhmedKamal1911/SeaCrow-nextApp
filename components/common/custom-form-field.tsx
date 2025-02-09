@@ -2,6 +2,7 @@ import {
   FormControl,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import CustomInput from "./custom-input";
@@ -35,6 +36,9 @@ const CustomFormField = <
       render={({ field }) => {
         return (
           <FormItem className="relative w-full">
+            <FormLabel htmlFor={field.name} className="sr-only">
+              {placeholder}
+            </FormLabel>
             <FormControl>
               <CustomInput
                 type={type}
