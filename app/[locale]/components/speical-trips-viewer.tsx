@@ -1,9 +1,13 @@
 import TripsSlider from "./trips-slider";
 import ErrorViewer from "@/components/common/error-viewer";
+import { Locale } from "@/i18n/routing";
 import { getSpeicalOffersData } from "@/lib/queries/getSpeicalOffersData";
+import { getLocale } from "next-intl/server";
 
 export default async function SpecialTripsViewer() {
-  const specialOffersData = await getSpeicalOffersData();
+  const locale = await getLocale();
+
+  const specialOffersData = await getSpeicalOffersData(locale as Locale);
 
   return specialOffersData.data.length >= 1 ? (
     <TripsSlider

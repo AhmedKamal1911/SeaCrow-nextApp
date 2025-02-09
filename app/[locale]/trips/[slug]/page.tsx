@@ -21,34 +21,12 @@ import TourPlanInfoContainer from "./components/tour-plan-info-container";
 import TripOverviewHeader from "./components/trip-overview-header";
 import BookTripForm from "./components/book-trip-form";
 import getTripQuestionsData from "@/lib/queries/getTripQuestionsData";
-// import { getTripsSectionData } from "@/lib/queries/getTripsSectionData";
+import { Locale, routing } from "@/i18n/routing";
+import { notFound } from "next/navigation";
 
-// import { routing } from "@/i18n/routing";
-
-// import { getTripsSectionData } from "@/lib/queries/getTripsSectionData";
-
-// export async function generateStaticParams() {
-//
-//   const tripSlugs = trips.data.map((trip) => ({
-//     slug: trip.slug,
-//   }));
-
-//   console.log({ fromTripPageStatic: tripSlugs });
-//   return trips.data.map((trip) => ({
-//     slug: trip.slug,
-//   }));
-// }
-// Generate static paths for all locales and slugs
-
-export const revalidate = 5;
-export async function generateStaticParams({
-  params: { locale },
-}: {
-  params: { locale: "en" | "ar" | "ru" };
-}) {
-  console.log({ propsFromGenerateStaticParams: locale });
+export async function generateStaticParams() {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_BASE_URL}/api/trips?locale=${locale}`,
+    `${process.env.NEXT_PUBLIC_STRAPI_BASE_URL}/api/trips?locale=en`,
     {
       headers: {
         "Content-Type": "application/json",
@@ -56,21 +34,29 @@ export async function generateStaticParams({
     }
   );
   const data = await response.json();
-  return data.data.map((trip) => ({ slug: trip.slug }));
+
+  return data.data.flatMap((trip) =>
+    routing.locales.map((locale) => ({
+      slug: trip.attributes.slug,
+      locale,
+    }))
+  );
 }
 
 type Props = {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: Locale }>;
 };
+export const dynamic = "force-static";
+export const revalidate = 3600; // 1 hour
 export default async function Trip({ params }: Props) {
-  console.log("rendered page");
+  console.log("trip page rendered page");
   const { slug } = await params;
-
   const t = await getTranslations();
-
-  const tripData = await getTripData(slug);
-  const questions = await getTripQuestionsData();
-
+  const [tripData, questions] = await Promise.all([
+    getTripData(slug),
+    getTripQuestionsData(),
+  ]);
+  if (tripData === undefined) notFound();
   const tripImagesList = tripData?.imgs?.data;
 
   const tripType = tripData.type;

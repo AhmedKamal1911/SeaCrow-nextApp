@@ -1,7 +1,8 @@
+import { Locale } from "@/i18n/routing";
 import { customFetch } from "../helpers/custom-fetch";
 import { tripsResponseSchema } from "../validations/trips-schema";
 
-export async function getSpeicalOffersData() {
+export async function getSpeicalOffersData(locale: Locale) {
   try {
     const data = await customFetch({
       pathname: "trips",
@@ -26,6 +27,7 @@ export async function getSpeicalOffersData() {
           },
         },
         sort: "offer:desc",
+        locale,
       },
     });
 

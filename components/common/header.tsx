@@ -24,6 +24,7 @@ import {
 import { useLocale } from "next-intl";
 
 import { HeaderDataSchemaTypes } from "@/lib/validations/header-schema";
+import { useParams } from "next/navigation";
 
 type Props = {
   data: HeaderDataSchemaTypes;
@@ -191,11 +192,14 @@ function NavLinks({
 function LanguageSelectMenu({ className }: { className?: string }) {
   const langLocale = useLocale();
   const router = useRouter();
-
   const pathname = useI18nPathname();
-
+  const params = useParams();
   function onLanguageChange(langCode: string) {
-    router.replace({ pathname }, { locale: langCode });
+    // @ts-expect-error -- TypeScript will validate that only known `params`
+    // are used in combination with a given `pathname`. Since the two will
+    // always match for the current route, we can skip runtime checks.
+    router.replace({ pathname, params }, { locale: langCode });
+    // router.replace({ pathname }, { locale: langCode });
   }
   return (
     <Select value={langLocale} onValueChange={onLanguageChange}>

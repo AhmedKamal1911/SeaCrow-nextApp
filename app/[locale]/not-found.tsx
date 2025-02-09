@@ -1,7 +1,6 @@
 import NotFoundAnimation from "@/components/common/not-found-animation";
 
 export default function NotFoundPage() {
-  console.log("not found");
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
       <NotFoundAnimation />

@@ -9,7 +9,7 @@ import { Control, FieldPath, FieldValues } from "react-hook-form";
 import { HTMLInputTypeAttribute, ReactNode } from "react";
 type Props<
   TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 > = {
   control: Control<TFieldValues>;
   name: TName;
@@ -19,7 +19,7 @@ type Props<
 };
 const CustomFormField = <
   T extends FieldValues = FieldValues,
-  K extends FieldPath<T> = FieldPath<T>
+  K extends FieldPath<T> = FieldPath<T>,
 >({
   control,
   name,
@@ -27,6 +27,7 @@ const CustomFormField = <
   type,
   icon,
 }: Props<T, K>) => {
+  // TODO:create lable to improve the seo
   return (
     <FormField
       control={control}

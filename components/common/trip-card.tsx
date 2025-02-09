@@ -29,8 +29,10 @@ export default function TripCard({ trip, i, inView }: Props) {
       className="h-full"
     >
       <Link
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        href={`/trips/${trip.slug}` as any}
+        href={{
+          pathname: "/trips/[slug]",
+          params: { slug: trip.slug },
+        }}
         prefetch={false}
         className="relative overflow-hidden select-none block group h-full bg-cover bg-[80%] after:absolute after:inset-0 after:bg-[#12131233] before:absolute before:inset-0 before:opacity-0 hover:before:bg-custom-gradient hover:before:opacity-[1] before:transition-all before:duration-700"
         style={{

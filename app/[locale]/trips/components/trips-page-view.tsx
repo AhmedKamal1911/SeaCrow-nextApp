@@ -15,11 +15,11 @@ import { AnimatePresence } from "framer-motion";
 import TripCard from "@/components/common/trip-card";
 import { useInView } from "react-intersection-observer";
 
-import { getTripsSectionData } from "@/lib/queries/getTripsSectionData";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import ErrorViewer from "@/components/common/error-viewer";
 import { LoaderCircle } from "lucide-react";
 import { tripsTypes } from "@/lib/data";
+import { getAllTrips } from "@/lib/queries/getAllTrips";
 
 export default function TripsPageView() {
   const t = useTranslations();
@@ -35,8 +35,9 @@ export default function TripsPageView() {
     useInfiniteQuery({
       queryKey: ["trips", tripType], // Object form for query key
       queryFn: ({ pageParam }) =>
-        getTripsSectionData({ pageParam, typeName: tripType }),
+        getAllTrips({ pageParam, typeName: tripType }),
       initialPageParam: 1,
+
       getNextPageParam: ({ meta }) => {
         const totalPages = meta.pagination.pageCount as number;
         const nextPage = (meta?.pagination?.page ?? 1) + 1;

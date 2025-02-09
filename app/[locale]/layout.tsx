@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Bebas_Neue, Cairo, Audiowide, Playwrite_CO } from "next/font/google";
+
 import Header from "@/components/common/header";
 import ScrollToTopButton from "@/components/common/scroll-to-top-button";
 import SocialContainer from "@/components/common/social-container";
@@ -22,6 +23,7 @@ const bebasNeueFont = Bebas_Neue({
   fallback: ["sans-serif", "Arial"], // Specify fallback fonts
   style: "normal",
   display: "swap",
+  preload: true,
 });
 
 const audioWideFont = Audiowide({
@@ -66,7 +68,6 @@ export default async function RootLayout({
   const { locale } = await params;
   // Ensure that the incoming `locale` is valid
   if (!routing.locales.includes(locale as Locale)) {
-    console.log("notfound", { locales: routing.locales, locale });
     notFound();
   }
 

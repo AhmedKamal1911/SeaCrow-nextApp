@@ -13,6 +13,7 @@ export default async function getFaqPageData() {
           },
         },
       },
+      tags: ["FAQ"],
     });
 
     const result = FaqsPageSchema.safeParse(data);

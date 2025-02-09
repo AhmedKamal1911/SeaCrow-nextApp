@@ -8,7 +8,6 @@ export default async function getRelatedTripsData(
   try {
     const data = await customFetch({
       pathname: "trips",
-
       query: {
         populate: {
           imgs: "*", // Populate all fields inside imgs
@@ -33,6 +32,7 @@ export default async function getRelatedTripsData(
           },
         },
       },
+      tags: ["Trip"],
     });
 
     const result = tripsResponseSchema.safeParse(data);

@@ -12,23 +12,28 @@ export const routing = defineRouting({
     "/": "/",
     "/contact-us": {
       en: "/contact-us",
-      ru: "/контакты", // Proper Russian translation
-      ar: "/contact-us",
+      ru: "/контакты",
+      ar: "/اتصل-بنا", // Proper Arabic translation
     },
     "/faqs": {
       en: "/faqs",
       ru: "/часто-задаваемые-вопросы",
-      ar: "/faqs",
+      ar: "/الأسئلة-الشائعة", // Arabic translation
     },
     "/trips": {
       en: "/trips",
       ru: "/поездки",
-      ar: "/trips",
+      ar: "/رحلات", // Arabic translation
+    },
+    "/trips/[slug]": {
+      en: "/trips/[slug]",
+      ru: "/поездки/[slug]",
+      ar: "/رحلات/[slug]", // Arabic dynamic route
     },
     "/about-us": {
       en: "/about-us",
-      ru: "/о-нас", // Correct Russian translation
-      ar: "/about-us",
+      ru: "/о-нас",
+      ar: "/من-نحن", // Arabic translation
     },
   },
 });

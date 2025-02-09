@@ -14,6 +14,7 @@ export default async function getTripQuestionsData() {
           },
         },
       },
+      tags: ["Questions"],
     });
 
     const result = tripQuestionsSchema.safeParse(data);

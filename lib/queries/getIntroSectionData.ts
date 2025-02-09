@@ -1,7 +1,8 @@
+import { Locale } from "@/i18n/routing";
 import { customFetch } from "../helpers/custom-fetch";
 import { introSectionSchemaData } from "../validations/intro-section-schema";
 
-export async function getIntroSectionData() {
+export async function getIntroSectionData(locale: Locale) {
   try {
     const response = await customFetch({
       pathname: "intro-section",
@@ -14,7 +15,9 @@ export async function getIntroSectionData() {
             },
           },
         },
+        locale,
       },
+      tags: ["Intro"],
     });
 
     const result = introSectionSchemaData.safeParse(response);

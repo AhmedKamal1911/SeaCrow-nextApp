@@ -2,6 +2,7 @@ import { customFetch } from "../helpers/custom-fetch";
 import { tripResponseSchema } from "../validations/trip-schema";
 
 export default async function getTripData(slug: string) {
+  // TODO: make param of this function as object that accepts slug and locale
   try {
     const data = await customFetch({
       pathname: "trips",
@@ -49,7 +50,7 @@ export default async function getTripData(slug: string) {
       console.log(result.error);
       throw new Error(`Trip data validation failed: ${errorMessage}`);
     }
-    return result.data.data[0];
+    return result?.data.data[0];
   } catch (error) {
     throw error;
   }

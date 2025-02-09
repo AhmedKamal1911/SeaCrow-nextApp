@@ -1,5 +1,6 @@
 import qs from "qs";
 import { flattenAttributes } from "../utils";
+import { CacheKey } from "./cache";
 
 type Query = {
   [key: string]: string | boolean | number | Query | null | string[];
@@ -10,6 +11,8 @@ type CustomFetchArgs = {
   method?: string;
   body?: Record<string, unknown>;
   token?: string;
+  tags?: CacheKey[];
+  cache?: RequestCache;
 };
 
 export async function customFetch({
@@ -18,20 +21,22 @@ export async function customFetch({
   method = "GET",
   body,
   token,
+  tags,
 }: CustomFetchArgs) {
   // const currentLocale = await getCurrentLocale();
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_STRAPI_BASE_URL}/api/${pathname}?${qs.stringify(
       query
-    )}&locale=en`,
+    )}`,
     {
       body: body ? JSON.stringify(body) : undefined,
-      // cache: "force-cache",
-
       method: method,
       headers: {
         "Content-Type": "application/json",
         Authorization: `${token ? token : undefined}`,
+      },
+      next: {
+        tags: tags,
       },
     }
   );
