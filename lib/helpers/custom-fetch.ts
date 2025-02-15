@@ -22,6 +22,7 @@ export async function customFetch({
   body,
   token,
   tags,
+  cache,
 }: CustomFetchArgs) {
   // const currentLocale = await getCurrentLocale();
   const response = await fetch(
@@ -38,6 +39,7 @@ export async function customFetch({
       next: {
         tags: tags,
       },
+      cache,
     }
   );
 

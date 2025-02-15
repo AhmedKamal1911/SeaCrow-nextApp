@@ -143,7 +143,7 @@ function AsideDrawer({
                 navLinks={navLinks}
                 disableInitialAnimation
                 className={cn(
-                  "flex-col transition-transform duration-1000 items-center mb-5",
+                  "flex-col transition-transform duration-700 items-center mb-5",
                   "-translate-y-full",
                   isAnimateDrawerLinks && "translate-y-0"
                 )}
@@ -199,8 +199,10 @@ function LanguageSelectMenu({ className }: { className?: string }) {
     // are used in combination with a given `pathname`. Since the two will
     // always match for the current route, we can skip runtime checks.
     router.replace({ pathname, params }, { locale: langCode });
+
     // router.replace({ pathname }, { locale: langCode });
   }
+
   return (
     <Select value={langLocale} onValueChange={onLanguageChange}>
       <SelectTrigger

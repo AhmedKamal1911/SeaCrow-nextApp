@@ -1,10 +1,11 @@
 import { z } from "zod";
-import { metaObject, questionsListSchema } from "./shared";
+import { metaObject, questionsListSchema, SEOSchema } from "./shared";
 
 // Main Schema
-export const FaqsPageSchema = z.object({
+export const faqsPageSchema = z.object({
   id: z.number(),
   locale: z.string(),
   faqsList: questionsListSchema,
+  SEO: SEOSchema,
   meta: metaObject,
 });

@@ -1,19 +1,38 @@
 import AboutInfoBox from "@/components/common/about-info-box";
 import SectionHeader from "@/components/common/section-header";
-import { aboutInfoList, iconMap } from "@/lib/data";
+import { aboutInfoList, iconMap, locales } from "@/lib/data";
 import { getWhyChooseUsData } from "@/lib/queries/getWhyChooseUsData";
 
 import Image from "next/image";
 
 import OurServiceBox from "./components/our-service-box";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
+import { Locale } from "@/i18n/routing";
+
+import getAboutusPageData from "@/lib/queries/getAboutusPageData";
 export async function generateStaticParams() {
-  return [{ locale: "en" }, { locale: "ar" }, { locale: "ru" }];
+  return locales.map((locale) => ({ locale }));
 }
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}) {
+  const { locale } = await params;
+
+  const response = await getAboutusPageData({ locale });
+  console.log(response);
+  return {
+    title: response.SEO.title,
+    description: response.SEO.description,
+  };
+}
+
 export default async function AboutUs() {
-  // useScrollToTop();
   const t = await getTranslations();
-  const whyChooseUsData = await getWhyChooseUsData();
+  const locale = await getLocale();
+  const whyChooseUsData = await getWhyChooseUsData(locale as Locale);
   const services = whyChooseUsData.services;
 
   return (

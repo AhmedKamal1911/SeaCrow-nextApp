@@ -1,11 +1,16 @@
 import { Skeleton } from "@/components/ui/skeleton";
+import { cn } from "@/lib/utils";
 
 type Props = {
   numberOfCards?: number;
+  className?: string;
 };
-export default function SkeletonLoaderCard({ numberOfCards = 3 }: Props) {
+export default function SkeletonLoaderCard({
+  numberOfCards = 3,
+  className,
+}: Props) {
   return (
-    <div className="relative w-full flex flex-col gap-5">
+    <div className={cn("relative w-full flex flex-col gap-5", className)}>
       {Array.from({ length: numberOfCards }).map((_, i) => (
         <Skeleton
           key={i}

@@ -1,4 +1,3 @@
-"use client";
 import { cn } from "@/lib/utils";
 import FetchTripsLoader from "../loaders/fetch-trips-loader";
 import { ReactNode } from "react";

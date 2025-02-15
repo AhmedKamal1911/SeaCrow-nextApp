@@ -43,7 +43,7 @@ export async function getTripsSectionData(locale: Locale) {
           "slug",
           "type",
         ],
-        "pagination[pageSize]": 5,
+        "pagination[pageSize]": 4,
         locale,
       })}`,
       {

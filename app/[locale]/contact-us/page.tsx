@@ -3,8 +3,27 @@ import SectionHeader from "@/components/common/section-header";
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import ContactForm from "./components/contact-form";
+
+import { locales } from "@/lib/data";
+import getContactusPageData from "@/lib/queries/getContactusPageData";
+import { Locale } from "@/i18n/routing";
 export async function generateStaticParams() {
-  return [{ locale: "en" }, { locale: "ar" }, { locale: "ru" }];
+  return locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}) {
+  const { locale } = await params;
+
+  const response = await getContactusPageData({ locale });
+
+  return {
+    title: response.SEO.title,
+    description: response.SEO.description,
+  };
 }
 export default async function ContactUs() {
   const t = await getTranslations();

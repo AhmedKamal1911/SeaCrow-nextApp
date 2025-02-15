@@ -1,4 +1,5 @@
 // import { CACHE_KEY_MODEL_MAP, StrapiModel } from "@/lib/helpers/cache";
+import { Locale, TRIP_SLUG_ALIAS } from "@/i18n/routing";
 import { CACHE_KEY_MODEL_MAP, StrapiModel } from "@/lib/helpers/cache";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { headers } from "next/headers";
@@ -16,11 +17,10 @@ export async function POST(req: NextRequest) {
   revalidateTag(CACHE_KEY_MODEL_MAP[strapiModel]);
   if (strapiModel === "trip") {
     const changedEntrySlug = reqBody.entry.slug as string;
-    const changedEntryLocale = reqBody.entry.locale as string;
-    revalidatePath(`/${changedEntryLocale}/trips/${changedEntrySlug}`);
-    console.log({
-      revalidatePath: `/${changedEntryLocale}/trips/${changedEntrySlug}`,
-    });
+    const changedEntryLocale = reqBody.entry.locale as Locale;
+    const revalidatedPath = `/${changedEntryLocale}/${encodeURIComponent(TRIP_SLUG_ALIAS[changedEntryLocale])}/${changedEntrySlug}`;
+    revalidatePath(revalidatedPath);
+    console.log({ revalidatedPath });
   }
   return NextResponse.json({
     revalidated: "success",

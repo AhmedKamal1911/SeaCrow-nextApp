@@ -1,28 +1,26 @@
 import { Locale } from "@/i18n/routing";
 import { customFetch } from "../helpers/custom-fetch";
-import { faqsPageSchema } from "../validations/faq-page-schema";
+import { TripsPageSchema } from "../validations/trips-page.schema";
 
-export default async function getFaqPageData({ locale }: { locale: Locale }) {
+export default async function getTripsPageData({ locale }: { locale: Locale }) {
   try {
     const data = await customFetch({
-      pathname: "faq-page",
+      pathname: "trips-page",
       query: {
         locale,
         populate: {
-          faqsList: "*",
           SEO: "*",
         },
         fields: ["id", "locale"],
       },
-      tags: ["FAQ"],
     });
 
-    const result = faqsPageSchema.safeParse(data);
+    const result = TripsPageSchema.safeParse(data);
     if (!result.success) {
       // const errorMessage = JSON.stringify(result.error, null, 2);
-      throw new Error(`Faq page data validation failed please call service`);
+      throw new Error(`trips page data validation failed please call service`);
     }
-    return result.data;
+    return data;
   } catch (error) {
     console.log(error);
     throw error;

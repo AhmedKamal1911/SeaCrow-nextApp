@@ -52,6 +52,12 @@ export const metaSchema = z.object({
   pagination: paginationSchema,
 });
 
+export const SEOSchema = z.object({
+  id: z.number(),
+  title: z.string(),
+  description: z.string(),
+});
+
 export const questionItemSchema = z.object({
   id: z.number(),
   question: z.string(),

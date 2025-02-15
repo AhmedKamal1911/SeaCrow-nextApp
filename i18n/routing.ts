@@ -1,10 +1,15 @@
 import { defineRouting } from "next-intl/routing";
 import { createNavigation } from "next-intl/navigation";
-
+import { locales } from "@/lib/data";
+export const TRIP_SLUG_ALIAS = {
+  en: "trips",
+  ar: "رحلات",
+  ru: "поездки",
+} as const;
 export const routing = defineRouting({
   // A list of all locales that are supported
 
-  locales: ["en", "ar", "ru"],
+  locales: locales,
 
   // Used when no locale matches
   defaultLocale: "en",
@@ -26,9 +31,9 @@ export const routing = defineRouting({
       ar: "/رحلات", // Arabic translation
     },
     "/trips/[slug]": {
-      en: "/trips/[slug]",
-      ru: "/поездки/[slug]",
-      ar: "/رحلات/[slug]", // Arabic dynamic route
+      en: `/${TRIP_SLUG_ALIAS.en}/[slug]`,
+      ru: `/${TRIP_SLUG_ALIAS.ru}/[slug]`,
+      ar: `/${TRIP_SLUG_ALIAS.ar}/[slug]`, // Arabic dynamic route
     },
     "/about-us": {
       en: "/about-us",
@@ -37,7 +42,7 @@ export const routing = defineRouting({
     },
   },
 });
-
+console.log(routing.pathnames["/trips/[slug]"].ar);
 // Lightweight wrappers around Next.js' navigation APIs
 // that will consider the routing configuration
 export type Locale = (typeof routing.locales)[number];

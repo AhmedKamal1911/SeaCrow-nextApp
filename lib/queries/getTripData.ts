@@ -9,7 +9,6 @@ export default async function getTripData({
   slug: string;
   locale: Locale;
 }) {
-  // TODO: make param of this function as object that accepts slug and locale
   try {
     const data = await customFetch({
       pathname: "trips",
@@ -46,6 +45,7 @@ export default async function getTripData({
         },
         locale,
       },
+      cache: "force-cache",
     });
 
     const result = tripResponseSchema.safeParse(data);

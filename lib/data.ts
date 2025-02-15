@@ -330,7 +330,7 @@ export const aboutInfoList = [
 ];
 
 export const tripsTypes = ["activities", "sea", "safari", "all"] as const;
-export const locales = { en: "en", ar: "ar", ru: "ru" };
+export const locales = ["en", "ar", "ru"] as const;
 
 // Map of icon names to their respective components
 export const iconMap: Record<

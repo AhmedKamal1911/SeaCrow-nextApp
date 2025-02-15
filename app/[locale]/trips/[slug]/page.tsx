@@ -1,4 +1,4 @@
-import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import TripBanner from "./components/trip-banner";
 import TripNavigation from "./components/trip-navigation";
 
@@ -43,23 +43,34 @@ export async function generateStaticParams() {
   );
 }
 
+export async function generateMetadata({ params }: Props) {
+  const { slug, locale } = await params;
+
+  const response = await getTripData({ locale, slug });
+
+  return {
+    title: `Sea Crow - ${response.slug}`,
+    description: response.name,
+  };
+}
+
 type Props = {
   params: Promise<{ slug: string; locale: Locale }>;
 };
-export const dynamic = "force-static";
+// export const dynamic = "force-static";
 export const revalidate = 3600; // 1 hour
 export default async function Trip({ params }: Props) {
   console.log("trip page rendered page");
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const t = await getTranslations();
-  const locale = await getLocale();
+
   const [tripData, questions] = await Promise.all([
     getTripData({ slug, locale: locale as Locale }),
     getTripQuestionsData({ locale: locale as Locale }),
   ]);
   if (tripData === undefined) notFound();
   const tripImagesList = tripData?.imgs?.data;
-  setRequestLocale(locale);
+  // setRequestLocale(locale);
   const tripType = tripData.type;
   return (
     <div className="min-h-screen py-[72px] bg-light">

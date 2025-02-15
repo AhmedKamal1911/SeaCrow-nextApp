@@ -1,26 +1,31 @@
 import { Locale } from "@/i18n/routing";
 import { customFetch } from "../helpers/custom-fetch";
-import { faqsPageSchema } from "../validations/faq-page-schema";
 
-export default async function getFaqPageData({ locale }: { locale: Locale }) {
+import { AboutusPageSchema } from "../validations/about-us-page-schema";
+
+export default async function getAboutusPageData({
+  locale,
+}: {
+  locale: Locale;
+}) {
   try {
     const data = await customFetch({
-      pathname: "faq-page",
+      pathname: "about-us-page",
       query: {
         locale,
         populate: {
-          faqsList: "*",
           SEO: "*",
         },
         fields: ["id", "locale"],
       },
-      tags: ["FAQ"],
     });
 
-    const result = faqsPageSchema.safeParse(data);
+    const result = AboutusPageSchema.safeParse(data);
     if (!result.success) {
       // const errorMessage = JSON.stringify(result.error, null, 2);
-      throw new Error(`Faq page data validation failed please call service`);
+      throw new Error(
+        `about us page data validation failed please call service`
+      );
     }
     return result.data;
   } catch (error) {

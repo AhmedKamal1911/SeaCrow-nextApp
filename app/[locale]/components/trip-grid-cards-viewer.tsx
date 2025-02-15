@@ -9,6 +9,9 @@ export default async function TripGridCardsViewer() {
   console.log("TripGridCardsViewer Component rendered ");
   const locale = await getLocale();
   const t = await getTranslations();
+  await new Promise((resolve) => {
+    setTimeout(() => resolve("test"), 10000);
+  });
   const tripsSectionData = await getTripsSectionData(locale as Locale);
   const tripsToShow = tripsSectionData?.data as TripData[];
   return tripsToShow.length >= 1 ? (

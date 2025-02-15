@@ -1,3 +1,4 @@
+"use client";
 import { loadingAnimationData } from "@/assets/animations";
 import Lottie from "lottie-react";
 

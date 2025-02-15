@@ -5,8 +5,24 @@ import getFaqPageData from "@/lib/queries/getFaqPageData";
 import { getLocale, getTranslations } from "next-intl/server";
 import FaqForm from "./components/faq-form";
 import { Locale } from "@/i18n/routing";
+import { locales } from "@/lib/data";
+
 export async function generateStaticParams() {
-  return [{ locale: "en" }, { locale: "ar" }, { locale: "ru" }];
+  return locales.map((locale) => ({ locale }));
+}
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}) {
+  const { locale } = await params;
+
+  const faqPageData = await getFaqPageData({ locale });
+
+  return {
+    title: faqPageData.SEO.title,
+    description: faqPageData.SEO.description,
+  };
 }
 export default async function Faqs() {
   const t = await getTranslations();
