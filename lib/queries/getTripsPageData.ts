@@ -9,10 +9,18 @@ export default async function getTripsPageData({ locale }: { locale: Locale }) {
       query: {
         locale,
         populate: {
-          SEO: "*",
+          SEO: {
+            populate: {
+              openGraph: {
+                populate: ["images"], // Ensure images inside openGraph are populated
+              },
+            },
+          },
         },
         fields: ["id", "locale"],
       },
+      cache: "force-cache",
+      tags: ["tripsPage"],
     });
 
     const result = TripsPageSchema.safeParse(data);
@@ -20,7 +28,7 @@ export default async function getTripsPageData({ locale }: { locale: Locale }) {
       // const errorMessage = JSON.stringify(result.error, null, 2);
       throw new Error(`trips page data validation failed please call service`);
     }
-    return data;
+    return result.data;
   } catch (error) {
     console.log(error);
     throw error;

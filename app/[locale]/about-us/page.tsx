@@ -10,6 +10,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { Locale } from "@/i18n/routing";
 
 import getAboutusPageData from "@/lib/queries/getAboutusPageData";
+import { getStrapiMediaURL } from "@/lib/utils";
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
@@ -22,10 +23,25 @@ export async function generateMetadata({
   const { locale } = await params;
 
   const response = await getAboutusPageData({ locale });
-  console.log(response);
+  const openGraph = response.SEO.openGraph;
+
   return {
     title: response.SEO.title,
     description: response.SEO.description,
+    metadatabase: new URL(process.env.NEXT_PUBLIC_BASE_URL as string),
+    openGraph: {
+      title: openGraph.title,
+      description: openGraph.description,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/${locale}${openGraph.url}`,
+      siteName: openGraph.siteName,
+      images: openGraph.images.data.map((image) => ({
+        url: getStrapiMediaURL(image.url),
+        height: image.height,
+        width: image.width,
+        alt: image.name,
+      })),
+      locale: locale,
+    },
   };
 }
 
@@ -33,7 +49,7 @@ export default async function AboutUs() {
   const t = await getTranslations();
   const locale = await getLocale();
   const whyChooseUsData = await getWhyChooseUsData(locale as Locale);
-  const services = whyChooseUsData.services;
+  const services = whyChooseUsData.services.slice(0, 4);
 
   return (
     <main className="min-h-screen py-36 overflow-hidden">

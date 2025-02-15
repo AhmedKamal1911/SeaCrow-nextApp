@@ -52,12 +52,28 @@ const cairoFont = Cairo({
 });
 // app/[locale]/about-us/page.jsx
 
-// This page will now be pre-rendered for these 3 locales
-export const metadata: Metadata = {
-  title: "Sea Crow - Discover the Best of Hurghada, Red Sea",
-  description:
-    "Explore breathtaking Red Sea adventures in Hurghada with Sea Crow. From diving and snorkeling to luxury cruises and desert safaris, experience the best of Egypt's coastal paradise.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}) {
+  const { locale } = await params;
+
+  return {
+    title: "Sea Crow - Discover the Best of Hurghada, Red Sea",
+    description:
+      "Explore breathtaking Red Sea adventures in Hurghada with Sea Crow. From diving and snorkeling to luxury cruises and desert safaris, experience the best of Egypt's coastal paradise.",
+    metadatabase: process.env.NEXT_PUBLIC_BASE_URL,
+    openGraph: {
+      title: "Sea Crow - Discover the Best of Hurghada, Red Sea",
+      description:
+        "Explore breathtaking Red Sea adventures in Hurghada with Sea Crow. From diving and snorkeling to luxury cruises and desert safaris, experience the best of Egypt's coastal paradise.",
+      url: process.env.NEXT_PUBLIC_BASE_URL,
+      siteName: "SeaCrow",
+      locale: locale,
+    },
+  };
+}
 export default async function RootLayout({
   children,
   params,

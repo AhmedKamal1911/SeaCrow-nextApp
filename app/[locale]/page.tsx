@@ -15,6 +15,7 @@ import { Locale } from "@/i18n/routing";
 import { locales } from "@/lib/data";
 import getHomePageData from "@/lib/queries/getHomePageData";
 import GridSkeletonLoader from "@/components/common/grid-skeleton-loader";
+import { getStrapiMediaURL } from "@/lib/utils";
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -28,10 +29,25 @@ export async function generateMetadata({
   const { locale } = await params;
 
   const response = await getHomePageData({ locale });
+  const openGraph = response.SEO.openGraph;
 
   return {
     title: response.SEO.title,
     description: response.SEO.description,
+    metadatabase: new URL(process.env.NEXT_PUBLIC_BASE_URL as string),
+    openGraph: {
+      title: openGraph.title,
+      description: openGraph.description,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/${locale}${openGraph.url}`,
+      siteName: openGraph.siteName,
+      images: openGraph.images.data.map((image) => ({
+        url: getStrapiMediaURL(image.url),
+        height: image.height,
+        width: image.width,
+        alt: image.name,
+      })),
+      locale: locale,
+    },
   };
 }
 
@@ -50,7 +66,7 @@ export default async function Home({
       getIntroSectionData(locale),
       getWhyChooseUsData(locale),
     ]);
-  console.log("home page rendered page");
+
   return (
     <main>
       <HeroSection data={heroSectionData} />

@@ -9,15 +9,24 @@ export default async function getHomePageData({ locale }: { locale: Locale }) {
       query: {
         locale,
         populate: {
-          SEO: "*",
+          SEO: {
+            populate: {
+              openGraph: {
+                populate: ["images"], // Ensure images inside openGraph are populated
+              },
+            },
+          },
         },
         fields: ["id", "locale"],
       },
+      cache: "force-cache",
+      tags: ["home"],
     });
-
+    console.log(data);
     const result = homePageSchema.safeParse(data);
     if (!result.success) {
-      // const errorMessage = JSON.stringify(result.error, null, 2);
+      const errorMessage = JSON.stringify(result.error, null, 2);
+      console.log(errorMessage);
       throw new Error(`home page data validation failed please call service`);
     }
     return result.data;

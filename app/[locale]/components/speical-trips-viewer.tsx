@@ -8,9 +8,9 @@ import { getLocale, getTranslations } from "next-intl/server";
 export default async function SpecialTripsViewer() {
   const locale = await getLocale();
   const t = await getTranslations();
-  await new Promise((resolve) => {
-    setTimeout(() => resolve("test"), 20000);
-  });
+  // await new Promise((resolve) => {
+  //   setTimeout(() => resolve("test"), 20000);
+  // });
   const specialOffersData = await getSpeicalOffersData(locale as Locale);
   const specialTripsListLength = specialOffersData.data.length;
 

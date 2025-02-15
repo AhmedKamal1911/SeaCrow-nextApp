@@ -14,10 +14,18 @@ export default async function getContactusPageData({
       query: {
         locale,
         populate: {
-          SEO: "*",
+          SEO: {
+            populate: {
+              openGraph: {
+                populate: ["images"], // Ensure images inside openGraph are populated
+              },
+            },
+          },
         },
         fields: ["id", "locale"],
       },
+      cache: "force-cache",
+      tags: ["contact"],
     });
 
     const result = contactUsPageSchema.safeParse(data);

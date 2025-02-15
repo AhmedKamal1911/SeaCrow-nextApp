@@ -56,6 +56,14 @@ export const SEOSchema = z.object({
   id: z.number(),
   title: z.string(),
   description: z.string(),
+  openGraph: z.object({
+    id: z.number(),
+    title: z.string(),
+    description: z.string(),
+    url: z.string(),
+    siteName: z.string(),
+    images: z.object({ data: z.array(imageTypeSchema) }),
+  }),
 });
 
 export const questionItemSchema = z.object({

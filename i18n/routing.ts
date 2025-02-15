@@ -42,7 +42,7 @@ export const routing = defineRouting({
     },
   },
 });
-console.log(routing.pathnames["/trips/[slug]"].ar);
+
 // Lightweight wrappers around Next.js' navigation APIs
 // that will consider the routing configuration
 export type Locale = (typeof routing.locales)[number];

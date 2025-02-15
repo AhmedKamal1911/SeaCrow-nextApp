@@ -10,7 +10,13 @@ export default async function getFaqPageData({ locale }: { locale: Locale }) {
         locale,
         populate: {
           faqsList: "*",
-          SEO: "*",
+          SEO: {
+            populate: {
+              openGraph: {
+                populate: ["images"], // Ensure images inside openGraph are populated
+              },
+            },
+          },
         },
         fields: ["id", "locale"],
       },

@@ -36,7 +36,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import CustomFormField from "@/components/common/custom-form-field";
 import FormSubmitButton from "@/components/common/form-submit-button";
 const siteKey = process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY as string;
-console.log(siteKey);
+
 export default function BookTripForm({ tripSlug }: { tripSlug: string }) {
   const t = useTranslations();
   const formRef = useRef(null);

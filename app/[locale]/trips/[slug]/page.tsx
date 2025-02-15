@@ -23,6 +23,7 @@ import BookTripForm from "./components/book-trip-form";
 import getTripQuestionsData from "@/lib/queries/getTripQuestionsData";
 import { Locale, routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
+import { getStrapiMediaURL } from "@/lib/utils";
 
 export async function generateStaticParams() {
   const response = await fetch(
@@ -34,7 +35,7 @@ export async function generateStaticParams() {
     }
   );
   const data = await response.json();
-
+  console.log(data.data[0].attributes.updatedAt);
   return data.data.flatMap((trip) =>
     routing.locales.map((locale) => ({
       slug: trip.attributes.slug,
@@ -51,6 +52,20 @@ export async function generateMetadata({ params }: Props) {
   return {
     title: `Sea Crow - ${response.slug}`,
     description: response.name,
+    metadatabase: new URL(process.env.NEXT_PUBLIC_BASE_URL as string),
+    openGraph: {
+      title: `Sea Crow - ${response.slug}`,
+      description: response.name,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/${locale}/trips/${response.slug}`,
+      siteName: "SeaCrow",
+      images: response.imgs.data.map((image) => ({
+        url: getStrapiMediaURL(image.url),
+        height: image.height,
+        width: image.width,
+        alt: image.name,
+      })),
+      locale: locale,
+    },
   };
 }
 
@@ -60,7 +75,6 @@ type Props = {
 // export const dynamic = "force-static";
 export const revalidate = 3600; // 1 hour
 export default async function Trip({ params }: Props) {
-  console.log("trip page rendered page");
   const { slug, locale } = await params;
   const t = await getTranslations();
 

@@ -7,14 +7,17 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   const token = (await headers()).get("Authorization");
-  console.log({ token: token });
+
   if (token !== process.env.REVALIDATE_TOKEN) {
     return NextResponse.json({ message: "invalid api token" }, { status: 401 });
   }
   const reqBody = await req.json();
   const strapiModel = reqBody.model as StrapiModel;
   console.log({ strapiModel, cacheKey: CACHE_KEY_MODEL_MAP[strapiModel] });
-  revalidateTag(CACHE_KEY_MODEL_MAP[strapiModel]);
+  const revalidatedTag = CACHE_KEY_MODEL_MAP[strapiModel];
+  if (revalidatedTag) {
+    revalidateTag(revalidatedTag);
+  }
   if (strapiModel === "trip") {
     const changedEntrySlug = reqBody.entry.slug as string;
     const changedEntryLocale = reqBody.entry.locale as Locale;

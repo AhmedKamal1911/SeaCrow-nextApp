@@ -11,4 +11,8 @@ export const CACHE_KEY_MODEL_MAP = {
   "intro-section": "Intro",
   "trip-question": "Questions",
   "why-us-section": "WhyUs",
+  "home-page": "home",
+  "about-us-page": "about",
+  "contact-us-page": "contact",
+  "trips-page": "tripsPage",
 } as const;

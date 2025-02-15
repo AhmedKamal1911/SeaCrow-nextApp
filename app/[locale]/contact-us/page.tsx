@@ -7,6 +7,7 @@ import ContactForm from "./components/contact-form";
 import { locales } from "@/lib/data";
 import getContactusPageData from "@/lib/queries/getContactusPageData";
 import { Locale } from "@/i18n/routing";
+import { getStrapiMediaURL } from "@/lib/utils";
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
@@ -19,10 +20,24 @@ export async function generateMetadata({
   const { locale } = await params;
 
   const response = await getContactusPageData({ locale });
-
+  const openGraph = response.SEO.openGraph;
   return {
     title: response.SEO.title,
     description: response.SEO.description,
+    metadatabase: new URL(process.env.NEXT_PUBLIC_BASE_URL as string),
+    openGraph: {
+      title: openGraph.title,
+      description: openGraph.description,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/${locale}${openGraph.url}`,
+      siteName: openGraph.siteName,
+      images: openGraph.images.data.map((image) => ({
+        url: getStrapiMediaURL(image.url),
+        height: image.height,
+        width: image.width,
+        alt: image.name,
+      })),
+      locale: locale,
+    },
   };
 }
 export default async function ContactUs() {
@@ -38,6 +53,7 @@ export default async function ContactUs() {
         <div className="flex flex-col items-stretch lg:flex-row bg-white rounded-xl min-h-[934px]">
           <div className="flex-1">
             <Image
+              priority
               src={"/images/slide-1.jpg"}
               alt=""
               width={500}

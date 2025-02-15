@@ -14,10 +14,18 @@ export default async function getAboutusPageData({
       query: {
         locale,
         populate: {
-          SEO: "*",
+          SEO: {
+            populate: {
+              openGraph: {
+                populate: ["images"], // Ensure images inside openGraph are populated
+              },
+            },
+          },
         },
         fields: ["id", "locale"],
       },
+      cache: "force-cache",
+      tags: ["about"],
     });
 
     const result = AboutusPageSchema.safeParse(data);
