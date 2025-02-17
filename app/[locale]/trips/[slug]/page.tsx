@@ -66,9 +66,7 @@ type Props = {
   params: Promise<{ slug: string; locale: Locale }>;
 };
 // export const dynamic = "force-static";
-export const revalidate = Number(
-  process.env.NEXT_PUBLIC_REVALIDATE_CACHE_DURATION
-);
+export const revalidate = 259200;
 export default async function Trip({ params }: Props) {
   const { slug, locale } = await params;
   const t = await getTranslations();
