@@ -1,19 +1,78 @@
-import { customFetch } from "../helpers/custom-fetch";
-import { Trip } from "../types/trips";
+import { Locale } from "@/i18n/routing";
 
-export async function getTripsSectionData(typeName: string) {
-  const data: Trip[] = await customFetch("why-us-section", {
-    populate: "*",
-    ...(typeName !== "all"
-      ? {
-          filters: {
-            type: {
-              $eq: typeName,
-            },
-          },
-        }
-      : {}),
-  });
-  console.log({ data });
-  return data;
+import { tripsResponseSchema } from "../validations/trips-schema";
+import { flattenAttributes } from "../utils";
+
+import { customFetch } from "../helpers/custom-fetch";
+export async function getTripsSectionData(locale: Locale) {
+  try {
+    const data = await customFetch({
+      pathname: "trips",
+      query: {
+        populate: {
+          imgs: "*", // Populate all fields inside imgs
+        },
+        fields: [
+          "id",
+          "offer",
+          "adultPrice",
+          "locale",
+          "name",
+          "time",
+          "slug",
+          "type",
+        ],
+        "pagination[pageSize]": 4,
+        locale,
+      },
+      // tags: ["Trip"],
+    });
+    const result = tripsResponseSchema.safeParse(flattenAttributes(data));
+    return result.data;
+    // const currentLocale = await getCurrentLocale();
+    // const response = await fetch(
+    //   `${process.env.NEXT_PUBLIC_STRAPI_BASE_URL}/api/trips?${qs.stringify({
+    //     populate: {
+    //       imgs: "*", // Populate all fields inside imgs
+    //     },
+    //     fields: [
+    //       "id",
+    //       "offer",
+    //       "adultPrice",
+    //       "locale",
+    //       "name",
+    //       "time",
+    //       "slug",
+    //       "type",
+    //     ],
+    //     "pagination[pageSize]": 4,
+    //     locale,
+    //   })}`,
+    //   {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   }
+    // );
+
+    // if (!response.ok && response.status === 404) {
+    //   return undefined;
+    // }
+    // const data = await response.json();
+
+    // const result = tripsResponseSchema.safeParse(flattenAttributes(data));
+
+    // if (!result.success) {
+    //   // const errorMessage = JSON.stringify(result.error.message, null, 2);
+    //   console.log(result.error);
+    //   throw new Error(
+    //     `trips Section data validation failed please call service`
+    //   );
+    // }
+
+    // return result.data;
+  } catch (error) {
+    // Optional: Return fallback data or re-throw
+    throw error; // Remove this if you want to suppress the error
+  }
 }

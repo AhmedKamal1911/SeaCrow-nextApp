@@ -16,9 +16,9 @@ const config = {
           "linear-gradient(180deg, rgba(86, 97, 108, 0) 0%, rgba(33, 52, 69, 0.7) 100%)",
       },
       fontFamily: {
-        logoFont: "Audiowide",
-        signature: "Playwrite CO",
-        mainFont: "Bebas Neue",
+        logoFont: ["var(--font-audio-wide)"],
+        signature: ["var(--font-playwrite-co)"],
+        mainFont: ["var(--font-bebas-neue)"],
       },
       boxShadow: {
         lighter:
@@ -132,6 +132,10 @@ const config = {
             transform: "translateX(100%)",
           },
         },
+        "slide-left": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
         "bouncing-left-right": {
           "0%": {
             transform: "translateX(10px)",
@@ -174,6 +178,7 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
         "slide-in": "slide-in 0.2s ease-out",
         "slide-out": "slide-out 0.1s ease-in",
+        "slide-left": "slide-left 0.3s ease-in ",
         "bouncing-left-right":
           "bouncing-left-right 2s linear infinite alternate",
         smoothScale: "smoothScale 25s linear infinite alternate",

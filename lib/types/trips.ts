@@ -1,79 +1,15 @@
-import { ImageType } from "./shared";
+import { z } from "zod";
+import { imageTypeSchema } from "../validations/shared";
 
-type Highlight = {
-  id: number;
-  name: string;
-};
+import {
+  tripDataSchema,
+  tripsResponseSchema,
+} from "../validations/trips-schema";
+import { tripItem, tripSchema } from "../validations/trip-schema";
 
-type TourPlan = {
-  id: number;
-  name: string;
-};
-
-type IncludedService = {
-  id: number;
-  name: string;
-};
-
-type NotIncluded = {
-  id: number;
-  name: string;
-};
-
-type DontForget = {
-  id: number;
-  name: string;
-};
-
-type Localization = {
-  id: number;
-  title: string;
-  time: string;
-  departureTime: string;
-  tripDays: string;
-  returnTime: string;
-  maxGuests: number;
-  tourFrom: string;
-  desc: string;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-  offer: number;
-  adultPrice: number;
-  childPrice: number;
-  type: string;
-  locale: string;
-  slug: string;
-};
-
-export type Trip = {
-  id: number;
-  title: string;
-  time: string;
-  departureTime: string;
-  tripDays: string;
-  returnTime: string;
-  maxGuests: number;
-  tourFrom: string;
-  desc: string;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-  offer: number;
-  adultPrice: number;
-  childPrice: number;
-  type: string;
-  locale: string;
-  slug: string;
-  imgs: {
-    data: ImageType[];
-  };
-  highlights: Highlight[];
-  tourPlan: TourPlan[];
-  includedServices: IncludedService[];
-  notIncluded: NotIncluded[];
-  dontForget: DontForget[];
-  localizations: {
-    data: Localization[];
-  };
-};
+// TypeScript types
+export type TripsResponse = z.infer<typeof tripsResponseSchema>;
+export type RuleType = z.infer<typeof tripItem>;
+export type ImageType = z.infer<typeof imageTypeSchema>;
+export type TripData = z.infer<typeof tripDataSchema>;
+export type TripDetails = z.infer<typeof tripSchema>;

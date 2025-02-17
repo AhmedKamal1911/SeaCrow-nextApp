@@ -1,9 +1,5 @@
 "use client";
 
-// import { useLanguage } from "@/contexts/LanguageProvider";
-
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Portal } from "@radix-ui/react-portal";
 import Image from "next/image";
@@ -17,33 +13,26 @@ import {
 } from "../ui/select";
 import { languages } from "@/lib/data";
 import { Menu, X } from "lucide-react";
-import useMediaQuery from "@/hooks/use-media-query";
 
-export type NavbarData = {
-  id: number;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-  logoText: string;
-  locale: string;
-  navLinks: {
-    id: number;
-    text: string;
-    url: string;
-    isExternal: boolean;
-  }[];
-  meta: Record<string, unknown>;
-};
+import clsx from "clsx";
+
+import {
+  useRouter,
+  usePathname as useI18nPathname,
+  Link,
+} from "@/i18n/routing";
+import { useLocale } from "next-intl";
+
+import { HeaderDataSchemaTypes } from "@/lib/validations/header-schema";
+import { useParams } from "next/navigation";
+
 type Props = {
-  data: NavbarData;
+  data: HeaderDataSchemaTypes;
 };
 
 export default function Header({ data }: Props) {
-  const isMatched = useMediaQuery("(max-width: 1280px)");
-  // FIXME:Fix aside in media query
-  // const isMatched = true;
+  const pathname = useI18nPathname();
 
-  const pathname = usePathname();
   const isHomepage = pathname === "/";
   const ref = useRef(null);
   const [isAnimateHeader, setIsAnimateHeader] = useState(false);
@@ -74,9 +63,11 @@ export default function Header({ data }: Props) {
     <>
       <div ref={ref} />
       <header
-        className={cn(
-          isAnimateHeader && "animate-fadeDown bg-black",
-          !isHomepage && "bg-black",
+        className={clsx(
+          {
+            "animate-fadeDown bg-black": isAnimateHeader,
+            "bg-black": !isHomepage,
+          },
           "fixed transition-all top-0 start-0 end-0 z-[999] py-4 flex items-center"
         )}
       >
@@ -84,21 +75,19 @@ export default function Header({ data }: Props) {
           <div className="flex justify-between items-center ">
             <div>
               <Link href="/">
-                <h2 className="text-2xl sm:text-3xl text-white font-logoFont uppercase">
+                <h1 className="text-2xl sm:text-3xl text-white font-logoFont uppercase">
                   {logo ?? "SeaCrow"}
-                </h2>
+                </h1>
               </Link>
             </div>
-            <div className="flex gap-16 items-center">
-              {isMatched ? (
-                <AsideDrawer navLinks={data?.navLinks} />
-              ) : (
-                <>
-                  <NavLinks navLinks={data?.navLinks} />
-                  {/* <LanguageSelectMenu /> */}
-                </>
-              )}
-            </div>
+            <nav>
+              <AsideDrawer navLinks={data?.navLinks} />
+
+              <nav className="flex gap-16 items-center nav-container">
+                <NavLinks navLinks={data?.navLinks} />
+                <LanguageSelectMenu />
+              </nav>
+            </nav>
           </div>
         </div>
       </header>
@@ -106,7 +95,11 @@ export default function Header({ data }: Props) {
   );
 }
 
-function AsideDrawer({ navLinks }: { navLinks: NavbarData["navLinks"] }) {
+function AsideDrawer({
+  navLinks,
+}: {
+  navLinks: HeaderDataSchemaTypes["navLinks"];
+}) {
   const [showDrawer, setShowDrawer] = useState(false);
   const [isAnimateDrawerLinks, setIsAnimateDrawerLinks] = useState(false);
 
@@ -128,9 +121,10 @@ function AsideDrawer({ navLinks }: { navLinks: NavbarData["navLinks"] }) {
     };
   }, [showDrawer]);
   return (
-    <>
+    <div className="aside-drawer">
       <button onClick={toggleShowAside}>
         <Menu className="text-white size-10" />
+        <span className="sr-only">Toggle menu</span>
       </button>
       <Portal asChild>
         <aside
@@ -141,6 +135,7 @@ function AsideDrawer({ navLinks }: { navLinks: NavbarData["navLinks"] }) {
           <button
             onClick={toggleShowAside}
             className="absolute end-6 top-4 rounded-full w-[40px] h-[40px] z-[999]"
+            aria-label="Close menu"
           >
             <X className="text-white size-12" />
           </button>
@@ -150,23 +145,23 @@ function AsideDrawer({ navLinks }: { navLinks: NavbarData["navLinks"] }) {
                 navLinks={navLinks}
                 disableInitialAnimation
                 className={cn(
-                  "flex-col transition-transform duration-1000 items-center mb-5",
+                  "flex-col transition-transform duration-700 items-center mb-5",
                   "-translate-y-full",
                   isAnimateDrawerLinks && "translate-y-0"
                 )}
               />
             </div>
-            {/* <LanguageSelectMenu className="mt-3 mx-auto" /> */}
+            <LanguageSelectMenu className="mt-3 mx-auto" />
           </div>
         </aside>
       </Portal>
-    </>
+    </div>
   );
 }
 type NavLinksProps = {
   className?: string;
   disableInitialAnimation?: boolean;
-  navLinks: NavbarData["navLinks"];
+  navLinks: HeaderDataSchemaTypes["navLinks"];
 };
 function NavLinks({
   className,
@@ -197,27 +192,26 @@ function NavLinks({
 }
 
 function LanguageSelectMenu({ className }: { className?: string }) {
-  const { selectedLanguage, onLanguageChange } = useLanguage();
+  const langLocale = useLocale();
+  const router = useRouter();
+  const pathname = useI18nPathname();
+  const params = useParams();
+  function onLanguageChange(langCode: string) {
+    // @ts-expect-error -- TypeScript will validate that only known `params`
+    // are used in combination with a given `pathname`. Since the two will
+    // always match for the current route, we can skip runtime checks.
+    router.replace({ pathname, params }, { locale: langCode });
+
+    // router.replace({ pathname }, { locale: langCode });
+  }
 
   return (
-    <Select onValueChange={onLanguageChange}>
+    <Select value={langLocale} onValueChange={onLanguageChange}>
       <SelectTrigger
+        aria-label="Select language"
         className={cn("text-[17px] text-white w-[120px]", className)}
       >
-        <SelectValue
-          placeholder={
-            <div className="flex gap-2 items-center">
-              {selectedLanguage?.languageName}
-              <Image
-                height={28}
-                width={28}
-                alt={selectedLanguage?.countryName ?? "flag"}
-                className="h-7 w-7 mr-2"
-                src={`https://flagsapi.com/${selectedLanguage?.countryName}/flat/64.png`}
-              />
-            </div>
-          }
-        />
+        <SelectValue />
       </SelectTrigger>
       <SelectContent
         ref={(ref) => {
@@ -229,20 +223,22 @@ function LanguageSelectMenu({ className }: { className?: string }) {
         {languages.map((language, i) => (
           <SelectItem
             key={i}
-            value={language.countryName}
-            className={`text-[17px] cursor-pointer hover:bg-[#ebeaea] transition-all capitalize w-full ${
-              language.countryName === selectedLanguage?.countryName
-                ? "bg-[#acacad]"
-                : ""
-            } mb-1`}
+            value={language.langCode}
+            className={clsx(
+              {
+                "bg-[#acacad]": language.langCode === langLocale,
+              },
+              `text-[17px] cursor-pointer hover:!bg-[#c9c8c8] transition-all uppercase w-full  mb-1`
+            )}
           >
-            {language.languageName}
+            {language.langCode === langLocale}
+            {language.langCode}
             {
               <Image
                 width={18}
                 height={18}
                 src={`https://flagsapi.com/${language.countryName}/flat/64.png`}
-                alt="flag"
+                alt="Country flag"
               />
             }
           </SelectItem>

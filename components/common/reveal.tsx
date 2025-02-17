@@ -1,3 +1,4 @@
+"use client";
 import { cn } from "@/lib/utils";
 import { motion, useAnimation, useInView } from "framer-motion";
 import { ReactNode, useEffect, useRef } from "react";
@@ -16,7 +17,7 @@ function Reveal({ children, className }: Props) {
       mainControls.start("visible");
       slideControls.start("visible");
     }
-  }, [isInView]);
+  }, [isInView, mainControls, slideControls]);
   return (
     <div
       ref={ref}
@@ -41,7 +42,7 @@ function Reveal({ children, className }: Props) {
         initial="hidden"
         animate={slideControls}
         transition={{ duration: 0.4, ease: "easeInOut" }}
-        className="absolute inset-0 bg-main z-20"
+        className="absolute inset-0 bg-main z-[20px]"
       />
     </div>
   );

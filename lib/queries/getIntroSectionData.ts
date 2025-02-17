@@ -1,17 +1,40 @@
-import { IntroSectionData } from "@/app/components/sections/intro-section";
+import { Locale } from "@/i18n/routing";
 import { customFetch } from "../helpers/custom-fetch";
+import { introSectionSchemaData } from "../validations/intro-section-schema";
 
-export async function getIntroSectionData() {
-  const data: IntroSectionData = await customFetch("intro-section", {
-    populate: {
-      featuresBox: {
+export async function getIntroSectionData(locale: Locale) {
+  try {
+    const response = await customFetch({
+      pathname: "intro-section",
+      query: {
         populate: {
-          icon: true,
-          travelImg: true,
+          featuresBox: {
+            populate: {
+              icon: true,
+              travelImg: true,
+            },
+          },
         },
+        locale,
       },
-    },
-  });
-  console.log({ data });
-  return data;
+      tags: ["Intro"],
+    });
+
+    const result = introSectionSchemaData.safeParse(response);
+    if (!result.success) {
+      // const errorMessage = JSON.stringify(
+      //   result.error.flatten().fieldErrors,
+      //   null,
+      //   2
+      // );
+      throw new Error(
+        `IntroSection data validation failed please call service`
+      );
+    }
+
+    return result.data;
+  } catch (error) {
+    // Optional: Return fallback data or re-throw
+    throw error; // Remove this if you want to suppress the error
+  }
 }

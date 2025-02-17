@@ -1,17 +1,19 @@
 import { motion } from "framer-motion";
 
-import { useTranslation } from "react-i18next";
-import Link from "next/link";
-import { Trip } from "@/lib/types/trips";
 import { getStrapiMediaURL } from "@/lib/utils";
+import { useTranslations } from "next-intl";
+
+import { Link } from "@/i18n/routing";
+import { TripData } from "@/lib/types/trips";
+
 type Props = {
-  trip: Trip;
+  trip: TripData;
   i: number;
   inView: boolean;
 };
 export default function TripCard({ trip, i, inView }: Props) {
   const imgUrl = getStrapiMediaURL(trip?.imgs.data[0]?.url);
-  const { t } = useTranslation("global");
+  const t = useTranslations();
 
   return (
     <motion.div
@@ -27,7 +29,11 @@ export default function TripCard({ trip, i, inView }: Props) {
       className="h-full"
     >
       <Link
-        href={`/trips/${trip.slug}`}
+        href={{
+          pathname: "/trips/[slug]",
+          params: { slug: trip.slug },
+        }}
+        prefetch={false}
         className="relative overflow-hidden select-none block group h-full bg-cover bg-[80%] after:absolute after:inset-0 after:bg-[#12131233] before:absolute before:inset-0 before:opacity-0 hover:before:bg-custom-gradient hover:before:opacity-[1] before:transition-all before:duration-700"
         style={{
           backgroundImage: `url(${imgUrl})`,
@@ -43,12 +49,12 @@ export default function TripCard({ trip, i, inView }: Props) {
           {i + 1 < 10 ? `0${i + 1}` : i + 1}
         </span>
         <div className="z-50 absolute start-[1em] bottom-[1em] end-[1em] ">
-          <h3 className="text-2xl mb-2 sm:mb-0 absolute bottom-[110px]  group-hover:bottom-[180px] sm:bottom-[110px]  sm:group-hover:bottom-[180px] md:bottom-[120px]  md:group-hover:bottom-[180px]  lg:bottom-[120px]lg:group-hover:bottom-[180px] transition-all duration-300 delay-[60ms] text-white">
+          <span className="text-2xl mb-2 sm:mb-0 absolute bottom-[110px]  group-hover:bottom-[180px] sm:bottom-[110px]  sm:group-hover:bottom-[180px] md:bottom-[120px]  md:group-hover:bottom-[180px]  lg:bottom-[120px]lg:group-hover:bottom-[180px] transition-all duration-300 delay-[60ms] text-white">
             {trip.adultPrice}$/ {t(`tripInfo.tripTime.${trip.time}`)}
-          </h3>
-          <h4 className="absolute bottom-[30px] start-0 end-0 text-white text-3xl my-2 line-clamp-2 group-hover:bottom-[80px] transition-all duration-300 delay-[50ms] ">
-            {trip.title}
-          </h4>
+          </span>
+          <span className="absolute bottom-[30px] start-0 end-0 text-white text-3xl my-2 line-clamp-2 group-hover:bottom-[80px] transition-all duration-300 delay-[50ms] ">
+            {trip.name}
+          </span>
           <button className="absolute py-2 px-5 bg-main text-white bottom-[-50px] opacity-0 group-hover:bottom-[30px] group-hover:opacity-[1] transition-all  duration-500 delay-[30ms]">
             {t("tripInfo.exploreButtonLabel")}
           </button>

@@ -1,49 +1,20 @@
-import { fetchFooterData } from "@/services/trips/queries";
+"use client";
 
-import useQueryWithLocale from "@/hooks/useQueryWithLocale";
-import { useTranslation } from "react-i18next";
-import Link from "next/link";
 import Image from "next/image";
 import { Button } from "../ui/button";
+import { useTranslations } from "next-intl";
+import { FooterDataSchemaTypes } from "@/lib/validations/footer-schema";
+
 import { ChevronsLeft, ChevronsRight } from "lucide-react";
+import { Link } from "@/i18n/routing";
+import useIsRTL from "@/hooks/use-is-rtl";
+
 type Props = {
-  data: {
-    id: number;
-    createdAt: string;
-    updatedAt: string;
-    publishedAt: string;
-    logoText: string;
-    locale: string;
-    navLinks: NavLinksData;
-    contactLinks: ContactLinksData;
-    meta: Record<string, unknown>;
-  };
+  data: FooterDataSchemaTypes;
 };
-export type FooterData = {
-  id: number;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-  logoText: string;
-  locale: string;
-  navLinks: NavLinksData;
-  contactLinks: ContactLinksData;
-  meta: Record<string, unknown>;
-};
-type ContactLinksData = {
-  id: number;
-  url: string;
-  text: string;
-  type: "mail" | "tel"; // Restrict to specific values
-}[];
-type NavLinksData = {
-  id: number;
-  text: string;
-  url: string;
-  isExternal: boolean;
-}[];
+
 export default function Footer({ data }: Props) {
-  const { t } = useTranslation("global");
+  const t = useTranslations();
 
   const linksList = data.navLinks;
   const contactLinks = data.contactLinks;
@@ -53,7 +24,7 @@ export default function Footer({ data }: Props) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 py-16">
           <div
             className="absolute w-[494px] h-[465px] start-[-100px] top-0 bottom-0 "
-            style={{ backgroundImage: `url("/images/wave-lines.png")` }}
+            style={{ backgroundImage: `url("/images/Uneven-waves.png")` }}
           />
           <div
             className="absolute w-[247px] h-[477px] end-[0px] top-0 bottom-0"
@@ -116,8 +87,8 @@ export default function Footer({ data }: Props) {
             </div>
           </div>
         </div>
-        <div className="relative flex flex-col sm:flex-row justify-between p-5 bg-[#363d5371]  gap-10 rounded-md">
-          <p className="text-main text-xl text-center sm:text-start">
+        <div className="relative text-center  flex flex-col sm:flex-row justify-between p-5 bg-[#363d5371]  gap-10 rounded-md">
+          <p className="text-main text-xl ">
             &copy; {t("footer.copyRightReference")}
           </p>
           <span className="text-white text-xl">
@@ -146,13 +117,13 @@ function FooterSectionHeader({
 }) {
   return (
     <div className="relative">
-      <h3 className="relative text-main text-xl mb-10">
+      <span className="relative text-main text-xl mb-10 block">
         {title}
         <div
           className="absolute w-[30px] h-[9px]"
           style={{ backgroundImage: `url('/images/wave-lines.png')` }}
         />
-      </h3>
+      </span>
       {desc && <p className="text-white lg:w-[270px]">{desc}</p>}
     </div>
   );
@@ -161,14 +132,16 @@ function FooterSectionHeader({
 function DynamicInfoSection({
   infoList,
 }: {
-  infoList: NavLinksData | ContactLinksData;
+  infoList:
+    | FooterDataSchemaTypes["navLinks"]
+    | FooterDataSchemaTypes["contactLinks"];
 }) {
-  const { isRTL } = useLanguage();
+  const isRTL = useIsRTL();
   return (
     <div>
       <ul className="flex flex-col gap-3 z-40 relative">
         {infoList.map((info) => (
-          <li className="flex items-center gap-2" key={id}>
+          <li className="flex items-center gap-2" key={info.id}>
             {isRTL ? (
               <ChevronsLeft className="text-main" />
             ) : (
@@ -180,10 +153,14 @@ function DynamicInfoSection({
                   info.type === "tel"
                     ? "tel:"
                     : info.type === "mail"
-                    ? "mailto:"
-                    : ""
+                      ? "mailto:"
+                      : ""
                 }${info.url}`}
-                // target={info.type === "externalLink" ? "_blank" : ""}
+                target={
+                  info.type === "mail" || info.type === "tel"
+                    ? "_self"
+                    : "_blank"
+                }
                 className="text-[#d3d3d3] text-[18px] hover:text-white transition-all duration-300 relative after:absolute after:bg-main after:rounded-lg after:start-0 after:bottom-0 after:h-[2px] after:w-0 after:transition-all after:duration-500 hover:after:w-full"
               >
                 {info.text}
@@ -204,7 +181,9 @@ function DynamicInfoSection({
 }
 
 function isContactInfo(
-  info: NavLinksData[0] | ContactLinksData[0]
-): info is ContactLinksData[0] {
+  info:
+    | FooterDataSchemaTypes["navLinks"][0]
+    | FooterDataSchemaTypes["contactLinks"][0]
+): info is FooterDataSchemaTypes["contactLinks"][0] {
   return "type" in info && !("isExternal" in info);
 }

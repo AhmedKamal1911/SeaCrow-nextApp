@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import Reveal from "./reveal";
 
 type Props = {
-  subTitle: string;
+  subTitle?: string;
   introText?: string;
   desc?: string;
   className?: string;
@@ -24,14 +24,19 @@ export default function SectionHeader({
   return (
     <div className={cn("space-y-6", className)}>
       <Reveal className={subTitleRevealClassName}>
-        <h5
-          className={cn("text-main text-3xl tracking-wide", subTitleClassName)}
+        <span
+          className={cn(
+            "text-main text-3xl tracking-wide block",
+            subTitleClassName
+          )}
         >
           {subTitle}
-        </h5>
+        </span>
       </Reveal>
       <Reveal className={introTextRevealClassName}>
-        <h3 className="text-black text-3xl lg:text-4xl">{introText}</h3>
+        <span className="text-black text-3xl lg:text-4xl block">
+          {introText}
+        </span>
       </Reveal>
       {desc && (
         <p className={cn("text-grayDesc text-[18px] leading-8", descClassName)}>
