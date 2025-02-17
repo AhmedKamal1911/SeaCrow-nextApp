@@ -10,7 +10,7 @@ export default async function getAllTripsSlugs() {
       fields: ["id", "slug", "updatedAt"],
     },
   });
-  console.dir({ dataFromSlugPage: data }, { depth: null });
+
   const result = z
     .object({
       data: z.array(
