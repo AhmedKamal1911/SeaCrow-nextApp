@@ -24,21 +24,14 @@ import getTripQuestionsData from "@/lib/queries/getTripQuestionsData";
 import { Locale, routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { getStrapiMediaURL } from "@/lib/utils";
+import getAllTripsSlugs from "@/lib/queries/getAllTripsSlugs";
 
 export async function generateStaticParams() {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_BASE_URL}/api/trips?locale=en`,
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
-  const data = await response.json();
-  console.log(data.data[0].attributes.updatedAt);
-  return data.data.flatMap((trip) =>
+  const data = await getAllTripsSlugs();
+  console.log({ responsed: data });
+  return data.flatMap((trip) =>
     routing.locales.map((locale) => ({
-      slug: trip.attributes.slug,
+      slug: trip.slug,
       locale,
     }))
   );
@@ -87,7 +80,7 @@ export default async function Trip({ params }: Props) {
   // setRequestLocale(locale);
   const tripType = tripData.type;
   return (
-    <div className="min-h-screen py-[72px] bg-light">
+    <main className="min-h-screen py-[72px] bg-light">
       <TripBanner
         imgSrc={tripData?.imgs.data[0]?.url}
         title={tripData?.name}
@@ -140,6 +133,6 @@ export default async function Trip({ params }: Props) {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

@@ -13,9 +13,9 @@ export default function RelatedTripsWrapper({ children }: Props) {
   return (
     <InViewContextProvider isInview={inView}>
       <div ref={ref} className="mt-10 flex flex-col gap-3 overflow-hidden">
-        <h2 className="text-3xl text-main mb-10">
+        <span className="text-3xl text-main mb-10 block">
           {t("tripInfo.relatedTripsSubTitle")}
-        </h2>
+        </span>
         {children}
       </div>
     </InViewContextProvider>

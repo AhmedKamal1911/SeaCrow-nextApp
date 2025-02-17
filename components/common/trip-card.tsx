@@ -49,12 +49,12 @@ export default function TripCard({ trip, i, inView }: Props) {
           {i + 1 < 10 ? `0${i + 1}` : i + 1}
         </span>
         <div className="z-50 absolute start-[1em] bottom-[1em] end-[1em] ">
-          <h3 className="text-2xl mb-2 sm:mb-0 absolute bottom-[110px]  group-hover:bottom-[180px] sm:bottom-[110px]  sm:group-hover:bottom-[180px] md:bottom-[120px]  md:group-hover:bottom-[180px]  lg:bottom-[120px]lg:group-hover:bottom-[180px] transition-all duration-300 delay-[60ms] text-white">
+          <span className="text-2xl mb-2 sm:mb-0 absolute bottom-[110px]  group-hover:bottom-[180px] sm:bottom-[110px]  sm:group-hover:bottom-[180px] md:bottom-[120px]  md:group-hover:bottom-[180px]  lg:bottom-[120px]lg:group-hover:bottom-[180px] transition-all duration-300 delay-[60ms] text-white">
             {trip.adultPrice}$/ {t(`tripInfo.tripTime.${trip.time}`)}
-          </h3>
-          <h4 className="absolute bottom-[30px] start-0 end-0 text-white text-3xl my-2 line-clamp-2 group-hover:bottom-[80px] transition-all duration-300 delay-[50ms] ">
+          </span>
+          <span className="absolute bottom-[30px] start-0 end-0 text-white text-3xl my-2 line-clamp-2 group-hover:bottom-[80px] transition-all duration-300 delay-[50ms] ">
             {trip.name}
-          </h4>
+          </span>
           <button className="absolute py-2 px-5 bg-main text-white bottom-[-50px] opacity-0 group-hover:bottom-[30px] group-hover:opacity-[1] transition-all  duration-500 delay-[30ms]">
             {t("tripInfo.exploreButtonLabel")}
           </button>

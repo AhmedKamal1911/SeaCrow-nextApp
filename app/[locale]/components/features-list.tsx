@@ -49,7 +49,7 @@ function FeatureListItem({ feature }: { feature: FeaturesBoxType }) {
       </div>
       <div className="relative flex md:flex-col flex-row gap-7 sm:gap-3 md:gap-0 items-center">
         <div className="z-50">
-          <h5 className="text-xl">{feature.title}</h5>
+          <span className="text-xl block">{feature.title}</span>
           <Link
             className="text-[17px] text-main z-50 hover:text-black transition-colors duration-700 relative after:absolute after:-end-7 after:bottom-1/2 after:w-[0px] after:hover:w-[25px] after:transition-all after:duration-700 after:h-[2px] after:bg-black after:rounded-3xl before:absolute before:-end-7 before:bottom-1/2 before:w-[25px] before:h-[2px] before:bg-main before:rounded-3xl "
             href={feature.url}

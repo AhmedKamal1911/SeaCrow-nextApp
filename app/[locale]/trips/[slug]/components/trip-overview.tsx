@@ -5,9 +5,9 @@ type Props = {
 export default function TripOverview({ desc, title }: Props) {
   return (
     <div className="mb-5">
-      <h3 className="text-3xl text-center sm:text-start sm:text-4xl mb-5">
+      <span className="text-3xl text-center sm:text-start sm:text-4xl mb-5 block">
         {title}
-      </h3>
+      </span>
       {desc && (
         <p className="text-[15px] lg:text-[18px] text-grayDesc leading-relaxed">
           {desc}

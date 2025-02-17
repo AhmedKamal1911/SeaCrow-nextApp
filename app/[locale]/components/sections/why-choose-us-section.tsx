@@ -49,7 +49,7 @@ export default function WhyChooseUsSection({ data }: Props) {
         />
         <div className="mt-16 relative">
           <div>
-            <h2
+            <span
               data-text={t("homePage.whyChooseUsSection.heading")}
               className={clsx(
                 {
@@ -57,11 +57,11 @@ export default function WhyChooseUsSection({ data }: Props) {
                   "max-[350px]:text-[20px] text-[30px] sm:text-5xl lg:text-6xl xl:text-8xl":
                     langCode === "ru",
                 },
-                "stroke-fill font-mainFont w-fit mx-auto whitespace-nowrap mb-5 text-center relative after:content-[attr(data-text)] after:absolute after:inset-0 after:w-0 after:z-[1] after:transition-all after:duration-500 hover:after:w-full after:overflow-hidden"
+                "stroke-fill block font-mainFont w-fit mx-auto whitespace-nowrap mb-5 text-center relative after:content-[attr(data-text)] after:absolute after:inset-0 after:w-0 after:z-[1] after:transition-all after:duration-500 hover:after:w-full after:overflow-hidden"
               )}
             >
               {t("homePage.whyChooseUsSection.heading")}
-            </h2>
+            </span>
             <div className="flex flex-col xl:flex-row lg:items-center">
               <div className="flex-1">
                 <div className="relative hidden xl:block">

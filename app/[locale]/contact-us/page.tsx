@@ -44,7 +44,7 @@ export default async function ContactUs() {
   const t = await getTranslations();
 
   return (
-    <div className="relative min-h-screen py-36 ">
+    <main className="relative min-h-screen py-36 ">
       <div
         style={{ backgroundImage: `url('/images/slide-1.jpg')` }}
         className="absolute inset-0 z-[-1] bg-cover blur-[5px]"
@@ -71,6 +71,6 @@ export default async function ContactUs() {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

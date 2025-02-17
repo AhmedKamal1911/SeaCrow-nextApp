@@ -117,13 +117,13 @@ function FooterSectionHeader({
 }) {
   return (
     <div className="relative">
-      <h3 className="relative text-main text-xl mb-10">
+      <span className="relative text-main text-xl mb-10 block">
         {title}
         <div
           className="absolute w-[30px] h-[9px]"
           style={{ backgroundImage: `url('/images/wave-lines.png')` }}
         />
-      </h3>
+      </span>
       {desc && <p className="text-white lg:w-[270px]">{desc}</p>}
     </div>
   );

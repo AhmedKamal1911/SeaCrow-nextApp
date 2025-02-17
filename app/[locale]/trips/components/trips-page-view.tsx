@@ -63,7 +63,7 @@ export default function TripsPageView() {
     fetchNextPage();
   }, [fetchNextPage, isInterSectedElementInView]);
   return (
-    <div ref={ref} className="min-h-screen py-24">
+    <main ref={ref} className="min-h-screen py-24">
       <div className="container">
         <div className="flex flex-col gap-5 md:gap-0 md:flex-row justify-between">
           <SectionHeader
@@ -72,7 +72,10 @@ export default function TripsPageView() {
             introText={t("tripsPage.introText")}
           />
           <Select value={tripType} onValueChange={onTripValueChange}>
-            <SelectTrigger className="w-[180px] text-[17px]">
+            <SelectTrigger
+              className="w-[180px] text-[17px]"
+              aria-label="Filter Trips Menu"
+            >
               <SelectValue placeholder={t("tripsPage.selectTypeMenu.title")} />
             </SelectTrigger>
             <SelectContent className="bg-white z-[800]">
@@ -128,6 +131,6 @@ export default function TripsPageView() {
           </div>
         )}
       </div>
-    </div>
+    </main>
   );
 }

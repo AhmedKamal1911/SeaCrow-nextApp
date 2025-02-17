@@ -34,7 +34,7 @@ export async function generateMetadata({
   return {
     title: response.SEO.title,
     description: response.SEO.description,
-    metadatabase: new URL(process.env.NEXT_PUBLIC_BASE_URL as string),
+    metadatabase: new URL(process.env.NEXT_PUBLIC_BASE_URL!),
     openGraph: {
       title: openGraph.title,
       description: openGraph.description,

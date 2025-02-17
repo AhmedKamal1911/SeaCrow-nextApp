@@ -24,7 +24,6 @@ export async function customFetch({
   tags,
   cache,
 }: CustomFetchArgs) {
-  // const currentLocale = await getCurrentLocale();
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_STRAPI_BASE_URL}/api/${pathname}?${qs.stringify(
       query

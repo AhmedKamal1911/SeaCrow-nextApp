@@ -27,10 +27,10 @@ export default async function getAboutusPageData({
       cache: "force-cache",
       tags: ["about"],
     });
-
     const result = AboutusPageSchema.safeParse(data);
     if (!result.success) {
       // const errorMessage = JSON.stringify(result.error, null, 2);
+      console.log({ d: result.data, e: result.error });
       throw new Error(
         `about us page data validation failed please call service`
       );

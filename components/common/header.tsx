@@ -75,9 +75,9 @@ export default function Header({ data }: Props) {
           <div className="flex justify-between items-center ">
             <div>
               <Link href="/">
-                <h2 className="text-2xl sm:text-3xl text-white font-logoFont uppercase">
+                <h1 className="text-2xl sm:text-3xl text-white font-logoFont uppercase">
                   {logo ?? "SeaCrow"}
-                </h2>
+                </h1>
               </Link>
             </div>
             <nav>
@@ -124,6 +124,7 @@ function AsideDrawer({
     <div className="aside-drawer">
       <button onClick={toggleShowAside}>
         <Menu className="text-white size-10" />
+        <span className="sr-only">Toggle menu</span>
       </button>
       <Portal asChild>
         <aside
@@ -134,6 +135,7 @@ function AsideDrawer({
           <button
             onClick={toggleShowAside}
             className="absolute end-6 top-4 rounded-full w-[40px] h-[40px] z-[999]"
+            aria-label="Close menu"
           >
             <X className="text-white size-12" />
           </button>
@@ -206,6 +208,7 @@ function LanguageSelectMenu({ className }: { className?: string }) {
   return (
     <Select value={langLocale} onValueChange={onLanguageChange}>
       <SelectTrigger
+        aria-label="Select language"
         className={cn("text-[17px] text-white w-[120px]", className)}
       >
         <SelectValue />

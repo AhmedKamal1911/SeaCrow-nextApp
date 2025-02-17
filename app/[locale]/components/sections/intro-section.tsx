@@ -33,14 +33,14 @@ const IntroSection = ({ data }: Props) => {
               subTitleRevealClassName="mx-auto"
               subTitle={t("homePage.introSection.subTitle")}
               introText={introHeading}
-              introTextRevealClassName="max-lg:mx-auto"
+              introTextRevealClassName="mx-auto"
               desc={introDesc}
             />
             <div className="mt-16 space-y-10">
-              <h3 className="font-signature text-4xl">Seif Haraz</h3>
-              <h6 className="text-xl">
+              <span className="font-signature text-4xl">Seif Haraz</span>
+              <span className="text-xl block">
                 {t("homePage.introSection.managerName")}
-              </h6>
+              </span>
               <span className="text-xl text-grayDesc font-bold  font-mono">
                 {t("homePage.introSection.managerRank")}
               </span>

@@ -10,7 +10,7 @@ export default function HeroSectionHeading({
 }) {
   const langCode = useLocale();
   return (
-    <motion.h1
+    <motion.h2
       variants={{
         hidden: { opacity: 0, y: -75, scale: 0.8 },
         visible: { opacity: 1, y: 0, scale: 1 },
@@ -27,6 +27,6 @@ export default function HeroSectionHeading({
       )}
     >
       {children}
-    </motion.h1>
+    </motion.h2>
   );
 }

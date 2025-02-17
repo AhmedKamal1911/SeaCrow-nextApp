@@ -35,11 +35,11 @@ export default function AboutInfoBox({ aboutInfoList, className }: Props) {
             />
           </div>
           <div className="flex flex-col">
-            <h3 className="self-center flex items-center">
+            <span className="self-center flex items-center">
               <NumberCounter to={info.count} />
 
               <span className="text-main text-6xl">+</span>
-            </h3>
+            </span>
             <span className="text-xl">
               {t(`homePage.whyChooseUsSection.achievementsSection.${i}`)}
             </span>

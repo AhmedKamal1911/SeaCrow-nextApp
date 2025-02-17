@@ -36,6 +36,7 @@ export function CountryComboBox({
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
+          aria-label="Search Country Field"
           variant="outline"
           role="combobox"
           aria-expanded={open}

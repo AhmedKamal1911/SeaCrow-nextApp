@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import "./globals.css";
 import { Bebas_Neue, Cairo, Audiowide, Playwrite_CO } from "next/font/google";
 

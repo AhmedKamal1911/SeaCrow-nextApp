@@ -1,28 +1,24 @@
-import { locales } from "@/lib/data";
+import getAllTripsSlugs from "@/lib/queries/getAllTripsSlugs";
 import { MetadataRoute } from "next";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_BASE_URL}/api/trips?locale=en`,
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
+  const tripsSlugs = await getAllTripsSlugs();
+
+  const tripUrls = tripsSlugs.map(
+    (trip) =>
+      ({
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/en/${trip.slug}`,
+        lastModified: trip.updatedAt,
+        alternates: {
+          languages: {
+            ru: `${process.env.NEXT_PUBLIC_BASE_URL}/ru/trips/${trip.slug}`,
+            ar: `${process.env.NEXT_PUBLIC_BASE_URL}/ar/trips/${trip.slug}`,
+          },
+        },
+        changeFrequency: "weekly",
+        priority: 1,
+      }) as const
   );
-  const data = await response.json();
-  const tripUrls = data.data.map((trip) => ({
-    url: `${process.env.NEXT_PUBLIC_BASE_URL}/en/${trip.attributes.slug}`,
-    lastModified: trip.attributes.updatedAt,
-    alternates: {
-      languages: {
-        ru: `${process.env.NEXT_PUBLIC_BASE_URL}/ru/trips/${trip.attributes.slug}`,
-        ar: `${process.env.NEXT_PUBLIC_BASE_URL}/ar/trips/${trip.attributes.slug}`,
-      },
-    },
-    changeFrequency: "weekly",
-    priority: 1,
-  }));
 
   return [
     {
