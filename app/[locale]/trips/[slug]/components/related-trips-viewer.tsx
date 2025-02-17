@@ -11,9 +11,7 @@ export default async function RelatedTripsViewer({
   tripSlug: string;
 }) {
   const locale = await getLocale();
-  // await new Promise((resolve) => {
-  //   setTimeout(() => resolve("test"), 10000);
-  // });
+
   const relatedTrips = await getRelatedTripsData({
     typeName: tripType,
     slug: tripSlug,

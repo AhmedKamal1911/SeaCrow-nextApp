@@ -14,9 +14,9 @@ export default function ErrorViewer({
         className
       )}
     >
-      <h3 className="font-bold text-4xl font-mainFont sm:text-5xl text-center error-stroke text-red-600">
+      <span className="font-bold text-4xl font-mainFont sm:text-5xl text-center error-stroke text-red-600 block">
         {errorText}
-      </h3>
+      </span>
     </div>
   );
 }

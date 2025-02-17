@@ -28,7 +28,7 @@ import getAllTripsSlugs from "@/lib/queries/getAllTripsSlugs";
 
 export async function generateStaticParams() {
   const data = await getAllTripsSlugs();
-  console.log({ responsed: data });
+
   return data.flatMap((trip) =>
     routing.locales.map((locale) => ({
       slug: trip.slug,

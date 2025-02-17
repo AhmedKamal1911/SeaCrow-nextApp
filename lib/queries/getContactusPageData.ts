@@ -35,7 +35,6 @@ export default async function getContactusPageData({
     }
     return result.data;
   } catch (error) {
-    console.log(error);
     throw error;
   }
 }

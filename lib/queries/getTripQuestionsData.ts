@@ -26,12 +26,13 @@ export default async function getTripQuestionsData({
 
     const result = tripQuestionsSchema.safeParse(data);
     if (!result.success) {
-      const errorMessage = JSON.stringify(result.error, null, 2);
-      throw new Error(`trip questions data validation failed: ${errorMessage}`);
+      // const errorMessage = JSON.stringify(result.error, null, 2);
+      throw new Error(
+        `trip questions data validation failed please call service`
+      );
     }
     return result.data;
   } catch (error) {
-    console.log(error);
     throw error;
   }
 }

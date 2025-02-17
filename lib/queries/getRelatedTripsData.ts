@@ -44,14 +44,13 @@ export default async function getRelatedTripsData({
 
     const result = tripsResponseSchema.safeParse(data);
     if (!result.success) {
-      const errorMessage = JSON.stringify(
-        result.error.flatten().fieldErrors,
-        null,
-        2
-      );
-      console.log(result.error);
+      // const errorMessage = JSON.stringify(
+      //   result.error.flatten().fieldErrors,
+      //   null,
+      //   2
+      // );
       throw new Error(
-        `relatedTrips Section data validation failed: ${errorMessage}`
+        `relatedTrips Section data validation failed please call service`
       );
     }
 

@@ -22,18 +22,18 @@ export async function getIntroSectionData(locale: Locale) {
 
     const result = introSectionSchemaData.safeParse(response);
     if (!result.success) {
-      const errorMessage = JSON.stringify(
-        result.error.flatten().fieldErrors,
-        null,
-        2
+      // const errorMessage = JSON.stringify(
+      //   result.error.flatten().fieldErrors,
+      //   null,
+      //   2
+      // );
+      throw new Error(
+        `IntroSection data validation failed please call service`
       );
-      console.log(result.error.flatten());
-      throw new Error(`IntroSection data validation failed: ${errorMessage}`);
     }
 
     return result.data;
   } catch (error) {
-    console.error("introSection data error:", error);
     // Optional: Return fallback data or re-throw
     throw error; // Remove this if you want to suppress the error
   }

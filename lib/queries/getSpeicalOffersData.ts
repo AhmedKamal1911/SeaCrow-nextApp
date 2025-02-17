@@ -38,7 +38,6 @@ export async function getSpeicalOffersData(locale: Locale) {
       //   null,
       //   2
       // );
-      console.log(result.error.errors);
       throw new Error(
         `SpecialOffers Section data validation failed please Call service`
       );
@@ -46,7 +45,6 @@ export async function getSpeicalOffersData(locale: Locale) {
 
     return result.data;
   } catch (error) {
-    console.error("HeroSection data error:", error);
     // Optional: Return fallback data or re-throw
     throw error; // Remove this if you want to suppress the error
   }

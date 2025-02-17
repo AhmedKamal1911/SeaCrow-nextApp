@@ -22,7 +22,6 @@ export default async function getFaqPageData({ locale }: { locale: Locale }) {
       },
       tags: ["FAQ"],
     });
-    console.log({ faq: data });
     const result = faqsPageSchema.safeParse(data);
     if (!result.success) {
       // const errorMessage = JSON.stringify(result.error, null, 2);
@@ -30,7 +29,6 @@ export default async function getFaqPageData({ locale }: { locale: Locale }) {
     }
     return result.data;
   } catch (error) {
-    console.log(error);
     throw error;
   }
 }

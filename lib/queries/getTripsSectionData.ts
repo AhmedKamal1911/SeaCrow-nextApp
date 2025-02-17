@@ -72,7 +72,6 @@ export async function getTripsSectionData(locale: Locale) {
 
     // return result.data;
   } catch (error) {
-    console.error("trips Section data error:", error);
     // Optional: Return fallback data or re-throw
     throw error; // Remove this if you want to suppress the error
   }

@@ -32,7 +32,6 @@ export default async function signIn(credentials: {
 
     return result.data;
   } catch (error) {
-    console.log({ error });
     throw error;
   }
 }

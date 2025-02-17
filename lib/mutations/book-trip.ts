@@ -10,7 +10,6 @@ export default async function bookTrip(data: TripTicket) {
       body: { data },
     });
   } catch (error) {
-    console.log({ error });
     throw error;
   }
 }

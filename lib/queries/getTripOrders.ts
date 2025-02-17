@@ -10,9 +10,8 @@ export async function getTripOrders(token: string) {
 
     const result = ordersTicketsSchema.safeParse(data);
     if (!result.success) {
-      const errorMessage = JSON.stringify(result.error.name, null, 2);
-      console.log(result.error);
-      throw new Error(`Orders Tickets data Error: ${errorMessage}`);
+      // const errorMessage = JSON.stringify(result.error.name, null, 2);
+      throw new Error(`Orders Tickets data Error please call service`);
     }
 
     return result.data.data;

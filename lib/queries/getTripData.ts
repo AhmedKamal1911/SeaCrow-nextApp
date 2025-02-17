@@ -50,13 +50,12 @@ export default async function getTripData({
 
     const result = tripResponseSchema.safeParse(data);
     if (!result.success) {
-      const errorMessage = JSON.stringify(
-        result.error.flatten().fieldErrors,
-        null,
-        2
-      );
-      console.log(result.error);
-      throw new Error(`Trip data validation failed: ${errorMessage}`);
+      // const errorMessage = JSON.stringify(
+      //   result.error.flatten().fieldErrors,
+      //   null,
+      //   2
+      // );
+      throw new Error(`Trip data validation failed please call service`);
     }
     return result?.data.data[0];
   } catch (error) {

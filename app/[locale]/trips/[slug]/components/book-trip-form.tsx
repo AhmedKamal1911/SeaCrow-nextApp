@@ -93,8 +93,8 @@ export default function BookTripForm({ tripSlug }: { tripSlug: string }) {
           }
         }, 1000);
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {
-      console.log(e);
       toast({
         description: t("global.toasts.messageToast.failedMessage"),
         variant: "destructive",

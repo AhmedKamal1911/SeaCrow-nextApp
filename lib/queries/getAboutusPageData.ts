@@ -30,14 +30,12 @@ export default async function getAboutusPageData({
     const result = AboutusPageSchema.safeParse(data);
     if (!result.success) {
       // const errorMessage = JSON.stringify(result.error, null, 2);
-      console.log({ d: result.data, e: result.error });
       throw new Error(
-        `about us page data validation failed please call service`
+        `About us page data validation failed please call service`
       );
     }
     return result.data;
   } catch (error) {
-    console.log(error);
     throw error;
   }
 }

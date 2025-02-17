@@ -26,12 +26,10 @@ export default async function getTripsPageData({ locale }: { locale: Locale }) {
     const result = TripsPageSchema.safeParse(data);
     if (!result.success) {
       // const errorMessage = JSON.stringify(result.error, null, 2);
-      console.log({ d: result.data, e: result.error.formErrors.fieldErrors });
       throw new Error(`trips page data validation failed please call service`);
     }
     return result.data;
   } catch (error) {
-    console.log(error);
     throw error;
   }
 }

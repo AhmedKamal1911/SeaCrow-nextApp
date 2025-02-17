@@ -51,8 +51,8 @@ export function LoginForm({
           message: t("global.loginForm.validation.invalidCredentials"),
         });
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {
-      console.log(e);
       setError("username", {
         type: "manual",
         message: t("global.loginForm.validation.invalidCredentials"), // Assign the error message to the username field

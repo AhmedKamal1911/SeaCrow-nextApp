@@ -54,8 +54,8 @@ const ContactForm = () => {
       setTimeout(() => {
         reset();
       }, 1000);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
-      console.log(error);
       toast({
         description: t("global.toasts.messageToast.failedMessage"),
         variant: "destructive",
