@@ -1,8 +1,8 @@
 import SectionHeader from "@/components/common/section-header";
 
-import FeaturesList from "../features-list";
 import { useTranslations } from "next-intl";
 import { IntroSectionDataSchemaType } from "@/lib/validations/intro-section-schema";
+import FeaturesList from "../features-list";
 
 type Props = {
   data: IntroSectionDataSchemaType;
