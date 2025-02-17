@@ -20,7 +20,6 @@ export async function getHeroSectionData(locale: Locale) {
 
     return result.data;
   } catch (error) {
-    console.error("HeroSection data error:", error);
     // Optional: Return fallback data or re-throw
     throw error; // Remove this if you want to suppress the error
   }

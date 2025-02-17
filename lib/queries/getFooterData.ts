@@ -26,8 +26,6 @@ export async function getFooterData({ locale }: { locale: Locale }) {
 
     return validationResult.data;
   } catch (error) {
-    console.error("Footer data error:", error);
-
     // Optional: Return fallback data or re-throw
     throw error; // Remove this if you want to suppress the error
   }

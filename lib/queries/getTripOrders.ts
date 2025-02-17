@@ -16,7 +16,6 @@ export async function getTripOrders(token: string) {
 
     return result.data.data;
   } catch (error) {
-    console.error("Orders Tickets data error:", error);
     // Optional: Return fallback data or re-throw
     throw error; // Remove this if you want to suppress the error
   }

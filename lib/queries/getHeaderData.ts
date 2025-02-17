@@ -20,8 +20,6 @@ export async function getHeaderData({ locale }: { locale: Locale }) {
 
     return result.data;
   } catch (error) {
-    console.error("Header data error:", error);
-
     // Optional: Return fallback data or re-throw
     throw error; // Remove this if you want to suppress the error
   }

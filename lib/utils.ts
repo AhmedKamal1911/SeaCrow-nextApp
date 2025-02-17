@@ -63,7 +63,6 @@ export function getTimingSystem(time: string) {
   if (isValid(parsedTime)) {
     return format(parsedTime, "a"); // 'a' returns AM or PM
   } else {
-    console.error("Invalid time format:", time);
     return "Invalid Time";
   }
 }
@@ -75,7 +74,6 @@ export function formatTime(time: string) {
   if (isValid(parsedTime)) {
     return format(parsedTime, "hh:mm");
   } else {
-    console.error("Invalid time format:", time);
     return "Invalid Time";
   }
 }
