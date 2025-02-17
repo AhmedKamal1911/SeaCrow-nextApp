@@ -13,16 +13,21 @@ const nextConfig: NextConfig = {
   // },
   images: {
     remotePatterns: [
-      {
-        protocol: "http",
-        hostname: "localhost",
-        port: "1337",
-        pathname: "/uploads/**",
-      },
+      // {
+      //   protocol: "http",
+      //   hostname: "localhost",
+      //   port: "1337",
+      //   pathname: "/uploads/**",
+      // },
       {
         protocol: "https",
         hostname: "flagsapi.com",
         pathname: "/**", // Match all paths
+      },
+      {
+        protocol: "https",
+        hostname: "3d2c-45-99-11-202.ngrok-free.app",
+        pathname: "/uploads/**",
       },
     ],
   },
