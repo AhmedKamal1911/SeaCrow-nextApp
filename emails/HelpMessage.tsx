@@ -42,22 +42,30 @@ export const HelpMessage = ({
       <Preview>Help</Preview>
       <Body style={main}>
         <Container>
-          <Section style={yellowSection}>
-            <Img
-              src={`https://img.freepik.com/free-vector/hand-drawn-minimalist-ocean-logo-template_742173-17685.jpg`}
-              width="96"
-              height="96"
-              style={{
-                borderRadius: "50%",
-                marginInline: "auto",
-              }}
-              alt="logo"
-            />
+          <Section style={darkBlueSection}>
+            <table width="100%">
+              <tr>
+                <td align="center">
+                  <Img
+                    src="https://img.freepik.com/free-vector/hand-drawn-minimalist-ocean-logo-template_742173-17685.jpg"
+                    width="96"
+                    height="96"
+                    style={{
+                      borderRadius: "50%",
+                      display: "block",
+                    }}
+                    alt="logo"
+                  />
+                </td>
+              </tr>
+            </table>
+
             <Heading
               style={{
                 fontSize: 26,
                 fontWeight: "bold",
                 textAlign: "center",
+                color: "white",
               }}
             >
               Hi SeaCrow
@@ -117,7 +125,7 @@ const heading: CSSProperties = {
   fontSize: "22px",
   lineHeight: "1.3",
   fontWeight: "700",
-  color: "#cd1a64b8",
+  color: "yellow",
   textAlign: "center",
 };
 const review = {
@@ -144,7 +152,7 @@ const content = {
 const boxInfos = {
   padding: "20px",
 };
-const yellowSection = {
-  background: "#f5d247",
+const darkBlueSection = {
+  background: "#0A1931",
   padding: "5px",
 };
