@@ -38,10 +38,10 @@ export default function AboutUsSection() {
             <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-5 mt-5 p-[10px] md:p-0">
               <div className="rounded-md overflow-hidden border-2 border-main">
                 <Image
-                  src={"/images/slide-1.jpg"}
-                  alt="about"
+                  src={"/images/logo.jpg"}
+                  alt="agency logo"
                   height={110}
-                  width={150}
+                  width={120}
                   className="object-cover"
                 />
               </div>
