@@ -73,9 +73,17 @@ export default function Header({ data }: Props) {
       >
         <div className="container">
           <div className="flex justify-between items-center ">
-            <div>
+            <div className="flex items-center gap-2">
+              <Image
+                src={"/images/logo.jpg"}
+                height={50}
+                width={50}
+                alt="agency logo"
+                className="rounded-full select-none"
+                draggable={false}
+              />
               <Link href="/">
-                <h1 className="text-2xl sm:text-3xl text-white font-logoFont uppercase">
+                <h1 className="max-[300px]:text-xl text-2xl sm:text-3xl text-white font-logoFont uppercase">
                   {logo ?? "SeaCrow"}
                 </h1>
               </Link>

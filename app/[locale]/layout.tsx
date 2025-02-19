@@ -71,6 +71,9 @@ export async function generateMetadata({
       siteName: "SeaCrow",
       locale: locale,
     },
+    icons: {
+      icon: "/logo.svg",
+    },
   };
 }
 export default async function RootLayout({
